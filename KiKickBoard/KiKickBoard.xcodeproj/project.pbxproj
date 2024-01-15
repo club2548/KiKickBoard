@@ -9,19 +9,30 @@
 /* Begin PBXBuildFile section */
 		F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F972F2B5539FC00BD01DE /* AppDelegate.swift */; };
 		F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97312B5539FC00BD01DE /* SceneDelegate.swift */; };
-		F87F97342B5539FC00BD01DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97332B5539FC00BD01DE /* ViewController.swift */; };
 		F87F97392B5539FD00BD01DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F87F97382B5539FD00BD01DE /* Assets.xcassets */; };
 		F87F973C2B5539FD00BD01DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87F973A2B5539FD00BD01DE /* LaunchScreen.storyboard */; };
+		F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97432B553B0000BD01DE /* LoginVC.swift */; };
+		F87F97462B553B0D00BD01DE /* SignUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97452B553B0D00BD01DE /* SignUPVC.swift */; };
+		F87F97482B553B1900BD01DE /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97472B553B1900BD01DE /* HomeVC.swift */; };
+		F87F974A2B553B2600BD01DE /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97492B553B2600BD01DE /* RegisterVC.swift */; };
+		F87F974C2B553B3200BD01DE /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F974B2B553B3200BD01DE /* MyPageVC.swift */; };
+		F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97522B553BAB00BD01DE /* TabBarController.swift */; };
+		F87F97562B55400E00BD01DE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F87F97552B55400E00BD01DE /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F87F972C2B5539FC00BD01DE /* KiKickBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiKickBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87F972F2B5539FC00BD01DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F87F97312B5539FC00BD01DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F87F97332B5539FC00BD01DE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F87F97382B5539FD00BD01DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F87F973B2B5539FD00BD01DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F87F973D2B5539FD00BD01DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F87F97432B553B0000BD01DE /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		F87F97452B553B0D00BD01DE /* SignUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPVC.swift; sourceTree = "<group>"; };
+		F87F97472B553B1900BD01DE /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		F87F97492B553B2600BD01DE /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		F87F974B2B553B3200BD01DE /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
+		F87F97522B553BAB00BD01DE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F87F97562B55400E00BD01DE /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,12 +68,57 @@
 			children = (
 				F87F972F2B5539FC00BD01DE /* AppDelegate.swift */,
 				F87F97312B5539FC00BD01DE /* SceneDelegate.swift */,
-				F87F97332B5539FC00BD01DE /* ViewController.swift */,
 				F87F97382B5539FD00BD01DE /* Assets.xcassets */,
 				F87F973A2B5539FD00BD01DE /* LaunchScreen.storyboard */,
 				F87F973D2B5539FD00BD01DE /* Info.plist */,
+				F87F97522B553BAB00BD01DE /* TabBarController.swift */,
+				F87F974D2B553B3600BD01DE /* Login */,
+				F87F974E2B553B5600BD01DE /* SignUp */,
+				F87F974F2B553B6300BD01DE /* Home */,
+				F87F97502B553B6F00BD01DE /* Register */,
+				F87F97512B553B7800BD01DE /* MyPage */,
 			);
 			path = KiKickBoard;
+			sourceTree = "<group>";
+		};
+		F87F974D2B553B3600BD01DE /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F87F97432B553B0000BD01DE /* LoginVC.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		F87F974E2B553B5600BD01DE /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				F87F97452B553B0D00BD01DE /* SignUPVC.swift */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
+		F87F974F2B553B6300BD01DE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F87F97472B553B1900BD01DE /* HomeVC.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		F87F97502B553B6F00BD01DE /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				F87F97492B553B2600BD01DE /* RegisterVC.swift */,
+			);
+			name = Register;
+			sourceTree = "<group>";
+		};
+		F87F97512B553B7800BD01DE /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				F87F974B2B553B3200BD01DE /* MyPageVC.swift */,
+			);
+			name = MyPage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,6 +137,9 @@
 			dependencies = (
 			);
 			name = KiKickBoard;
+			packageProductDependencies = (
+				F87F97552B55400E00BD01DE /* SnapKit */,
+			);
 			productName = KiKickBoard;
 			productReference = F87F972C2B5539FC00BD01DE /* KiKickBoard.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +168,9 @@
 				Base,
 			);
 			mainGroup = F87F97232B5539FC00BD01DE;
+			packageReferences = (
+				F87F97542B55400E00BD01DE /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = F87F972D2B5539FC00BD01DE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -134,8 +197,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F87F97342B5539FC00BD01DE /* ViewController.swift in Sources */,
 				F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */,
+				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,
+				F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */,
+				F87F97482B553B1900BD01DE /* HomeVC.swift in Sources */,
+				F87F974A2B553B2600BD01DE /* RegisterVC.swift in Sources */,
+				F87F974C2B553B3200BD01DE /* MyPageVC.swift in Sources */,
+				F87F97462B553B0D00BD01DE /* SignUPVC.swift in Sources */,
 				F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +412,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F87F97542B55400E00BD01DE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F87F97552B55400E00BD01DE /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F87F97542B55400E00BD01DE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F87F97242B5539FC00BD01DE /* Project object */;
 }
