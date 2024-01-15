@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46033EF62B556568002689F3 /* RegisterLayoutSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46033EF52B556568002689F3 /* RegisterLayoutSetup.swift */; };
 		F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F972F2B5539FC00BD01DE /* AppDelegate.swift */; };
 		F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97312B5539FC00BD01DE /* SceneDelegate.swift */; };
 		F87F97392B5539FD00BD01DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F87F97382B5539FD00BD01DE /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46033EF52B556568002689F3 /* RegisterLayoutSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterLayoutSetup.swift; sourceTree = "<group>"; };
 		F87F972C2B5539FC00BD01DE /* KiKickBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiKickBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87F972F2B5539FC00BD01DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F87F97312B5539FC00BD01DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				F87F97492B553B2600BD01DE /* RegisterVC.swift */,
+				46033EF52B556568002689F3 /* RegisterLayoutSetup.swift */,
 			);
 			name = Register;
 			sourceTree = "<group>";
@@ -152,7 +155,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					F87F972B2B5539FC00BD01DE = {
 						CreatedOnToolsVersion = 14.3;
@@ -200,6 +203,7 @@
 				F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */,
 				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,
 				F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */,
+				46033EF62B556568002689F3 /* RegisterLayoutSetup.swift in Sources */,
 				F87F97482B553B1900BD01DE /* HomeVC.swift in Sources */,
 				F87F974A2B553B2600BD01DE /* RegisterVC.swift in Sources */,
 				F87F974C2B553B3200BD01DE /* MyPageVC.swift in Sources */,
@@ -258,6 +262,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -318,6 +323,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -343,7 +349,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4G47XHXXQX;
+				DEVELOPMENT_TEAM = C22XU7SG44;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KiKickBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -370,7 +376,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4G47XHXXQX;
+				DEVELOPMENT_TEAM = C22XU7SG44;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KiKickBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
