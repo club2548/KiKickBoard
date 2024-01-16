@@ -51,6 +51,7 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        LoginController.shared.readCurrentUserInfo()
         addSubView()
         autoLayout()
         setupInteraction()
@@ -63,6 +64,9 @@ class LoginVC: UIViewController {
         self.view.addSubview(uPWTextField)
         self.view.addSubview(logInBtn)
         self.view.addSubview(signUPBtn)
+        uIDTextField.text = LoginController.shared.currentUserInfo.uid
+        uPWTextField.text = LoginController.shared.currentUserInfo.password
+
     }
     
     private func autoLayout() {
@@ -118,6 +122,8 @@ class LoginVC: UIViewController {
         if LoginController.shared.doesUserInfoExist(currentUserInfo: incomeUserInfo) {
             
             // 있다면, 메세지를 띄우고 이전화면으로.
+            LoginController.shared.currentUserInfo = incomeUserInfo
+            LoginController.shared.saveCurrentUserInfo()
             showAlert(message: "로그인 성공", handler: {_ in
                 self.navigationController?.pushViewController(HomeVC(), animated: true)})
         } else {

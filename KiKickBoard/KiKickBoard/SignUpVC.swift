@@ -110,17 +110,6 @@ class SignUpVC: UIViewController {
 extension SignUpVC {
     private func addSubView() {
         self.view.addSubViews([idStr, idSignUpTextField, pwStr, pwSignUpTextField, eMailStr, eMailSignUpTextField, nameStr, nameSignUpTextField, mobileStr, mobileSignUpTextField, joinBtn])
-//        self.view.addSubview(idStr)
-//        self.view.addSubview(idSignUpTextField)
-//        self.view.addSubview(pwStr)
-//        self.view.addSubview(pwSignUpTextField)
-//        self.view.addSubview(eMailStr)
-//        self.view.addSubview(eMailSignUpTextField)
-//        self.view.addSubview(nameStr)
-//        self.view.addSubview(nameSignUpTextField)
-//        self.view.addSubview(mobileStr)
-//        self.view.addSubview(mobileSignUpTextField)
-//        self.view.addSubview(joinBtn)
     }
     
     private func autoLayout() {
