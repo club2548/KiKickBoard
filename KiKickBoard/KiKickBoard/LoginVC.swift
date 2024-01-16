@@ -35,6 +35,8 @@ class LoginVC: UIViewController {
         return textField
     }()
     
+    var eyeButton = UIButton(type: .custom)
+    
     let logInBtn : UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .gray
@@ -55,6 +57,7 @@ class LoginVC: UIViewController {
         addSubView()
         autoLayout()
         setupInteraction()
+        setEyeButton()
     }
     
     private func addSubView() {
@@ -142,6 +145,31 @@ class LoginVC: UIViewController {
     
     @objc func touchSignUP() {
         self.navigationController?.pushViewController(SignUpVC(), animated: true)
+    }
+    
+    private func setEyeButton() {
+        eyeButton = UIButton(type: .custom)
+        
+        let imageSize = CGSize(width: 20, height: 20)
+        
+        eyeButton.setImage(UIImage(named: "password-hide")?.resized(to: imageSize), for: .selected)
+        eyeButton.setImage(UIImage(named: "password-view")?.resized(to: imageSize), for: .normal)
+        
+        var buttonConfiguration = UIButton.Configuration.plain()
+        buttonConfiguration.imagePadding = 10
+        buttonConfiguration.baseBackgroundColor = .clear
+        
+        self.eyeButton.configuration = buttonConfiguration
+
+        self.uPWTextField.rightView = eyeButton
+        self.uPWTextField.rightViewMode = .always
+        
+        uPWTextField.isSecureTextEntry = true
+        
+        eyeButton.addAction(UIAction(handler: {[self] _ in
+            uPWTextField.isSecureTextEntry.toggle()
+            self.eyeButton.isSelected.toggle()
+        }), for: .touchUpInside)
     }
 
 

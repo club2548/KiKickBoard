@@ -41,6 +41,8 @@ class SignUpVC: UIViewController {
         return textField
     }()
     
+    var eyeButton = UIButton(type: .custom)
+    
     let eMailStr : UILabel = {
         let str = UILabel()
         str.font = .boldSystemFont(ofSize: 15)
@@ -102,6 +104,7 @@ class SignUpVC: UIViewController {
         addSubView()
         autoLayout()
         setupInteraction()
+        setEyeButton()
     }
 }
 
@@ -196,6 +199,31 @@ extension SignUpVC {
         print("Saved UserInfo : \(SignUpController.shared.userInfoArray)")
     }
     
+    private func setEyeButton() {
+        eyeButton = UIButton(type: .custom)
+        
+        let imageSize = CGSize(width: 20, height: 20)
+        
+        eyeButton.setImage(UIImage(named: "password-hide")?.resized(to: imageSize), for: .selected)
+        eyeButton.setImage(UIImage(named: "password-view")?.resized(to: imageSize), for: .normal)
+        
+        var buttonConfiguration = UIButton.Configuration.plain()
+        buttonConfiguration.imagePadding = 10
+        buttonConfiguration.baseBackgroundColor = .clear
+        
+        self.eyeButton.configuration = buttonConfiguration
+
+        self.pwSignUpTextField.rightView = eyeButton
+        self.pwSignUpTextField.rightViewMode = .always
+        
+        pwSignUpTextField.isSecureTextEntry = true
+        
+        eyeButton.addAction(UIAction(handler: {[self] _ in
+            pwSignUpTextField.isSecureTextEntry.toggle()
+            self.eyeButton.isSelected.toggle()
+        }), for: .touchUpInside)
+    }
+    
     private func showAlert(message: String, handler: ((UIAlertAction) -> Void)?) {
         let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: handler))
@@ -208,6 +236,14 @@ extension UIView{
   func addSubViews(_ views : [UIView]){
     _ = views.map{self.addSubview($0)}
   }
+}
+
+extension UIImage {
+    func resized(to size: CGSize) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
 }
 
 // MARK: -Pre View
