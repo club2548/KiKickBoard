@@ -201,7 +201,7 @@ extension SignUpVC {
             SignUpController.shared.saveUserInfoArray()
             SignUpController.shared.readUserInfoArray()
             showAlert(message: "KiKickBoard 가입을 환영합니다!", handler: {_ in
-                self.navigationController?.pushViewController(HomeVC(), animated: true)})
+                self.navigationController?.popToRootViewController(animated: true)})
         }
 
         print("Saved UserInfo : \(SignUpController.shared.userInfoArray)")
