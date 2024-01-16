@@ -25,6 +25,7 @@ class LoginVC: UIViewController {
         let textField = UITextField()
         textField.placeholder = "ID"
         textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -32,6 +33,7 @@ class LoginVC: UIViewController {
         let textField = UITextField()
         textField.placeholder = "Password"
         textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
         return textField
     }()
     

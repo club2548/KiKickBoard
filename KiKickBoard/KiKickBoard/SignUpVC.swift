@@ -22,6 +22,7 @@ class SignUpVC: UIViewController {
         let textField = UITextField()
         textField.placeholder = "알파벳 소문자, 숫자 5~12자"
         textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -38,6 +39,7 @@ class SignUpVC: UIViewController {
         let textField = UITextField()
         textField.placeholder = "알파벳 소문자, 특수문자 필수 8~16자"
         textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -56,6 +58,7 @@ class SignUpVC: UIViewController {
         let textField = UITextField()
         textField.placeholder = "abcdegf@KiKickBoard.com"
         textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -72,6 +75,7 @@ class SignUpVC: UIViewController {
         let textField = UITextField()
         textField.placeholder = "박보검"
         textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
         return textField
     }()
     
@@ -88,6 +92,7 @@ class SignUpVC: UIViewController {
         let textField = UITextField()
         textField.placeholder = "-없이 입력"
         textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
         return textField
     }()
     
