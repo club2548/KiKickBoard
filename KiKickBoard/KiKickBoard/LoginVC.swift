@@ -109,7 +109,29 @@ class LoginVC: UIViewController {
     }
 
     @objc func touchSignIn() {
+        guard let incomeID = self.uIDTextField.text else { return }
+        guard let incomePW = self.uPWTextField.text else { return }
         
+        let incomeUserInfo = LoginModel(uid: incomeID, password: incomePW)
+        
+        // incomeUserInfo의 아이디, 비밀번호 모두가 UserDefaults로 저장된 UserInfoArray에 저장되어 있는지 여부 판단
+        if LoginController.shared.doesUserInfoExist(currentUserInfo: incomeUserInfo) {
+            
+            // 있다면, 메세지를 띄우고 이전화면으로.
+            showAlert(message: "로그인 성공", handler: {_ in
+                self.navigationController?.pushViewController(HomeVC(), animated: true)})
+        } else {
+            
+            showAlert(message: "KiKickBoard 가입을 환영합니다!", handler: nil)
+        }
+
+        print("Saved UserInfo : \(LoginController.shared.currentUserInfo)")
+    }
+    
+    private func showAlert(message: String, handler: ((UIAlertAction) -> Void)?) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: handler))
+        present(alert, animated: true, completion: nil)
     }
     
     @objc func touchSignUP() {

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3F0182D92B56176D0006F4B4 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182D82B56176D0006F4B4 /* SignUpModel.swift */; };
 		3F0182DB2B561B300006F4B4 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DA2B561B300006F4B4 /* SignUpController.swift */; };
+		3F0182DD2B5678F40006F4B4 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DC2B5678F40006F4B4 /* LoginModel.swift */; };
+		3F0182DF2B567B090006F4B4 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DE2B567B090006F4B4 /* LoginController.swift */; };
 		F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F972F2B5539FC00BD01DE /* AppDelegate.swift */; };
 		F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97312B5539FC00BD01DE /* SceneDelegate.swift */; };
 		F87F97392B5539FD00BD01DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F87F97382B5539FD00BD01DE /* Assets.xcassets */; };
@@ -25,6 +27,8 @@
 /* Begin PBXFileReference section */
 		3F0182D82B56176D0006F4B4 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		3F0182DA2B561B300006F4B4 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		3F0182DC2B5678F40006F4B4 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		3F0182DE2B567B090006F4B4 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		F87F972C2B5539FC00BD01DE /* KiKickBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiKickBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87F972F2B5539FC00BD01DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F87F97312B5539FC00BD01DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,7 +92,9 @@
 		F87F974D2B553B3600BD01DE /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				3F0182DC2B5678F40006F4B4 /* LoginModel.swift */,
 				F87F97432B553B0000BD01DE /* LoginVC.swift */,
+				3F0182DE2B567B090006F4B4 /* LoginController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -204,8 +210,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */,
+				3F0182DF2B567B090006F4B4 /* LoginController.swift in Sources */,
 				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,
 				F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */,
+				3F0182DD2B5678F40006F4B4 /* LoginModel.swift in Sources */,
 				3F0182D92B56176D0006F4B4 /* SignUpModel.swift in Sources */,
 				F87F97482B553B1900BD01DE /* HomeVC.swift in Sources */,
 				3F0182DB2B561B300006F4B4 /* SignUpController.swift in Sources */,
