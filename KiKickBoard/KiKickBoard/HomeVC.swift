@@ -8,7 +8,11 @@
 import UIKit
 import SnapKit
 import NMapsMap
-class HomeVC: UIViewController{
+import CoreLocation
+class HomeVC: UIViewController, CLLocationManagerDelegate{
+    var locationManager: CLLocationManager!
+    var latitude: Double?
+    var longtitude: Double?
     
     private lazy var explainLabel : UILabel = { // 상위 설명 Label
         let label = UILabel()
@@ -50,9 +54,10 @@ class HomeVC: UIViewController{
         button.layer.masksToBounds = true
         return button
     }()
-    private lazy var mapView : NMFMapView = {
-        let view = NMFMapView(frame: view.frame)
-        return view
+    private lazy var navermapView : NMFNaverMapView = {
+        let mapView = NMFNaverMapView() // 지도 객체 생성
+        mapView.showLocationButton = true
+        return mapView
     }()
     private lazy var rentalButton : UIButton = {
         let button = UIButton()
@@ -69,9 +74,27 @@ class HomeVC: UIViewController{
         addSubViews()
         setAutoLayout()
         setExplainLabel()
+        // CLLocationManager클래스의 인스턴스 locationManager를 생성
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        
+        // 포그라운드일 때 위치 추적 권한 요청
+        locationManager.requestWhenInUseAuthorization()
+        
+        // 배터리에 맞게 권장되는 최적의 정확도
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        // 위치 업데이트
+        locationManager.startUpdatingLocation()
+        
+        // 위,경도 가져오기
+        let coor = locationManager.location?.coordinate
+        latitude = coor?.latitude
+        longtitude = coor?.longitude
+        
     }
-  
- 
+    
+    
 }
 extension HomeVC {
     private func addSubViews(){
@@ -80,9 +103,7 @@ extension HomeVC {
         self.view.addSubview(addressStackView)
         addressStackView.addArrangedSubview(addressTextField)
         addressStackView.addArrangedSubview(addressButton)
-        self.view.addSubview(mapView)
-        let naverMapView = NMFMapView(frame: mapView.frame)
-        mapView.addSubview(naverMapView)
+        self.view.addSubview(navermapView)
         self.view.addSubview(rentalButton)
     }
     private func setAutoLayout(){
@@ -101,13 +122,13 @@ extension HomeVC {
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
         }
-        mapView.snp.makeConstraints { make in
+        navermapView.snp.makeConstraints { make in
             make.top.equalTo(addressStackView.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
         }
         rentalButton.snp.makeConstraints { make in
-            make.top.equalTo(mapView.snp.bottom).offset(15)
+            make.top.equalTo(navermapView.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-15)
@@ -130,10 +151,15 @@ extension HomeVC {
         attributed.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributed.length))
         explainLabel.attributedText = attributed
     }
-    private func setMapView(){
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[locations.count - 1]
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude))
+        navermapView.mapView.moveCamera(cameraUpdate)
         
     }
 }
-
-
-
+extension HomeVC : NMFMapViewTouchDelegate,NMFMapViewCameraDelegate{
+    
+}
