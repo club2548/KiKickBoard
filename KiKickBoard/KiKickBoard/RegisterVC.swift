@@ -1,8 +1,15 @@
 import UIKit
 import SnapKit
+import KakaoMapsSDK
 
 
-class RegisterVC: UIViewController {
+class RegisterVC: UIViewController, MapControllerDelegate {
+    func addViews() {
+        <#code#>
+    }
+    
+    
+    
     // 타이틀 라벨
     let registerTitlelabel: UILabel = {
         let label = UILabel()
@@ -24,14 +31,14 @@ class RegisterVC: UIViewController {
     let baseRateTextField: UITextField = {
         let field = UITextField()
         field.borderStyle = .roundedRect
-        field.placeholder = ""
+        field.placeholder = "1km 이내를 이동하는 기본요금을 설정합니다."
         return field
     }()
     
     // 추가 요금 라벨/텍스트필드
     let extraFeeLabel: UILabel = {
         let label = UILabel()
-        label.text = "추가 요금 (100m당)"
+        label.text = "추가 요금 (100m)"
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
@@ -39,7 +46,7 @@ class RegisterVC: UIViewController {
     let extraFeeTextField: UITextField = {
         let field = UITextField()
         field.borderStyle = .roundedRect
-        field.placeholder = ""
+        field.placeholder = "1km를 초과한 후 100m당 요금을 설정합니다. "
         return field
     }()
     // Equipment location 기기위치 라벨
@@ -70,6 +77,8 @@ class RegisterVC: UIViewController {
         return button
     }()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -81,13 +90,79 @@ class RegisterVC: UIViewController {
         
     }
     
+    
+    
+    // 등록하기 버튼 클릭시 동작.
     @objc func registerButton(_ sender: UIButton) {
         
     }
     
 }
 
-
+// 등록하기 화면 UI
+extension RegisterVC {
+    func autoLayouts() {
+        
+        registerTitlelabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(0)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+        }
+        
+        baseRateLabel.snp.makeConstraints { make in
+            make.top.equalTo(registerTitlelabel.snp.bottom).offset(20)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+        }
+        
+        baseRateTextField.snp.makeConstraints { make in
+            make.top.equalTo(baseRateLabel.snp.bottom).offset(20)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+        }
+        
+        extraFeeLabel.snp.makeConstraints { make in
+            make.top.equalTo(baseRateTextField.snp.bottom).offset(20)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+        }
+        
+        extraFeeTextField.snp.makeConstraints { make in
+            make.top.equalTo(extraFeeLabel.snp.bottom).offset(20)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+        }
+        
+        eLLabel.snp.makeConstraints { make in
+            make.top.equalTo(extraFeeTextField.snp.bottom).offset(40)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+        }
+        
+        button.snp.makeConstraints { make in
+            make.centerX.equalTo(view) // 가로축에서 중앙 정렬
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+            make.width.equalTo(200)
+            make.height.equalTo(50)
+        }
+    }
+    
+    
+//    func addSubViews(_ views : [UIView]){
+//        _ = views.map{self.addSubview($0)}
+//    }
+    
+    
+    func addSubViews() {
+        view.addSubview(baseRateLabel)
+        view.addSubview(baseRateTextField)
+        view.addSubview(extraFeeLabel)
+        view.addSubview(extraFeeTextField)
+        view.addSubview(registerTitlelabel)
+        view.addSubview(eLLabel)
+        view.addSubview(button)
+    }
+}
 
 
 
