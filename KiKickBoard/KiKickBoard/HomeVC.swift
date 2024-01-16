@@ -9,11 +9,11 @@ import UIKit
 import SnapKit
 import NMapsMap
 import CoreLocation
-class HomeVC: UIViewController, CLLocationManagerDelegate{
+class HomeVC: UIViewController{
     var locationManager: CLLocationManager!
-    var latitude: Double?
-    var longtitude: Double?
-    
+    var currentLatitude: Double?
+    var currentLongtitude: Double?
+    var searchAddress = ""
     private lazy var explainLabel : UILabel = { // 상위 설명 Label
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17)
@@ -44,6 +44,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate{
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.cornerRadius = 10
         textField.layer.masksToBounds = true
+        textField.addTarget(self, action: #selector(changeTextField(_:)), for: .editingChanged)
         return textField
     }()
     private lazy var addressButton : UIButton = {
@@ -52,6 +53,7 @@ class HomeVC: UIViewController, CLLocationManagerDelegate{
         button.backgroundColor = .purple
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(tapMoveAddress), for: .touchUpInside)
         return button
     }()
     private lazy var navermapView : NMFNaverMapView = {
@@ -74,28 +76,70 @@ class HomeVC: UIViewController, CLLocationManagerDelegate{
         addSubViews()
         setAutoLayout()
         setExplainLabel()
+        getCurrentLoaction()
+        addressTextField.delegate = self
+    }
+}
+extension HomeVC : CLLocationManagerDelegate{
+    private func setExplainLabel(){ // explainLabel 설정
+        let text = "가까운 곳의 킥보드를 찾아보세요.\n대여를 원하는 킥보드를 클릭하세요."
+        let attributed = NSMutableAttributedString(string: text)
+        // 특정 범위의 글자색과 폰트(크기) 변경
+        let range = (text as NSString).range(of: "대여를 원하는 킥보드를 클릭하세요.")
+        var attributes: [NSAttributedString.Key : Any] = [
+            .foregroundColor: UIColor.gray,
+            .font : UIFont.systemFont(ofSize: 15)
+        ]
+        attributed.addAttributes(attributes, range: range)
+        // 글자 행간 간격 추가
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 10
+        attributes[.paragraphStyle] = paragraphStyle
+        attributed.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributed.length))
+        explainLabel.attributedText = attributed
+    }
+
+    @objc func tapMoveAddress(){
+        NaverGeocodingManager.shared.getData(address: searchAddress) { address in
+            guard let latitude = Double(address.addresses[0].y) else {
+                return
+            }
+            guard let longitude = Double(address.addresses[0].x) else{
+                return
+            }
+            let postion = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude , lng: longitude ))
+            DispatchQueue.main.async {
+                self.navermapView.mapView.moveCamera(postion)
+            }
+        }
+        addressTextField.text = ""
+    }
+    @objc func changeTextField(_ sender : UITextField){
+        searchAddress = sender.text ?? ""
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[locations.count - 1]
+        self.currentLatitude = location.coordinate.latitude
+        self.currentLongtitude = location.coordinate.longitude
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude))
+        navermapView.mapView.moveCamera(cameraUpdate)
+        
+    }
+    func getCurrentLoaction(){
         // CLLocationManager클래스의 인스턴스 locationManager를 생성
         locationManager = CLLocationManager()
         locationManager.delegate = self
-        
         // 포그라운드일 때 위치 추적 권한 요청
         locationManager.requestWhenInUseAuthorization()
-        
         // 배터리에 맞게 권장되는 최적의 정확도
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
         // 위치 업데이트
         locationManager.startUpdatingLocation()
-        
-        // 위,경도 가져오기
-        let coor = locationManager.location?.coordinate
-        latitude = coor?.latitude
-        longtitude = coor?.longitude
-        
     }
-    
-    
 }
+extension HomeVC : UITextFieldDelegate{
+}
+
 extension HomeVC {
     private func addSubViews(){
         self.view.addSubview(explainLabel)
@@ -134,32 +178,4 @@ extension HomeVC {
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-15)
         }
     }
-    private func setExplainLabel(){ // explainLabel 설정
-        let text = "가까운 곳의 킥보드를 찾아보세요.\n대여를 원하는 킥보드를 클릭하세요."
-        let attributed = NSMutableAttributedString(string: text)
-        // 특정 범위의 글자색과 폰트(크기) 변경
-        let range = (text as NSString).range(of: "대여를 원하는 킥보드를 클릭하세요.")
-        var attributes: [NSAttributedString.Key : Any] = [
-            .foregroundColor: UIColor.gray,
-            .font : UIFont.systemFont(ofSize: 15)
-        ]
-        attributed.addAttributes(attributes, range: range)
-        // 글자 행간 간격 추가
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 10
-        attributes[.paragraphStyle] = paragraphStyle
-        attributed.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributed.length))
-        explainLabel.attributedText = attributed
-    }
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations[locations.count - 1]
-        let latitude = location.coordinate.latitude
-        let longitude = location.coordinate.longitude
-        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude, lng: longitude))
-        navermapView.mapView.moveCamera(cameraUpdate)
-        
-    }
-}
-extension HomeVC : NMFMapViewTouchDelegate,NMFMapViewCameraDelegate{
-    
 }
