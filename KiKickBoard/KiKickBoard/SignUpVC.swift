@@ -1,5 +1,5 @@
 //
-//  SignUPVC.swift
+//  SignUpVC.swift
 //  KiKickBoard
 //
 //  Created by 원동진 on 2024/01/15.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SignUPVC: UIViewController {
+class SignUpVC: UIViewController {
     
     let idStr : UILabel = {
         let str = UILabel()
@@ -18,7 +18,7 @@ class SignUPVC: UIViewController {
         return str
     }()
     
-    let idSignUPTextField : UITextField = {
+    let idSignUpTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "알파벳 소문자, 숫자 5~12자"
         textField.borderStyle = .roundedRect
@@ -34,7 +34,7 @@ class SignUPVC: UIViewController {
         return str
     }()
     
-    let pwSignUPTextField : UITextField = {
+    let pwSignUpTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "알파벳 소문자, 특수문자 필수 8~16자"
         textField.borderStyle = .roundedRect
@@ -50,7 +50,7 @@ class SignUPVC: UIViewController {
         return str
     }()
     
-    let eMailSignUPTextField : UITextField = {
+    let eMailSignUpTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "abcdegf@KiKickBoard.com"
         textField.borderStyle = .roundedRect
@@ -66,7 +66,7 @@ class SignUPVC: UIViewController {
         return str
     }()
     
-    let nameSignUPTextField : UITextField = {
+    let nameSignUpTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "박보검"
         textField.borderStyle = .roundedRect
@@ -82,7 +82,7 @@ class SignUPVC: UIViewController {
         return str
     }()
     
-    let mobileSignUPTextField : UITextField = {
+    let mobileSignUpTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "-없이 입력"
         textField.borderStyle = .roundedRect
@@ -95,28 +95,32 @@ class SignUPVC: UIViewController {
         btn.setTitle("JOIN", for: .normal)
         return btn
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         addSubView()
         autoLayout()
         setupInteraction()
-
-        // Do any additional setup after loading the view.
     }
-    
+}
+
+
+// MARK: extention of SignUpVC - addSubView, autoLayout, interaction etc.
+extension SignUpVC {
     private func addSubView() {
-        self.view.addSubview(idStr)
-        self.view.addSubview(idSignUPTextField)
-        self.view.addSubview(pwStr)
-        self.view.addSubview(pwSignUPTextField)
-        self.view.addSubview(eMailStr)
-        self.view.addSubview(eMailSignUPTextField)
-        self.view.addSubview(nameStr)
-        self.view.addSubview(nameSignUPTextField)
-        self.view.addSubview(mobileStr)
-        self.view.addSubview(mobileSignUPTextField)
-        self.view.addSubview(joinBtn)
+        self.view.addSubViews([idStr, idSignUpTextField, pwStr, pwSignUpTextField, eMailStr, eMailSignUpTextField, nameStr, nameSignUpTextField, mobileStr, mobileSignUpTextField, joinBtn])
+//        self.view.addSubview(idStr)
+//        self.view.addSubview(idSignUpTextField)
+//        self.view.addSubview(pwStr)
+//        self.view.addSubview(pwSignUpTextField)
+//        self.view.addSubview(eMailStr)
+//        self.view.addSubview(eMailSignUpTextField)
+//        self.view.addSubview(nameStr)
+//        self.view.addSubview(nameSignUpTextField)
+//        self.view.addSubview(mobileStr)
+//        self.view.addSubview(mobileSignUpTextField)
+//        self.view.addSubview(joinBtn)
     }
     
     private func autoLayout() {
@@ -124,43 +128,43 @@ class SignUPVC: UIViewController {
             make.left.equalToSuperview().offset(50)
             make.top.equalToSuperview().offset(150)
         }
-        idSignUPTextField.snp.makeConstraints() { make in
+        idSignUpTextField.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
             make.top.equalTo(idStr.snp.bottom).offset(10)
         }
         pwStr.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
-            make.top.equalTo(idSignUPTextField.snp.bottom).offset(30)
+            make.top.equalTo(idSignUpTextField.snp.bottom).offset(30)
         }
-        pwSignUPTextField.snp.makeConstraints() { make in
+        pwSignUpTextField.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
             make.top.equalTo(pwStr.snp.bottom).offset(10)
         }
         eMailStr.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
-            make.top.equalTo(pwSignUPTextField.snp.bottom).offset(30)
+            make.top.equalTo(pwSignUpTextField.snp.bottom).offset(30)
         }
-        eMailSignUPTextField.snp.makeConstraints() { make in
+        eMailSignUpTextField.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
             make.top.equalTo(eMailStr.snp.bottom).offset(10)
         }
         nameStr.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
-            make.top.equalTo(eMailSignUPTextField.snp.bottom).offset(30)
+            make.top.equalTo(eMailSignUpTextField.snp.bottom).offset(30)
         }
-        nameSignUPTextField.snp.makeConstraints() { make in
+        nameSignUpTextField.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
             make.top.equalTo(nameStr.snp.bottom).offset(10)
         }
         mobileStr.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
-            make.top.equalTo(nameSignUPTextField.snp.bottom).offset(30)
+            make.top.equalTo(nameSignUpTextField.snp.bottom).offset(30)
         }
-        mobileSignUPTextField.snp.makeConstraints() { make in
+        mobileSignUpTextField.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
             make.top.equalTo(mobileStr.snp.bottom).offset(10)
@@ -168,27 +172,74 @@ class SignUPVC: UIViewController {
         joinBtn.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(mobileSignUPTextField.snp.bottom).offset(50)
+            make.top.equalTo(mobileSignUpTextField.snp.bottom).offset(50)
         }
     }
     
     private func setupInteraction() {
         joinBtn.addTarget(self, action: #selector(touchJoin), for: .touchUpInside)
     }
-
+    
+    // 사용자 입력 중 아이디, 이메일, 전화번호를 저장된 정보와 확인한 후, 없다면 UserDefaults에 저장.
     @objc func touchJoin() {
+        guard let newID = self.idSignUpTextField.text else { return }
+        guard let newPW = self.pwSignUpTextField.text else { return }
+        guard let newEMail = self.eMailSignUpTextField.text else { return }
+        guard let newName = self.nameSignUpTextField.text else { return }
+        guard let newMobile = self.mobileSignUpTextField.text else { return }
         
+        let newUserInfo = UserInfo(uid: newID, password: newPW, email: newEMail, name: newName, phoneNumber: newMobile)
+        
+        // newUserInfo의 아이디, 이메일, 전화번호 중 같은 정보가 UserDefaults내 저장된 여부 판단
+        if SignUpController.shared.doesUserInfoExist(userInfo: newUserInfo) {
+            
+            // 있다면, 메세지를 띄우고 이전화면으로.
+            showAlert(message: "이미 가입된 정보가 있습니다.", handler: nil)
+        } else {
+            // 없다면, 입력된 정보 UserDefaults에 저장. alert로 메세지를 띄워주고, 확인을 누르면 HomeVC로 이동.
+            SignUpController.shared.userInfoArray.append(newUserInfo)
+            SignUpController.shared.saveUserInfoArray()
+            SignUpController.shared.readUserInfoArray()
+            showAlert(message: "KiKickBoard 가입을 환영합니다!", handler: {_ in
+                self.navigationController?.pushViewController(HomeVC(), animated: true)})
+        }
+
+        print("Saved UserInfo : \(SignUpController.shared.userInfoArray)")
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func showAlert(message: String, handler: ((UIAlertAction) -> Void)?) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: handler))
+        present(alert, animated: true, completion: nil)
     }
-    */
 
 }
+
+extension UIView{
+  func addSubViews(_ views : [UIView]){
+    _ = views.map{self.addSubview($0)}
+  }
+}
+
+// MARK: -Pre View
+import SwiftUI
+struct PreView: PreviewProvider {
+  static var previews: some View {
+    UINavigationController(rootViewController: LoginVC()).toPreview()
+  }
+}
+#if DEBUG
+extension UIViewController {
+  private struct Preview: UIViewControllerRepresentable {
+      let viewController: UIViewController
+      func makeUIViewController(context: Context) -> UIViewController {
+        return viewController
+      }
+      func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+      }
+    }
+    func toPreview() -> some View {
+      Preview(viewController: self)
+    }
+}
+#endif
