@@ -7,7 +7,7 @@
 //test
 import UIKit
 import SnapKit
-import KakaoMapsSDK
+import NMapsMap
 class HomeVC: UIViewController{
     
     private lazy var explainLabel : UILabel = { // 상위 설명 Label
@@ -50,9 +50,8 @@ class HomeVC: UIViewController{
         button.layer.masksToBounds = true
         return button
     }()
-    private lazy var mapView : UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemCyan
+    private lazy var mapView : NMFMapView = {
+        let view = NMFMapView(frame: view.frame)
         return view
     }()
     private lazy var rentalButton : UIButton = {
@@ -82,6 +81,8 @@ extension HomeVC {
         addressStackView.addArrangedSubview(addressTextField)
         addressStackView.addArrangedSubview(addressButton)
         self.view.addSubview(mapView)
+        let naverMapView = NMFMapView(frame: mapView.frame)
+        mapView.addSubview(naverMapView)
         self.view.addSubview(rentalButton)
     }
     private func setAutoLayout(){
@@ -129,7 +130,9 @@ extension HomeVC {
         attributed.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: attributed.length))
         explainLabel.attributedText = attributed
     }
-    
+    private func setMapView(){
+        
+    }
 }
 
 
