@@ -1,13 +1,9 @@
 import UIKit
 import SnapKit
-import KakaoMapsSDK
 
 
-class RegisterVC: UIViewController, MapControllerDelegate {
-    func addViews() {
-        <#code#>
-    }
-    
+
+class RegisterVC: UIViewController {
     
     
     // 타이틀 라벨
@@ -83,12 +79,14 @@ class RegisterVC: UIViewController, MapControllerDelegate {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        
         addSubViews()
         autoLayouts()
         
         button.addTarget(self, action: #selector(registerButton(_:)), for: .touchUpInside)
         
     }
+    
     
     
     
@@ -145,6 +143,8 @@ extension RegisterVC {
             make.width.equalTo(200)
             make.height.equalTo(50)
         }
+        
+        
     }
     
     
@@ -168,32 +168,32 @@ extension RegisterVC {
 
 
 
-// MARK: -Pre View
-import SwiftUI
-
-
-struct PreView: PreviewProvider {
-    static var previews: some View {
-        UINavigationController(rootViewController: RegisterVC()).toPreview()
-    }
-}
-
-
-#if DEBUG
-extension UIViewController {
-    private struct Preview: UIViewControllerRepresentable {
-            let viewController: UIViewController
-
-            func makeUIViewController(context: Context) -> UIViewController {
-                return viewController
-            }
-
-            func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-            }
-        }
-
-        func toPreview() -> some View {
-            Preview(viewController: self)
-        }
-}
-#endif
+//// MARK: -Pre View
+//import SwiftUI
+//
+//
+//struct PreView: PreviewProvider {
+//    static var previews: some View {
+//        UINavigationController(rootViewController: RegisterVC()).toPreview()
+//    }
+//}
+//
+//
+//#if DEBUG
+//extension UIViewController {
+//    private struct Preview: UIViewControllerRepresentable {
+//            let viewController: UIViewController
+//
+//            func makeUIViewController(context: Context) -> UIViewController {
+//                return viewController
+//            }
+//
+//            func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+//            }
+//        }
+//
+//        func toPreview() -> some View {
+//            Preview(viewController: self)
+//        }
+//}
+//#endif

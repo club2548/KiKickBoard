@@ -3,11 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>KAKAO_APP_KEY</key>
-	<string>db03961a6321c7b38df7a5234d5aa393
-db03961a6321c7b38df7a5234d5aa393
-</string>
+	<string>db03961a6321c7b38df7a5234d5aa393</string>
 	<key>KAKAO_PHASE</key>
-	<string>&quot;sandbox&quot;</string>
+	<string>sandbox</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
