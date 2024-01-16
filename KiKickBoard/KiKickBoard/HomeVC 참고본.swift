@@ -32,7 +32,17 @@ class HomeVC: UIViewController{
         let view = KMViewContainer()
         return view
     }()
-  
+    private lazy var addressLabel : UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.text = "주소 입력"
+        return label
+    }()
+    private lazy var addressTextField : UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "주소를 입력하세요."
+        return textField
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white

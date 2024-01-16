@@ -19,6 +19,7 @@
 		F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97522B553BAB00BD01DE /* TabBarController.swift */; };
 		F87F97562B55400E00BD01DE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F87F97552B55400E00BD01DE /* SnapKit */; };
 		F8D5EAF32B561D6A0057168A /* KakaoMapsSDK_SPM in Frameworks */ = {isa = PBXBuildFile; productRef = F8D5EAF22B561D6A0057168A /* KakaoMapsSDK_SPM */; };
+		F8D5EAF72B56275A0057168A /* ExtensionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5EAF62B56275A0057168A /* ExtensionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		F87F97492B553B2600BD01DE /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		F87F974B2B553B3200BD01DE /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		F87F97522B553BAB00BD01DE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		F8D5EAF62B56275A0057168A /* ExtensionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 				F87F974F2B553B6300BD01DE /* Home */,
 				F87F97502B553B6F00BD01DE /* Register */,
 				F87F97512B553B7800BD01DE /* MyPage */,
+				F8D5EAF62B56275A0057168A /* ExtensionVC.swift */,
 			);
 			path = KiKickBoard;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */,
+				F8D5EAF72B56275A0057168A /* ExtensionVC.swift in Sources */,
 				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,
 				F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */,
 				F87F97482B553B1900BD01DE /* HomeVC.swift in Sources */,
@@ -308,7 +312,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -362,7 +366,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -391,7 +395,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dongjin.KiKickBoard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.2Team.KiKickBoard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -418,7 +422,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dongjin.KiKickBoard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.2Team.KiKickBoard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
