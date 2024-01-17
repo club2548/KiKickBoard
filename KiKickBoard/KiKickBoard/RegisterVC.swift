@@ -1,13 +1,13 @@
 import UIKit
 import SnapKit
-
+import NMapsMap
 
 
 class RegisterVC: UIViewController {
     
     
     // 타이틀 라벨
-    let registerTitlelabel: UILabel = {
+    private lazy var registerTitlelabel: UILabel = {
         let label = UILabel()
         label.text = "KiKickBoard 등록하기"
         label.textAlignment = .left
@@ -16,7 +16,7 @@ class RegisterVC: UIViewController {
     }()
     
     // 기본 요금 라벨/텍스트필드
-    let baseRateLabel: UILabel = {
+    private lazy var baseRateLabel: UILabel = {
         let label = UILabel()
         label.text = "기본 요금 (1km)"
         label.textAlignment = .left
@@ -24,7 +24,7 @@ class RegisterVC: UIViewController {
         return label
     }()
     
-    let baseRateTextField: UITextField = {
+    private lazy var baseRateTextField: UITextField = {
         let field = UITextField()
         field.borderStyle = .roundedRect
         field.placeholder = "1km 이내를 이동하는 기본요금을 설정합니다."
@@ -32,21 +32,21 @@ class RegisterVC: UIViewController {
     }()
     
     // 추가 요금 라벨/텍스트필드
-    let extraFeeLabel: UILabel = {
+    private lazy var extraFeeLabel: UILabel = {
         let label = UILabel()
         label.text = "추가 요금 (100m)"
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
-    let extraFeeTextField: UITextField = {
+    private lazy var extraFeeTextField: UITextField = {
         let field = UITextField()
         field.borderStyle = .roundedRect
         field.placeholder = "1km를 초과한 후 100m당 요금을 설정합니다. "
         return field
     }()
     // Equipment location 기기위치 라벨
-    let eLLabel: UILabel = {
+    private lazy var eLLabel: UILabel = {
         let eLocationLabel = UILabel()
         eLocationLabel.numberOfLines = 2
         eLocationLabel.textAlignment = .left
@@ -63,7 +63,7 @@ class RegisterVC: UIViewController {
         return eLocationLabel
     }()
     
-    let button: UIButton =  {
+    private lazy var button: UIButton =  {
         let button = UIButton()
         button.setTitle("등록하기", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
@@ -73,12 +73,15 @@ class RegisterVC: UIViewController {
         return button
     }()
     
-    
+    private lazy var naverMapView: NMFNaverMapView = {
+        let mapView = NMFNaverMapView()
+        mapView.showLocationButton = true
+        return mapView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         
         addSubViews()
         autoLayouts()
@@ -144,7 +147,12 @@ extension RegisterVC {
             make.height.equalTo(50)
         }
         
-        
+        naverMapView.snp.makeConstraints { make in
+            
+            make.top.equalTo(eLLabel.snp.bottom).offset(20)
+            make.left.right.equalTo(view).inset(20) // 좌우 여백 설정
+            make.bottom.equalTo(button.snp.top).offset(-20) // 버튼 위에 위치
+        }
     }
     
     
@@ -161,12 +169,15 @@ extension RegisterVC {
         view.addSubview(registerTitlelabel)
         view.addSubview(eLLabel)
         view.addSubview(button)
+        view.addSubview(naverMapView)
     }
 }
 
 
 
-
+extension RegisterVC {
+    
+}
 
 //// MARK: -Pre View
 //import SwiftUI
