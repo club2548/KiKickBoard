@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0182D92B56176D0006F4B4 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182D82B56176D0006F4B4 /* SignUpModel.swift */; };
+		3F0182DB2B561B300006F4B4 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DA2B561B300006F4B4 /* SignUpController.swift */; };
+		3F0182DD2B5678F40006F4B4 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DC2B5678F40006F4B4 /* LoginModel.swift */; };
+		3F0182DF2B567B090006F4B4 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DE2B567B090006F4B4 /* LoginController.swift */; };
+		3F0182E12B57BC5E0006F4B4 /* SignUpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182E02B57BC5E0006F4B4 /* SignUpExtension.swift */; };
 		0D1A4A4CA4FA94B0241BB871 /* Pods_KiKickBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 309C01BF95ED8EBE6099F549 /* Pods_KiKickBoard.framework */; };
 		F85D46F62B575B07002E4160 /* BaseKickBoardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */; };
 		F85D46FA2B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D46F92B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift */; };
@@ -18,7 +23,7 @@
 		F87F97392B5539FD00BD01DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F87F97382B5539FD00BD01DE /* Assets.xcassets */; };
 		F87F973C2B5539FD00BD01DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87F973A2B5539FD00BD01DE /* LaunchScreen.storyboard */; };
 		F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97432B553B0000BD01DE /* LoginVC.swift */; };
-		F87F97462B553B0D00BD01DE /* SignUPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97452B553B0D00BD01DE /* SignUPVC.swift */; };
+		F87F97462B553B0D00BD01DE /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97452B553B0D00BD01DE /* SignUpVC.swift */; };
 		F87F97482B553B1900BD01DE /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97472B553B1900BD01DE /* HomeVC.swift */; };
 		F87F974A2B553B2600BD01DE /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97492B553B2600BD01DE /* RegisterVC.swift */; };
 		F87F974C2B553B3200BD01DE /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F974B2B553B3200BD01DE /* MyPageVC.swift */; };
@@ -28,6 +33,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F0182D82B56176D0006F4B4 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
+		3F0182DA2B561B300006F4B4 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		3F0182DC2B5678F40006F4B4 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		3F0182DE2B567B090006F4B4 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		3F0182E02B57BC5E0006F4B4 /* SignUpExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpExtension.swift; sourceTree = "<group>"; };
 		309C01BF95ED8EBE6099F549 /* Pods_KiKickBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KiKickBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0B0B8F6C31DCBA39CEF2156 /* Pods-KiKickBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.debug.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.debug.xcconfig"; sourceTree = "<group>"; };
 		F3461657C19D0140250FFF5C /* Pods-KiKickBoard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.release.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.release.xcconfig"; sourceTree = "<group>"; };
@@ -43,7 +53,7 @@
 		F87F973B2B5539FD00BD01DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F87F973D2B5539FD00BD01DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F87F97432B553B0000BD01DE /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
-		F87F97452B553B0D00BD01DE /* SignUPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUPVC.swift; sourceTree = "<group>"; };
+		F87F97452B553B0D00BD01DE /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		F87F97472B553B1900BD01DE /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		F87F97492B553B2600BD01DE /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		F87F974B2B553B3200BD01DE /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
@@ -131,7 +141,9 @@
 		F87F974D2B553B3600BD01DE /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				3F0182DC2B5678F40006F4B4 /* LoginModel.swift */,
 				F87F97432B553B0000BD01DE /* LoginVC.swift */,
+				3F0182DE2B567B090006F4B4 /* LoginController.swift */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -139,7 +151,10 @@
 		F87F974E2B553B5600BD01DE /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				F87F97452B553B0D00BD01DE /* SignUPVC.swift */,
+				3F0182D82B56176D0006F4B4 /* SignUpModel.swift */,
+				F87F97452B553B0D00BD01DE /* SignUpVC.swift */,
+				3F0182DA2B561B300006F4B4 /* SignUpController.swift */,
+				3F0182E02B57BC5E0006F4B4 /* SignUpExtension.swift */,
 			);
 			name = SignUp;
 			sourceTree = "<group>";
@@ -228,7 +243,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					F87F972B2B5539FC00BD01DE = {
 						CreatedOnToolsVersion = 14.3;
@@ -317,17 +332,22 @@
 			files = (
 				F8728F252B56BE3000700EB1 /* NaverGeocodingManager.swift in Sources */,
 				F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */,
+				3F0182DF2B567B090006F4B4 /* LoginController.swift in Sources */,
 				F85D46FA2B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				F85D46F62B575B07002E4160 /* BaseKickBoardData.swift in Sources */,
 				F8D5EAF72B56275A0057168A /* ExtensionVC.swift in Sources */,
 				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,
 				F8728F272B56CAA200700EB1 /* NMapAddModel.swift in Sources */,
 				F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */,
+				3F0182DD2B5678F40006F4B4 /* LoginModel.swift in Sources */,
+				3F0182E12B57BC5E0006F4B4 /* SignUpExtension.swift in Sources */,
+				3F0182D92B56176D0006F4B4 /* SignUpModel.swift in Sources */,
 				F87F97482B553B1900BD01DE /* HomeVC.swift in Sources */,
+				3F0182DB2B561B300006F4B4 /* SignUpController.swift in Sources */,
 				F87F974A2B553B2600BD01DE /* RegisterVC.swift in Sources */,
 				F85D46FD2B57A395002E4160 /* UILabel+Extension.swift in Sources */,
 				F87F974C2B553B3200BD01DE /* MyPageVC.swift in Sources */,
-				F87F97462B553B0D00BD01DE /* SignUPVC.swift in Sources */,
+				F87F97462B553B0D00BD01DE /* SignUpVC.swift in Sources */,
 				F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,6 +402,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -442,6 +463,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -468,7 +490,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4G47XHXXQX;
+				DEVELOPMENT_TEAM = 76R226FG59;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KiKickBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -496,7 +518,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 4G47XHXXQX;
+				DEVELOPMENT_TEAM = 76R226FG59;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KiKickBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
