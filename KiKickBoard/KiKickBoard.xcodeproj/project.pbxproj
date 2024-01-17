@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46FA04962B57DA6E00B963CB /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FA04952B57DA6E00B963CB /* RegisterModel.swift */; };
 		6F2C97BD7466364BA6A10B3C /* Pods_KiKickBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E2A7116E60E3B8D898D7EE8 /* Pods_KiKickBoard.framework */; };
 		F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F972F2B5539FC00BD01DE /* AppDelegate.swift */; };
 		F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97312B5539FC00BD01DE /* SceneDelegate.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		1E2A7116E60E3B8D898D7EE8 /* Pods_KiKickBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KiKickBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46FA04952B57DA6E00B963CB /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		4F3DFFAEC91D2F827C0E838A /* Pods-KiKickBoard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.release.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.release.xcconfig"; sourceTree = "<group>"; };
 		F87F972C2B5539FC00BD01DE /* KiKickBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiKickBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87F972F2B5539FC00BD01DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				F87F97492B553B2600BD01DE /* RegisterVC.swift */,
+				46FA04952B57DA6E00B963CB /* RegisterModel.swift */,
 			);
 			name = Register;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				F87F974C2B553B3200BD01DE /* MyPageVC.swift in Sources */,
 				F87F97462B553B0D00BD01DE /* SignUPVC.swift in Sources */,
 				F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */,
+				46FA04962B57DA6E00B963CB /* RegisterModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

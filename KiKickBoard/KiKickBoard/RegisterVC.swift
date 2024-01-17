@@ -3,7 +3,7 @@ import SnapKit
 import NMapsMap
 
 
-class RegisterVC: UIViewController {
+class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     // 타이틀 라벨
     private lazy var registerTitlelabel: UILabel = {
         let label = UILabel()
@@ -26,6 +26,7 @@ class RegisterVC: UIViewController {
         let field = UITextField()
         field.borderStyle = .roundedRect
         field.placeholder = "1km 이내를 이동하는 기본요금을 설정합니다."
+        field.keyboardType = .numberPad // 숫자패드
         return field
     }()
     
@@ -41,6 +42,7 @@ class RegisterVC: UIViewController {
         let field = UITextField()
         field.borderStyle = .roundedRect
         field.placeholder = "1km를 초과한 후 100m당 요금을 설정합니다. "
+        field.keyboardType = .numberPad //숫자패드
         return field
     }()
     // Equipment location 기기위치 라벨
@@ -76,19 +78,15 @@ class RegisterVC: UIViewController {
         mapView.showLocationButton = true
         return mapView
     }()
-//    private lazy var kickboardMarker: NMFMarker = {
-//        let marker = NMFMarker()
-//        marker.position = NMGLatLng(lat: 37.5670135, lng: 126.9783740)
-//        marker.iconImage = NMFOverlayImage(name: "marker_image")
-//        marker.width = 30
-//        marker.height = 60
-//        return marker
-//    }()
+    
+    var selectedPosition: NMGLatLng?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        
+        naverMapView.mapView.touchDelegate = self
         addSubViews()
         autoLayouts()
         
@@ -96,13 +94,47 @@ class RegisterVC: UIViewController {
         
     }
     
+    // 텍스트필드에 키보드 동작 후 화면 터치 이벤트로 다시 숨기기
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
-    
+    // 마커 설정.
+    func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+        let marker = NMFMarker()
+        marker.position = latlng
+        marker.iconImage = NMFOverlayImage(name: "KickBoardImg")
+        marker.width = 30
+        marker.height = 30
+        marker.mapView = mapView // 마커를 지도에 추가
+        selectedPosition = latlng
+        print("\(latlng.lat), \(latlng.lng)")
+    }
     
     // 등록하기 버튼 클릭시 동작.
     @objc func registerButton(_ sender: UIButton) {
-        
+        let serialNumber = serialNumber()
+        let baseRate = baseRateTextField.text ?? ""
+        let extraFee = extraFeeTextField.text ?? ""
+        guard let position = selectedPosition else {
+            let alert = UIAlertController(title: "킥보드 위치 미등록", message: "등록할 킥보드의 위치를 선택해주세요.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+            present(alert, animated: true)
+            return
+        }
+        let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, position: selectedPosition!)
+        // 킥보드정보 객체를 저장
+        KickBoardData.shared.kickboards.append(kickboard)
+        print("시리얼 넘버: \(serialNumber)")
+        print("기본요금: \(baseRate)")
+        print("추가요금: \(extraFee)")
+        print("위치: \(position.lat), \(position.lng)")
     }
+    
+    func serialNumber() -> Int {
+        return Int.random(in: 10000000...99999999)
+    }
+    
     
 }
 
@@ -168,15 +200,12 @@ extension RegisterVC {
     
     
     func addSubViews() {
-        view.addSubview(baseRateLabel)
-        view.addSubview(baseRateTextField)
-        view.addSubview(extraFeeLabel)
-        view.addSubview(extraFeeTextField)
-        view.addSubview(registerTitlelabel)
-        view.addSubview(eLLabel)
-        view.addSubview(button)
-        view.addSubview(naverMapView)
-       
+        let views = [
+            baseRateLabel, baseRateTextField, extraFeeLabel, extraFeeTextField, registerTitlelabel, eLLabel, button, naverMapView
+        ]
+        
+        _ = views.map { view.addSubview($0)}
+      
     }
 }
 
