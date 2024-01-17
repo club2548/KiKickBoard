@@ -26,13 +26,13 @@ class KickBoardData {
     private init() {}
 }
 
-struct BaseKickBoardData {
-    var baseKickBoard: [NMFMarker] {
-        return KickBoardData.shared.kickboards.map { kickboardInfo in
-            let marker = NMFMarker(position: kickboardInfo.position)
-            marker.iconImage = kickboardInfo.iconImage
-            return marker
-        }
-    }
-}
+//struct BaseKickBoardData {
+//    var baseKickBoard: [NMFMarker] {
+//        return KickBoardData.shared.kickboards.map { kickboardInfo in
+//            let marker = NMFMarker(position: kickboardInfo.position)
+//            marker.iconImage = kickboardInfo.iconImage
+//            return marker
+//        }
+//    }
+//}
 

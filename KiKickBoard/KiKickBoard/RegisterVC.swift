@@ -83,7 +83,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "PrimaryColoy")
         
         
         naverMapView.mapView.touchDelegate = self
@@ -112,7 +112,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     }
     
     // 등록하기 버튼 클릭시 동작.
-    @objc func registerButton(_ sender: UIButton) {
+    @objc func registerButton(_ sender: UIButton) { // 등록하기 버튼 x -> 지도 클릭 할 떄마다 등록. alert
         let serialNumber = serialNumber()
         let baseRate = baseRateTextField.text ?? ""
         let extraFee = extraFeeTextField.text ?? ""
@@ -194,18 +194,11 @@ extension RegisterVC {
     }
     
     
-//    func addSubViews(_ views : [UIView]){
-//        _ = views.map{self.addSubview($0)}
-//    }
-    
-    
     func addSubViews() {
         let views = [
             baseRateLabel, baseRateTextField, extraFeeLabel, extraFeeTextField, registerTitlelabel, eLLabel, button, naverMapView
         ]
-        
         _ = views.map { view.addSubview($0)}
-      
     }
 }
 
