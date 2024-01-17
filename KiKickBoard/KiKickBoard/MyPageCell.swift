@@ -13,8 +13,7 @@ class MyPageCell: UICollectionViewCell {
     static let MPCidenti = "MyPageCell"
     
     var profileLabel: UILabel = {
-        let profileLabel = UILabel()
-        
+        let profileLabel = UILabel()        
         return profileLabel
     }()
     

@@ -35,18 +35,22 @@ extension UIViewController {
 
 class MyPageVC: UIViewController {
     
+    //cell label
     var models: [String] = ["회원정보", "이용내역", "등록한 킥보드", "로그아웃"]
-    
+
     private let myPageCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero , collectionViewLayout: layout)
+        
+        //셀끼리 간격
+        layout.minimumLineSpacing = 1
         
         collectionView.backgroundColor = .white
         
         return collectionView
     }()
     
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,13 +80,13 @@ class MyPageVC: UIViewController {
 extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
     
     //셀 설정 및 반환
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCell.MPCidenti, for: indexPath) as! MyPageCell
         let model = models[indexPath.item]
         cell.profileLabel.text = model
         
         cell.backgroundColor = .lightGray
+
         return cell
     }
     
@@ -95,21 +99,30 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         guard let cell = myPageCollectionView.dequeueReusableCell(withReuseIdentifier: MyPageCell.MPCidenti, for: indexPath) as? MyPageCell else { return .zero }
+        
         let model = models[indexPath.item]
         cell.profileLabel.text = model
         //sizeToFit() 글자 사이즈에 맞춤
         cell.profileLabel.sizeToFit()
+        
         let cellheight = cell.profileLabel.frame.height + 20
         
         return CGSize(width: collectionView.safeAreaLayoutGuide.layoutFrame.width - 30, height: cellheight)
     }
     
-    //셀끼리 간격. 근데 왜 안 먹냐...?
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        return 0
-    }
+        switch indexPath.item {
+        case 0: navigationController?.pushViewController(ProfileVC(), animated:true)
+        case 1: navigationController?.pushViewController(HistoryVC(), animated:true)
+        case 2: navigationController?.pushViewController(RegisterVC(), animated: true)
+        //case 3: navigationController?.popToRootViewController(animated: true)
+        default: break
+        }
 
-
+        }
+        
+        
     }
+    
 
