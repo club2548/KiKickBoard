@@ -26,6 +26,14 @@ class SignUpVC: UIViewController {
         return textField
     }()
     
+    let idDescription : UILabel = {
+        let description = UILabel()
+        description.font = .systemFont(ofSize: 12)
+        description.textColor = .red
+        description.textAlignment = .left
+        return description
+    }()
+    
     let pwStr : UILabel = {
         let str = UILabel()
         str.font = .boldSystemFont(ofSize: 15)
@@ -45,6 +53,40 @@ class SignUpVC: UIViewController {
     
     var eyeButton = UIButton(type: .custom)
     
+    let pwDescription : UILabel = {
+        let description = UILabel()
+        description.font = .systemFont(ofSize: 12)
+        description.textColor = .red
+        description.textAlignment = .left
+        return description
+    }()
+    
+    let pwCheckStr : UILabel = {
+        let str = UILabel()
+        str.font = .boldSystemFont(ofSize: 15)
+        str.textColor = .black
+        str.text = "비밀번호 확인"
+        str.textAlignment = .left
+        return str
+    }()
+    
+    let pwSignUpCheckTextField : UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "비밀번호를 다시 입력해주세요"
+        textField.borderStyle = .roundedRect
+        textField.autocapitalizationType = .none
+        textField.isSecureTextEntry = true
+        return textField
+    }()
+    
+    let pwCheckDescription : UILabel = {
+        let description = UILabel()
+        description.font = .systemFont(ofSize: 12)
+        description.textColor = .red
+        description.textAlignment = .left
+        return description
+    }()
+    
     let eMailStr : UILabel = {
         let str = UILabel()
         str.font = .boldSystemFont(ofSize: 15)
@@ -60,6 +102,14 @@ class SignUpVC: UIViewController {
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         return textField
+    }()
+    
+    let eMailCheckDescription : UILabel = {
+        let description = UILabel()
+        description.font = .systemFont(ofSize: 12)
+        description.textColor = .red
+        description.textAlignment = .left
+        return description
     }()
     
     let nameStr : UILabel = {
@@ -110,6 +160,7 @@ class SignUpVC: UIViewController {
         autoLayout()
         setupInteraction()
         setEyeButton()
+//        idValidCheck()
     }
 }
 
@@ -117,7 +168,7 @@ class SignUpVC: UIViewController {
 // MARK: extention of SignUpVC - addSubView, autoLayout, interaction etc.
 extension SignUpVC {
     private func addSubView() {
-        self.view.addSubViews([idStr, idSignUpTextField, pwStr, pwSignUpTextField, eMailStr, eMailSignUpTextField, nameStr, nameSignUpTextField, mobileStr, mobileSignUpTextField, joinBtn])
+        self.view.addSubViews([idStr, idSignUpTextField, idDescription,pwStr, pwSignUpTextField, pwDescription,pwCheckStr, pwSignUpCheckTextField,pwCheckDescription,eMailStr, eMailSignUpTextField, eMailCheckDescription,nameStr, nameSignUpTextField, mobileStr, mobileSignUpTextField, joinBtn])
     }
     
     private func autoLayout() {
@@ -128,43 +179,68 @@ extension SignUpVC {
         idSignUpTextField.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(idStr.snp.bottom).offset(10)
+            make.top.equalTo(idStr.snp.bottom).offset(5)
+        }
+        idDescription.snp.makeConstraints() { make in
+            make.left.equalToSuperview().offset(50)
+            make.top.equalTo(idSignUpTextField.snp.bottom).offset(5)
         }
         pwStr.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
-            make.top.equalTo(idSignUpTextField.snp.bottom).offset(30)
+            make.top.equalTo(idSignUpTextField.snp.bottom).offset(35)
         }
         pwSignUpTextField.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(pwStr.snp.bottom).offset(10)
+            make.top.equalTo(pwStr.snp.bottom).offset(5)
+        }
+        pwDescription.snp.makeConstraints() { make in
+            make.left.equalToSuperview().offset(50)
+            make.top.equalTo(pwSignUpTextField.snp.bottom).offset(5)
+        }
+        pwCheckStr.snp.makeConstraints() { make in
+            make.left.equalToSuperview().offset(50)
+            make.top.equalTo(pwSignUpTextField.snp.bottom).offset(35)
+        }
+        pwSignUpCheckTextField.snp.makeConstraints() { make in
+            make.left.equalToSuperview().offset(50)
+            make.right.equalToSuperview().offset(-50)
+            make.top.equalTo(pwCheckStr.snp.bottom).offset(5)
+        }
+        pwCheckDescription.snp.makeConstraints() { make in
+            make.left.equalToSuperview().offset(50)
+            make.top.equalTo(pwSignUpCheckTextField.snp.bottom).offset(5)
         }
         eMailStr.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
-            make.top.equalTo(pwSignUpTextField.snp.bottom).offset(30)
+            make.top.equalTo(pwSignUpCheckTextField.snp.bottom).offset(35)
         }
         eMailSignUpTextField.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(eMailStr.snp.bottom).offset(10)
+            make.top.equalTo(eMailStr.snp.bottom).offset(5)
+        }
+        eMailCheckDescription.snp.makeConstraints() { make in
+            make.left.equalToSuperview().offset(50)
+            make.top.equalTo(eMailSignUpTextField.snp.bottom).offset(5)
         }
         nameStr.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
-            make.top.equalTo(eMailSignUpTextField.snp.bottom).offset(30)
+            make.top.equalTo(eMailSignUpTextField.snp.bottom).offset(35)
         }
         nameSignUpTextField.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(nameStr.snp.bottom).offset(10)
+            make.top.equalTo(nameStr.snp.bottom).offset(5)
         }
         mobileStr.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
-            make.top.equalTo(nameSignUpTextField.snp.bottom).offset(30)
+            make.top.equalTo(nameSignUpTextField.snp.bottom).offset(35)
         }
         mobileSignUpTextField.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(mobileStr.snp.bottom).offset(10)
+            make.top.equalTo(mobileStr.snp.bottom).offset(5)
         }
         joinBtn.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(50)
@@ -175,6 +251,10 @@ extension SignUpVC {
     
     private func setupInteraction() {
         joinBtn.addTarget(self, action: #selector(touchJoin), for: .touchUpInside)
+        idSignUpTextField.addTarget(self, action: #selector(idValidCheck), for: .editingChanged)
+        pwSignUpTextField.addTarget(self, action: #selector(pwValidCheck), for: .editingChanged)
+        pwSignUpCheckTextField.addTarget(self, action: #selector(pwEqualCheck), for: .editingChanged)
+        eMailSignUpTextField.addTarget(self, action: #selector(eMailValidCheck), for: .editingChanged)
     }
     
     // 사용자 입력 중 아이디, 이메일, 전화번호를 저장된 정보와 확인한 후, 없다면 UserDefaults에 저장.
@@ -202,6 +282,88 @@ extension SignUpVC {
         }
 
         print("Saved UserInfo : \(SignUpController.shared.userInfoArray)")
+    }
+    
+    @objc func idValidCheck() {
+        idDescription.isHidden = false
+        
+        let minCount = 5
+        let maxCount = 12
+        let count = idSignUpTextField.text!.count
+        
+        switch count {
+        case 0 :
+            idDescription.text = "아이디는 필수입력 정보입니다."
+        case 1..<minCount :
+            idDescription.text = "아이디는 5글자 이상이어야 합니다."
+        case minCount..<maxCount :
+            let idPattern = "^[a-z0-9-_]{\(minCount),\(maxCount)}$"
+            let isValidPattern = (idSignUpTextField.text!.range(of: idPattern, options: .regularExpression) != nil)
+            if isValidPattern {
+                idDescription.text = "조건에 맞는 아이디"
+                idDescription.isHidden = true
+            } else {
+                idDescription.text = "소문자, 숫자, 빼기(-), 밑줄(_)만 사용할 수 있습니다."
+            }
+        default :
+            idDescription.text = "아이디는 12글자 이하여야 합니다."
+        }
+        
+    }
+    
+    @objc func pwValidCheck() {
+        pwDescription.isHidden = false
+        
+        let minCount = 5
+        let maxCount = 12
+        let count = pwSignUpTextField.text!.count
+        
+        switch count {
+        case 0 :
+            pwDescription.text = "아이디는 필수입력 정보입니다."
+        case 1..<minCount :
+            pwDescription.text = "아이디는 5글자 이상이어야 합니다."
+        case minCount..<maxCount :
+            let pwPattern = "^[a-z0-9-_]{\(minCount),\(maxCount)}$"
+            let isValidPattern = (pwSignUpTextField.text!.range(of: pwPattern, options: .regularExpression) != nil)
+            if isValidPattern {
+                pwDescription.text = "조건에 맞는 아이디"
+                pwDescription.isHidden = true
+            } else {
+                pwDescription.text = "소문자, 숫자, 빼기(-), 밑줄(_)만 사용할 수 있습니다."
+            }
+        default :
+            pwDescription.text = "아이디는 12글자 이하여야 합니다."
+        }
+        
+    }
+    @objc func pwEqualCheck() {
+        pwCheckDescription.isHidden = false
+        let count = pwSignUpCheckTextField.text!.count
+        
+        switch pwSignUpCheckTextField.text {
+        case pwSignUpTextField.text :
+            pwCheckDescription.text = "비밀번호가 일치합니다."
+            pwCheckDescription.textColor = .blue
+        default :
+            pwCheckDescription.text = "비밀번호가 일치하지 않습니다."
+        }
+        
+    }
+    @objc func eMailValidCheck() {
+        eMailCheckDescription.isHidden = false
+
+        let count = eMailSignUpTextField.text!.count
+        let eMailPattern = "^[a-zA-Z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"
+        let isValidPattern = (eMailSignUpTextField.text!.range(of: eMailPattern, options: .regularExpression) != nil)
+        
+        switch isValidPattern {
+        case true :
+            eMailCheckDescription.text = ""
+        default :
+            eMailCheckDescription.text = "정상적인 이메일 주소가 아닙니다."
+        }
+        
     }
     
     private func setEyeButton() {
