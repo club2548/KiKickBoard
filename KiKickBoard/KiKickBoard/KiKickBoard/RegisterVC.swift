@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import NMapsMap
 
-// test
+// dev
 class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     // 타이틀 라벨
     private lazy var registerTitlelabel: UILabel = {
