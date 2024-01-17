@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D1A4A4CA4FA94B0241BB871 /* Pods_KiKickBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 309C01BF95ED8EBE6099F549 /* Pods_KiKickBoard.framework */; };
+		F85D46F62B575B07002E4160 /* BaseKickBoardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */; };
+		F85D46FA2B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D46F92B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift */; };
+		F85D46FD2B57A395002E4160 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D46FC2B57A395002E4160 /* UILabel+Extension.swift */; };
+		F8728F252B56BE3000700EB1 /* NaverGeocodingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8728F242B56BE3000700EB1 /* NaverGeocodingManager.swift */; };
+		F8728F272B56CAA200700EB1 /* NMapAddModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8728F262B56CAA200700EB1 /* NMapAddModel.swift */; };
 		F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F972F2B5539FC00BD01DE /* AppDelegate.swift */; };
 		F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97312B5539FC00BD01DE /* SceneDelegate.swift */; };
 		F87F97392B5539FD00BD01DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F87F97382B5539FD00BD01DE /* Assets.xcassets */; };
@@ -18,9 +24,18 @@
 		F87F974C2B553B3200BD01DE /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F974B2B553B3200BD01DE /* MyPageVC.swift */; };
 		F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97522B553BAB00BD01DE /* TabBarController.swift */; };
 		F87F97562B55400E00BD01DE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F87F97552B55400E00BD01DE /* SnapKit */; };
+		F8D5EAF72B56275A0057168A /* ExtensionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5EAF62B56275A0057168A /* ExtensionVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		309C01BF95ED8EBE6099F549 /* Pods_KiKickBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KiKickBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0B0B8F6C31DCBA39CEF2156 /* Pods-KiKickBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.debug.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.debug.xcconfig"; sourceTree = "<group>"; };
+		F3461657C19D0140250FFF5C /* Pods-KiKickBoard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.release.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.release.xcconfig"; sourceTree = "<group>"; };
+		F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseKickBoardData.swift; sourceTree = "<group>"; };
+		F85D46F92B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
+		F85D46FC2B57A395002E4160 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		F8728F242B56BE3000700EB1 /* NaverGeocodingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverGeocodingManager.swift; sourceTree = "<group>"; };
+		F8728F262B56CAA200700EB1 /* NMapAddModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMapAddModel.swift; sourceTree = "<group>"; };
 		F87F972C2B5539FC00BD01DE /* KiKickBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiKickBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87F972F2B5539FC00BD01DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F87F97312B5539FC00BD01DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -33,6 +48,7 @@
 		F87F97492B553B2600BD01DE /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		F87F974B2B553B3200BD01DE /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		F87F97522B553BAB00BD01DE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		F8D5EAF62B56275A0057168A /* ExtensionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,17 +57,46 @@
 			buildActionMask = 2147483647;
 			files = (
 				F87F97562B55400E00BD01DE /* SnapKit in Frameworks */,
+				0D1A4A4CA4FA94B0241BB871 /* Pods_KiKickBoard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2FAF26CC19643402D8D8286F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A0B0B8F6C31DCBA39CEF2156 /* Pods-KiKickBoard.debug.xcconfig */,
+				F3461657C19D0140250FFF5C /* Pods-KiKickBoard.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BF1C320A5704C449F3391827 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				309C01BF95ED8EBE6099F549 /* Pods_KiKickBoard.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F85D46FB2B57A35D002E4160 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F85D46F92B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift */,
+				F85D46FC2B57A395002E4160 /* UILabel+Extension.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
 		F87F97232B5539FC00BD01DE = {
 			isa = PBXGroup;
 			children = (
 				F87F972E2B5539FC00BD01DE /* KiKickBoard */,
 				F87F972D2B5539FC00BD01DE /* Products */,
+				2FAF26CC19643402D8D8286F /* Pods */,
+				BF1C320A5704C449F3391827 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +111,7 @@
 		F87F972E2B5539FC00BD01DE /* KiKickBoard */ = {
 			isa = PBXGroup;
 			children = (
+				F85D46FB2B57A35D002E4160 /* Extension */,
 				F87F972F2B5539FC00BD01DE /* AppDelegate.swift */,
 				F87F97312B5539FC00BD01DE /* SceneDelegate.swift */,
 				F87F97382B5539FD00BD01DE /* Assets.xcassets */,
@@ -77,6 +123,7 @@
 				F87F974F2B553B6300BD01DE /* Home */,
 				F87F97502B553B6F00BD01DE /* Register */,
 				F87F97512B553B7800BD01DE /* MyPage */,
+				F8D5EAF62B56275A0057168A /* ExtensionVC.swift */,
 			);
 			path = KiKickBoard;
 			sourceTree = "<group>";
@@ -100,7 +147,9 @@
 		F87F974F2B553B6300BD01DE /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				F87F97472B553B1900BD01DE /* HomeVC.swift */,
+				F87F975A2B5551A700BD01DE /* Service */,
+				F87F97582B55519800BD01DE /* Model */,
+				F87F97592B5551A100BD01DE /* VC */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -121,6 +170,31 @@
 			name = MyPage;
 			sourceTree = "<group>";
 		};
+		F87F97582B55519800BD01DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F8728F262B56CAA200700EB1 /* NMapAddModel.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		F87F97592B5551A100BD01DE /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				F87F97472B553B1900BD01DE /* HomeVC.swift */,
+			);
+			name = VC;
+			sourceTree = "<group>";
+		};
+		F87F975A2B5551A700BD01DE /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F8728F242B56BE3000700EB1 /* NaverGeocodingManager.swift */,
+				F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -128,9 +202,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F87F97402B5539FD00BD01DE /* Build configuration list for PBXNativeTarget "KiKickBoard" */;
 			buildPhases = (
+				88FB4CED2B6792F92B43A9CF /* [CP] Check Pods Manifest.lock */,
 				F87F97282B5539FC00BD01DE /* Sources */,
 				F87F97292B5539FC00BD01DE /* Frameworks */,
 				F87F972A2B5539FC00BD01DE /* Resources */,
+				688FCFA71FF4ADAE3179BD93 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -192,16 +268,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		688FCFA71FF4ADAE3179BD93 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		88FB4CED2B6792F92B43A9CF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-KiKickBoard-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F87F97282B5539FC00BD01DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8728F252B56BE3000700EB1 /* NaverGeocodingManager.swift in Sources */,
 				F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */,
+				F85D46FA2B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift in Sources */,
+				F85D46F62B575B07002E4160 /* BaseKickBoardData.swift in Sources */,
+				F8D5EAF72B56275A0057168A /* ExtensionVC.swift in Sources */,
 				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,
+				F8728F272B56CAA200700EB1 /* NMapAddModel.swift in Sources */,
 				F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */,
 				F87F97482B553B1900BD01DE /* HomeVC.swift in Sources */,
 				F87F974A2B553B2600BD01DE /* RegisterVC.swift in Sources */,
+				F85D46FD2B57A395002E4160 /* UILabel+Extension.swift in Sources */,
 				F87F974C2B553B3200BD01DE /* MyPageVC.swift in Sources */,
 				F87F97462B553B0D00BD01DE /* SignUPVC.swift in Sources */,
 				F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */,
@@ -272,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -326,7 +450,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -338,6 +462,7 @@
 		};
 		F87F97412B5539FD00BD01DE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A0B0B8F6C31DCBA39CEF2156 /* Pods-KiKickBoard.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -355,7 +480,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dongjin.KiKickBoard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.2Team.KiKickBoard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -365,6 +490,7 @@
 		};
 		F87F97422B5539FD00BD01DE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3461657C19D0140250FFF5C /* Pods-KiKickBoard.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -382,7 +508,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dongjin.KiKickBoard;
+				PRODUCT_BUNDLE_IDENTIFIER = com.2Team.KiKickBoard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
