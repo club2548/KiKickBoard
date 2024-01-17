@@ -4,8 +4,6 @@ import NMapsMap
 
 
 class RegisterVC: UIViewController {
-    
-    
     // 타이틀 라벨
     private lazy var registerTitlelabel: UILabel = {
         let label = UILabel()
@@ -78,6 +76,14 @@ class RegisterVC: UIViewController {
         mapView.showLocationButton = true
         return mapView
     }()
+//    private lazy var kickboardMarker: NMFMarker = {
+//        let marker = NMFMarker()
+//        marker.position = NMGLatLng(lat: 37.5670135, lng: 126.9783740)
+//        marker.iconImage = NMFOverlayImage(name: "marker_image")
+//        marker.width = 30
+//        marker.height = 60
+//        return marker
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -170,6 +176,7 @@ extension RegisterVC {
         view.addSubview(eLLabel)
         view.addSubview(button)
         view.addSubview(naverMapView)
+       
     }
 }
 
