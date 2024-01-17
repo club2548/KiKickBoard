@@ -119,3 +119,4 @@ install_xcframework() {
 
 install_xcframework "${PODS_ROOT}/NMapsGeometry/framework/NMapsGeometry.xcframework" "NMapsGeometry" "framework" "ios-arm64_armv7" "ios-arm64_i386_x86_64-simulator"
 
+
