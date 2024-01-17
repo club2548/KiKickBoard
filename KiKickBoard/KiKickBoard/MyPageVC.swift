@@ -16,6 +16,8 @@ struct PreView: PreviewProvider {
 #if DEBUG
 
 extension UIViewController {
+    
+    
   private struct Preview: UIViewControllerRepresentable {
       let viewController: UIViewController
       func makeUIViewController(context: Context) -> UIViewController {
@@ -32,6 +34,8 @@ extension UIViewController {
 
 
 class MyPageVC: UIViewController {
+    
+    var models: [String] = ["회원정보", "이용내역", "등록한 킥보드", "로그아웃"]
     
     private let myPageCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -52,6 +56,7 @@ class MyPageVC: UIViewController {
         myPageAddSubView()
         myPageCollectionViewAutoLayout()
         configureMyPageCollectionView()
+
     }
     
     func myPageAddSubView() {
@@ -74,19 +79,29 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCell.MPCidenti, for: indexPath) as! MyPageCell
+        let model = models[indexPath.item]
+        cell.profileLabel.text = model
+        
         cell.backgroundColor = .lightGray
-        cell.profileLabel.text
         return cell
     }
     
     //셀 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return models.count
     }
     
     //셀 크기
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: 100)
+        
+        guard let cell = myPageCollectionView.dequeueReusableCell(withReuseIdentifier: MyPageCell.MPCidenti, for: indexPath) as? MyPageCell else { return .zero }
+        let model = models[indexPath.item]
+        cell.profileLabel.text = model
+        //sizeToFit() 글자 사이즈에 맞춤
+        cell.profileLabel.sizeToFit()
+        let cellheight = cell.profileLabel.frame.height + 20
+        
+        return CGSize(width: collectionView.safeAreaLayoutGuide.layoutFrame.width - 30, height: cellheight)
     }
     
     //셀끼리 간격. 근데 왜 안 먹냐...?
