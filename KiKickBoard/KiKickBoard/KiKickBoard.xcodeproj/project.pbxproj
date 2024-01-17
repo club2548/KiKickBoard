@@ -25,10 +25,11 @@
 		F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97432B553B0000BD01DE /* LoginVC.swift */; };
 		F87F97462B553B0D00BD01DE /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97452B553B0D00BD01DE /* SignUpVC.swift */; };
 		F87F97482B553B1900BD01DE /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97472B553B1900BD01DE /* HomeVC.swift */; };
-		F87F974A2B553B2600BD01DE /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97492B553B2600BD01DE /* RegisterVC.swift */; };
 		F87F974C2B553B3200BD01DE /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F974B2B553B3200BD01DE /* MyPageVC.swift */; };
 		F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97522B553BAB00BD01DE /* TabBarController.swift */; };
 		F87F97562B55400E00BD01DE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F87F97552B55400E00BD01DE /* SnapKit */; };
+		F8C5DC872B5814F900702F8E /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5DC852B5814F900702F8E /* RegisterModel.swift */; };
+		F8C5DC882B5814F900702F8E /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5DC862B5814F900702F8E /* RegisterVC.swift */; };
 		F8D5EAF72B56275A0057168A /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5EAF62B56275A0057168A /* View+Extension.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,9 +56,10 @@
 		F87F97432B553B0000BD01DE /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		F87F97452B553B0D00BD01DE /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		F87F97472B553B1900BD01DE /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
-		F87F97492B553B2600BD01DE /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		F87F974B2B553B3200BD01DE /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		F87F97522B553BAB00BD01DE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		F8C5DC852B5814F900702F8E /* RegisterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
+		F8C5DC862B5814F900702F8E /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterVC.swift; path = ../../../../../../../Downloads/7TeamKikickborad/KiKickBoard/KiKickBoard/KiKickBoard/RegisterVC.swift; sourceTree = "<group>"; };
 		F8D5EAF62B56275A0057168A /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,7 +174,8 @@
 		F87F97502B553B6F00BD01DE /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				F87F97492B553B2600BD01DE /* RegisterVC.swift */,
+				F8C5DC852B5814F900702F8E /* RegisterModel.swift */,
+				F8C5DC862B5814F900702F8E /* RegisterVC.swift */,
 			);
 			name = Register;
 			sourceTree = "<group>";
@@ -344,9 +347,10 @@
 				3F0182D92B56176D0006F4B4 /* SignUpModel.swift in Sources */,
 				F87F97482B553B1900BD01DE /* HomeVC.swift in Sources */,
 				3F0182DB2B561B300006F4B4 /* SignUpController.swift in Sources */,
-				F87F974A2B553B2600BD01DE /* RegisterVC.swift in Sources */,
 				F85D46FD2B57A395002E4160 /* UILabel+Extension.swift in Sources */,
+				F8C5DC872B5814F900702F8E /* RegisterModel.swift in Sources */,
 				F87F974C2B553B3200BD01DE /* MyPageVC.swift in Sources */,
+				F8C5DC882B5814F900702F8E /* RegisterVC.swift in Sources */,
 				F87F97462B553B0D00BD01DE /* SignUpVC.swift in Sources */,
 				F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */,
 			);
@@ -490,7 +494,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 76R226FG59;
+				DEVELOPMENT_TEAM = 4G47XHXXQX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KiKickBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -518,7 +522,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 76R226FG59;
+				DEVELOPMENT_TEAM = 4G47XHXXQX;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KiKickBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
