@@ -40,6 +40,14 @@ extension SignUpVC : UITextFieldDelegate {
         guard let text = textField.text else { return false }
         let newString = (text as NSString).replacingCharacters(in: range, with: string)
         textField.text = format(mask:"XXX-XXXX-XXXX", phone: newString)
+        
+        // Check if the phone number is complete
+        let phoneNumber = textField.text!.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        let isComplete = phoneNumber.count == 11
+
+        // Update mobileCheck accordingly
+        mobileCheck = isComplete
+        
         return false
     }
 }

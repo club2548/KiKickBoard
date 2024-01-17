@@ -9,6 +9,11 @@ import UIKit
 
 class SignUpVC: UIViewController {
     
+    var idCheck = false
+    var pwCheck = false
+    var eMailCheck = false
+    var mobileCheck = false
+    
     let idStr : UILabel = {
         let str = UILabel()
         str.font = .boldSystemFont(ofSize: 15)
@@ -148,6 +153,7 @@ class SignUpVC: UIViewController {
     
     let joinBtn : UIButton = {
         let btn = UIButton()
+        btn.isHidden = true
         btn.backgroundColor = .gray
         btn.setTitle("JOIN", for: .normal)
         return btn
@@ -255,7 +261,7 @@ extension SignUpVC {
         pwSignUpTextField.addTarget(self, action: #selector(pwValidCheck), for: .editingChanged)
         pwSignUpCheckTextField.addTarget(self, action: #selector(pwEqualCheck), for: .editingChanged)
         eMailSignUpTextField.addTarget(self, action: #selector(eMailValidCheck), for: .editingChanged)
-//        mobileSignUpTextField.addTarget(self, action: #selector(mobileNumberFormatting), for: .editingChanged)
+        nameSignUpTextField.addTarget(self, action: #selector(checkAllConditions), for: .editingChanged)
     }
     
     // 사용자 입력 중 아이디, 이메일, 전화번호를 저장된 정보와 확인한 후, 없다면 UserDefaults에 저장.
@@ -295,23 +301,32 @@ extension SignUpVC {
         switch count {
         case 0 :
             idDescription.text = "아이디는 필수입력 정보입니다."
+            self.idCheck = false
+            print("id False")
         case 1..<minCount :
             idDescription.text = "아이디는 \(minCount)글자 이상이어야 합니다."
+            self.idCheck = false
+            print("id False")
         case minCount..<maxCount :
             let idPattern = "^[a-z0-9]{\(minCount),\(maxCount)}$"
             let isValidPattern = (idSignUpTextField.text!.range(of: idPattern, options: .regularExpression) != nil)
             if isValidPattern {
                 idDescription.text = "조건에 맞는 아이디"
                 idDescription.isHidden = true
+                self.idCheck = true
+                print("id True")
             } else {
                 idDescription.text = "알파벳 소문자, 숫자만 사용할 수 있습니다."
+                self.idCheck = false
+                print("id False")
             }
         default :
             idDescription.text = "아이디는 \(maxCount)글자 이하여야 합니다."
+            self.idCheck = false
+            print("id False")
         }
         
     }
-    
     @objc func pwValidCheck() {
         pwDescription.isHidden = false
         
@@ -346,9 +361,13 @@ extension SignUpVC {
         case pwSignUpTextField.text :
             pwCheckDescription.text = "비밀번호가 일치합니다."
             pwCheckDescription.textColor = .blue
+            self.pwCheck = true
+            print("pw True")
         default :
             pwCheckDescription.text = "비밀번호가 일치하지 않습니다."
-            pwSignUpCheckTextField.textColor = .red
+            pwCheckDescription.textColor = .red
+            self.pwCheck = false
+            print("pw False")
         }
         
     }
@@ -362,20 +381,46 @@ extension SignUpVC {
         switch count {
         case 0 :
             eMailCheckDescription.text = "이메일 주소는 필수입력 정보입니다."
+            self.eMailCheck = false
+            print("eMail False")
         case minCount..<maxCount :
             let eMailPattern = "^[a-zA-Z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"
             let isValidPattern = (eMailSignUpTextField.text!.range(of: eMailPattern, options: .regularExpression) != nil)
             if isValidPattern {
                 eMailCheckDescription.text = ""
+                self.eMailCheck = true
+                print("eMail True")
             } else {
                 eMailCheckDescription.text = "정상적인 이메일 주소가 아닙니다."
+                self.eMailCheck = false
+                print("eMail False")
             }
         default :
             eMailCheckDescription.text = "정상적인 이메일 주소가 아닙니다."
+            self.eMailCheck = false
+            print("eMail False")
         }
         
     }
     
+    @objc func checkAllConditions() {
+        let nameValidCheck = nameSignUpTextField.text!.isEmpty
+        
+        self.oKCheck()
+//        if idCheck && pwCheck && eMailCheck && mobileCheck && !nameValidCheck {
+//            joinBtn.isHidden = false
+//        } else {
+//            joinBtn.isHidden = true
+//            }
+    }
+    
+    func oKCheck() {
+        if idCheck && pwCheck && eMailCheck && mobileCheck {
+            joinBtn.isHidden = false
+        } else {
+            joinBtn.isHidden = true
+            }
+    }
     
     private func setEyeButton() {
         eyeButton = UIButton(type: .custom)
