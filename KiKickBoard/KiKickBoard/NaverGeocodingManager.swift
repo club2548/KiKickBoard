@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NaverGeocodingManager {
+class NaverGeocodingManager { // 주소 Stirng to 좌표 구하는 API
     static let shared = NaverGeocodingManager()
     func getData(address : String, completion : @escaping(NMapAddModel) -> Void){
         guard let baseURL = URL(string: "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode") else{
