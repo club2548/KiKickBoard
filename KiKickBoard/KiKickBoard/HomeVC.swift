@@ -14,6 +14,8 @@ class HomeVC: UIViewController{
     var currentLatitude: Double?
     var currentLongtitude: Double?
     var searchAddress = ""
+    let markers : [NMFMarker] = BaseKickBoardData().baseKickBoard
+    var retalPostion : NMGLatLng?
     private lazy var explainLabel : UILabel = { // 상위 설명 Label
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17)
@@ -50,7 +52,7 @@ class HomeVC: UIViewController{
     private lazy var addressButton : UIButton = {
         let button = UIButton()
         button.setTitle("주소 입력", for: .normal)
-        button.backgroundColor = .purple
+        button.backgroundColor = UIColor(named: "PrimaryColor")
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(tapMoveAddress), for: .touchUpInside)
@@ -64,9 +66,10 @@ class HomeVC: UIViewController{
     private lazy var rentalButton : UIButton = {
         let button = UIButton()
         button.setTitle("대여하기", for: .normal)
-        button.backgroundColor = .purple
+        button.backgroundColor = UIColor(named: "PrimaryColor")
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
+        button.addTarget(self, action: #selector(tapRentalButton), for: .touchUpInside)
         return button
     }()
     override func viewDidLoad() {
@@ -78,6 +81,17 @@ class HomeVC: UIViewController{
         setExplainLabel()
         getCurrentLoaction()
         addressTextField.delegate = self
+        navermapView.mapView.touchDelegate = self
+        for mark in markers{
+            mark.touchHandler = { (overlay : NMFOverlay) -> Bool in
+                self.retalPostion = mark.position
+                print(mark.position)
+                print("Mark Touch")
+                return true
+            }
+            mark.anchor = CGPoint(x: 1, y: 1)
+            mark.mapView = self.navermapView.mapView
+        }
     }
 }
 extension HomeVC : CLLocationManagerDelegate{
@@ -108,7 +122,7 @@ extension HomeVC : CLLocationManagerDelegate{
                 return
             }
             let postion = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude , lng: longitude ))
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { //
                 self.navermapView.mapView.moveCamera(postion)
             }
         }
@@ -116,6 +130,9 @@ extension HomeVC : CLLocationManagerDelegate{
     }
     @objc func changeTextField(_ sender : UITextField){
         searchAddress = sender.text ?? ""
+    }
+    @objc func tapRentalButton(){
+        print(self.retalPostion)
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[locations.count - 1]
@@ -138,6 +155,11 @@ extension HomeVC : CLLocationManagerDelegate{
     }
 }
 extension HomeVC : UITextFieldDelegate{
+}
+extension HomeVC : NMFMapViewTouchDelegate{
+    func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
+        print("\(latlng.lat), \(latlng.lng)")
+    }
 }
 
 extension HomeVC {
@@ -177,5 +199,8 @@ extension HomeVC {
             make.right.equalToSuperview().offset(-15)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-15)
         }
+        addressTextField.setContentHuggingPriority(.init(rawValue: 750), for: .horizontal)
+        addressButton.setContentHuggingPriority(.init(rawValue: 751), for: .horizontal)
+        addressButton.setContentCompressionResistancePriority(.required, for: .horizontal)
     }
 }

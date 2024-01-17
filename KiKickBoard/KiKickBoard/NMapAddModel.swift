@@ -18,13 +18,3 @@ struct Address: Decodable {
     let x, y: String
     let distance: Double
 }
-// MARK: - AddressElement
-//struct AddressElement: Codable {
-//    let types: [String]
-//    let longName, shortName, code: String
-//}
-
-// MARK: - Meta
-//struct Meta: Codable {
-//    let totalCount, page, count: Int
-//}

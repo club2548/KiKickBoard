@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0D1A4A4CA4FA94B0241BB871 /* Pods_KiKickBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 309C01BF95ED8EBE6099F549 /* Pods_KiKickBoard.framework */; };
+		F85D46F62B575B07002E4160 /* BaseKickBoardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */; };
 		F8728F252B56BE3000700EB1 /* NaverGeocodingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8728F242B56BE3000700EB1 /* NaverGeocodingManager.swift */; };
 		F8728F272B56CAA200700EB1 /* NMapAddModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8728F262B56CAA200700EB1 /* NMapAddModel.swift */; };
 		F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F972F2B5539FC00BD01DE /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 		309C01BF95ED8EBE6099F549 /* Pods_KiKickBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KiKickBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0B0B8F6C31DCBA39CEF2156 /* Pods-KiKickBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.debug.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.debug.xcconfig"; sourceTree = "<group>"; };
 		F3461657C19D0140250FFF5C /* Pods-KiKickBoard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.release.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.release.xcconfig"; sourceTree = "<group>"; };
+		F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseKickBoardData.swift; sourceTree = "<group>"; };
 		F8728F242B56BE3000700EB1 /* NaverGeocodingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverGeocodingManager.swift; sourceTree = "<group>"; };
 		F8728F262B56CAA200700EB1 /* NMapAddModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NMapAddModel.swift; sourceTree = "<group>"; };
 		F87F972C2B5539FC00BD01DE /* KiKickBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiKickBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,7 +136,6 @@
 				F87F975B2B5551B800BD01DE /* Cell */,
 				F87F975A2B5551A700BD01DE /* Service */,
 				F87F97592B5551A100BD01DE /* VC */,
-				F87F97582B55519800BD01DE /* Model */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -167,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				F87F97472B553B1900BD01DE /* HomeVC.swift */,
+				F87F97582B55519800BD01DE /* Model */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				F8728F242B56BE3000700EB1 /* NaverGeocodingManager.swift */,
+				F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 			files = (
 				F8728F252B56BE3000700EB1 /* NaverGeocodingManager.swift in Sources */,
 				F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */,
+				F85D46F62B575B07002E4160 /* BaseKickBoardData.swift in Sources */,
 				F8D5EAF72B56275A0057168A /* ExtensionVC.swift in Sources */,
 				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,
 				F8728F272B56CAA200700EB1 /* NMapAddModel.swift in Sources */,
