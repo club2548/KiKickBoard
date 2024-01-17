@@ -50,11 +50,11 @@ class HomeVC: UIViewController{
         textField.addTarget(self, action: #selector(changeTextField(_:)), for: .editingChanged)
         return textField
     }()
-    private lazy var addressButton : UIButton = { // 주소입력 Button
+    private lazy var addressButton : UIButton = { // 입력된 주소로 이동 Button
         var config = UIButton.Configuration.plain()
         config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         let button = UIButton(configuration: config)
-        button.setTitle("주소 입력", for: .normal)
+        button.setTitle("이동", for: .normal)
         button.backgroundColor = UIColor(named: "PrimaryColor")
         button.tintColor = .white
         button.layer.cornerRadius = 10
@@ -86,6 +86,7 @@ class HomeVC: UIViewController{
         button.layer.cornerRadius = 10
         button.layer.masksToBounds = true
         button.addTarget(self, action: #selector(tapReturnButton), for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
     override func viewDidLoad() {
@@ -108,7 +109,7 @@ extension HomeVC : CLLocationManagerDelegate{
         self.currentLatitude = location.coordinate.latitude // 현재 사용자 좌표 lat
         self.currentLongtitude = location.coordinate.longitude // 현재 사용자 좌표 lng
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)) // 카메라 이동될 좌표
-        navermapView.mapView.moveCamera(cameraUpdate) // 현재 사용자 위치로 카메라 이동
+        navermapView.mapView.moveCamera(cameraUpdate) // 현재 사용자 위치 기준으로  카메라 이동
     }
     func getCurrentLoaction(){
         locationManager = CLLocationManager()// CLLocationManager클래스의 인스턴스 locationManager를 생성
@@ -117,8 +118,8 @@ extension HomeVC : CLLocationManagerDelegate{
         locationManager.desiredAccuracy = kCLLocationAccuracyBest// 배터리에 맞게 권장되는 최적의 정확도
         locationManager.startUpdatingLocation()// 위치 업데이트
     }
-    //MARK : - Button Action
-    @objc func tapMoveAddress(){
+    //MARK: - Button Action
+    @objc func tapMoveAddress(){ // 입력된 주소로 이동 함수
         NaverGeocodingManager.shared.getData(address: searchAddress) { address in
             guard let latitude = Double(address.addresses[0].y) else {
                 return
@@ -127,14 +128,14 @@ extension HomeVC : CLLocationManagerDelegate{
                 return
             }
             let postion = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude , lng: longitude ))
-            DispatchQueue.main.async { // error 발생했엇음
+            DispatchQueue.main.async { // UI업데이트는 Main 스레드에서 이루어져야함 (설정안해줘서 오류발생)
                 self.navermapView.mapView.moveCamera(postion)
             }
         }
         addressTextField.text = ""
     }
     @objc func changeTextField(_ sender : UITextField){
-        searchAddress = sender.text ?? ""
+        searchAddress = sender.text ?? "" // 주소 입력창에 입력되는 Text
     }
     @objc func tapReturnButton(){// 키보드 반납하기 버튼 Action
         self.changeUsingStatus(use: false) // 키보드 반납
@@ -150,16 +151,16 @@ extension HomeVC : CLLocationManagerDelegate{
             mark.anchor = CGPoint(x: 0.5, y: 0.5) // 마커의 중심읠 현재위치로 설정
             mark.mapView = self.navermapView.mapView
             
-            mark.touchHandler = { (overlay : NMFOverlay) -> Bool in
+            mark.touchHandler = { (overlay : NMFOverlay) -> Bool in // marker의 touch Event
                 let currentCoordinate = CLLocation(latitude: self.currentLatitude, longitude: self.currentLongtitude) // 현재 위치 좌표
                 let from = CLLocation(latitude: mark.position.lat, longitude: mark.position.lng) // mark 위치 좌표
                 let dist = currentCoordinate.distance(from: from) // 현재 위치에서 킥보드사이의 거리 (미터 기준)
-                if dist < 100 { // 100m 이하일 경우
+                if dist <= 100 { // 100m 이하일 경우
                     let alert = UIAlertController(title: "대여하기", message: "해당 킥보드를 대여하시겠습니까?", preferredStyle: .alert)
                     let confirmAction = UIAlertAction(title: "대여", style: .default){ _ in
                         self.changeUsingStatus(use: true)
                         self.markers.remove(at: idx)
-                        mark.mapView = nil
+                        mark.mapView = nil // 대여 함으로써 해당 킥보드 마커 지우기
                     }
                     let cancelAction = UIAlertAction(title: "취소", style: .cancel)
                     alert.addAction(confirmAction)
@@ -167,8 +168,7 @@ extension HomeVC : CLLocationManagerDelegate{
                     self.present(alert, animated: true)
                 }else{
                     let alert = UIAlertController(title: "킥보드와의 거리가 100m이상입니다.", message: "킥보드에 가까이 와주세요. ", preferredStyle: .alert)
-                    let confirmAction = UIAlertAction(title: "확인", style: .default){ _ in
-                    }
+                    let confirmAction = UIAlertAction(title: "확인", style: .cancel)
                     alert.addAction(confirmAction)
                     self.present(alert, animated: true)
                 }
@@ -241,9 +241,12 @@ extension HomeVC {
     private func changeUsingStatus(use : Bool){ // 킥보드 이용중 상태에 따라  이용 중 라벨, 반납하기 UI 상태 변경
         if use {
             self.usingLabel.isHidden = false
+            self.returnButton.isHidden = false
             self.returnButton.isEnabled = true
             self.returnButton.backgroundColor = UIColor(named: "PrimaryColor")
+            
         }else{
+            self.returnButton.isHidden = true
             self.usingLabel.isHidden = true
             self.returnButton.isEnabled = false
             self.returnButton.backgroundColor = UIColor.gray

@@ -147,10 +147,9 @@
 		F87F974F2B553B6300BD01DE /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				F87F975B2B5551B800BD01DE /* Cell */,
 				F87F975A2B5551A700BD01DE /* Service */,
-				F87F97592B5551A100BD01DE /* VC */,
 				F87F97582B55519800BD01DE /* Model */,
+				F87F97592B5551A100BD01DE /* VC */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -194,13 +193,6 @@
 				F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */,
 			);
 			name = Service;
-			sourceTree = "<group>";
-		};
-		F87F975B2B5551B800BD01DE /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
