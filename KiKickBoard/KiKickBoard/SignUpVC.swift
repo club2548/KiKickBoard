@@ -255,6 +255,7 @@ extension SignUpVC {
         pwSignUpTextField.addTarget(self, action: #selector(pwValidCheck), for: .editingChanged)
         pwSignUpCheckTextField.addTarget(self, action: #selector(pwEqualCheck), for: .editingChanged)
         eMailSignUpTextField.addTarget(self, action: #selector(eMailValidCheck), for: .editingChanged)
+        mobileSignUpTextField.addTarget(self, action: #selector(mobileNumberFormatting), for: .editingChanged)
     }
     
     // 사용자 입력 중 아이디, 이메일, 전화번호를 저장된 정보와 확인한 후, 없다면 UserDefaults에 저장.
@@ -364,6 +365,27 @@ extension SignUpVC {
             eMailCheckDescription.text = "정상적인 이메일 주소가 아닙니다."
         }
         
+    }
+    
+    @objc func mobileNumberFormatting() {
+        guard let phoneNumber = mobileSignUpTextField.text else { return }
+        
+        var formattedNumber = ""
+        
+        switch phoneNumber.count {
+        case 1..<4:
+            formattedNumber = phoneNumber
+        case 4..<7:
+            formattedNumber = "\(phoneNumber.prefix(3))-\(phoneNumber.suffix(3))"
+        case 7..<11:
+            formattedNumber = "\(phoneNumber.prefix(3))-\(phoneNumber.suffix(4))-\(phoneNumber.suffix(4))"
+        default:
+            formattedNumber = "\(phoneNumber.prefix(3))-\(phoneNumber.suffix(4))-\(phoneNumber.suffix(4))"
+            mobileSignUpTextField.text = formattedNumber
+            return
+        }
+        
+        mobileSignUpTextField.text = formattedNumber
     }
     
     private func setEyeButton() {
