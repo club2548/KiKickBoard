@@ -404,7 +404,7 @@ extension SignUpVC {
     }
     
     @objc func checkAllConditions() {
-        let nameValidCheck = nameSignUpTextField.text!.isEmpty
+//        let nameValidCheck = nameSignUpTextField.text!.isEmpty
         
         self.oKCheck()
 //        if idCheck && pwCheck && eMailCheck && mobileCheck && !nameValidCheck {
