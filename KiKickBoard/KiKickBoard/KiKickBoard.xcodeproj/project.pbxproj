@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		46FA04962B57DA6E00B963CB /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FA04952B57DA6E00B963CB /* RegisterModel.swift */; };
-		6F2C97BD7466364BA6A10B3C /* Pods_KiKickBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E2A7116E60E3B8D898D7EE8 /* Pods_KiKickBoard.framework */; };
 		0D1A4A4CA4FA94B0241BB871 /* Pods_KiKickBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 309C01BF95ED8EBE6099F549 /* Pods_KiKickBoard.framework */; };
 		3F0182D92B56176D0006F4B4 /* SignUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182D82B56176D0006F4B4 /* SignUpModel.swift */; };
 		3F0182DB2B561B300006F4B4 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DA2B561B300006F4B4 /* SignUpController.swift */; };
@@ -35,9 +33,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1E2A7116E60E3B8D898D7EE8 /* Pods_KiKickBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KiKickBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		46FA04952B57DA6E00B963CB /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
-		4F3DFFAEC91D2F827C0E838A /* Pods-KiKickBoard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.release.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.release.xcconfig"; sourceTree = "<group>"; };
 		309C01BF95ED8EBE6099F549 /* Pods_KiKickBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KiKickBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F0182D82B56176D0006F4B4 /* SignUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpModel.swift; sourceTree = "<group>"; };
 		3F0182DA2B561B300006F4B4 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -63,7 +58,6 @@
 		F87F97492B553B2600BD01DE /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		F87F974B2B553B3200BD01DE /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		F87F97522B553BAB00BD01DE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		FFE8E3CF2430A8A7C9CD42FB /* Pods-KiKickBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.debug.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.debug.xcconfig"; sourceTree = "<group>"; };
 		F8D5EAF62B56275A0057168A /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,7 +67,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F87F97562B55400E00BD01DE /* SnapKit in Frameworks */,
-				6F2C97BD7466364BA6A10B3C /* Pods_KiKickBoard.framework in Frameworks */,
 				0D1A4A4CA4FA94B0241BB871 /* Pods_KiKickBoard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,11 +74,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		137CF006492B87F3F334D493 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				FFE8E3CF2430A8A7C9CD42FB /* Pods-KiKickBoard.debug.xcconfig */,
-				4F3DFFAEC91D2F827C0E838A /* Pods-KiKickBoard.release.xcconfig */,
 		2FAF26CC19643402D8D8286F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,10 +83,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		33F8A158C3D2575139B0ED0E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1E2A7116E60E3B8D898D7EE8 /* Pods_KiKickBoard.framework */,
 		BF1C320A5704C449F3391827 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,8 +106,8 @@
 			children = (
 				F87F972E2B5539FC00BD01DE /* KiKickBoard */,
 				F87F972D2B5539FC00BD01DE /* Products */,
-				137CF006492B87F3F334D493 /* Pods */,
-				33F8A158C3D2575139B0ED0E /* Frameworks */,
+				2FAF26CC19643402D8D8286F /* Pods */,
+				BF1C320A5704C449F3391827 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,7 +173,6 @@
 			isa = PBXGroup;
 			children = (
 				F87F97492B553B2600BD01DE /* RegisterVC.swift */,
-				46FA04952B57DA6E00B963CB /* RegisterModel.swift */,
 			);
 			name = Register;
 			sourceTree = "<group>";
@@ -234,11 +217,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F87F97402B5539FD00BD01DE /* Build configuration list for PBXNativeTarget "KiKickBoard" */;
 			buildPhases = (
-				7946E8559794B8DA3DC4EE4B /* [CP] Check Pods Manifest.lock */,
+				88FB4CED2B6792F92B43A9CF /* [CP] Check Pods Manifest.lock */,
 				F87F97282B5539FC00BD01DE /* Sources */,
 				F87F97292B5539FC00BD01DE /* Frameworks */,
 				F87F972A2B5539FC00BD01DE /* Resources */,
-				46DC199383BDE43B18FF4339 /* [CP] Embed Pods Frameworks */,
+				688FCFA71FF4ADAE3179BD93 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -260,7 +243,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					F87F972B2B5539FC00BD01DE = {
 						CreatedOnToolsVersion = 14.3;
@@ -301,7 +284,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		46DC199383BDE43B18FF4339 /* [CP] Embed Pods Frameworks */ = {
+		688FCFA71FF4ADAE3179BD93 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -318,7 +301,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7946E8559794B8DA3DC4EE4B /* [CP] Check Pods Manifest.lock */ = {
+		88FB4CED2B6792F92B43A9CF /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -366,7 +349,6 @@
 				F87F974C2B553B3200BD01DE /* MyPageVC.swift in Sources */,
 				F87F97462B553B0D00BD01DE /* SignUpVC.swift in Sources */,
 				F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */,
-				46FA04962B57DA6E00B963CB /* RegisterModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,13 +484,13 @@
 		};
 		F87F97412B5539FD00BD01DE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FFE8E3CF2430A8A7C9CD42FB /* Pods-KiKickBoard.debug.xcconfig */;
+			baseConfigurationReference = A0B0B8F6C31DCBA39CEF2156 /* Pods-KiKickBoard.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C22XU7SG44;
+				DEVELOPMENT_TEAM = 76R226FG59;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KiKickBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -530,13 +512,13 @@
 		};
 		F87F97422B5539FD00BD01DE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4F3DFFAEC91D2F827C0E838A /* Pods-KiKickBoard.release.xcconfig */;
+			baseConfigurationReference = F3461657C19D0140250FFF5C /* Pods-KiKickBoard.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C22XU7SG44;
+				DEVELOPMENT_TEAM = 76R226FG59;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = KiKickBoard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
