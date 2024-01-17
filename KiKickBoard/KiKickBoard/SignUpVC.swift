@@ -20,7 +20,7 @@ class SignUpVC: UIViewController {
     
     let idSignUpTextField : UITextField = {
         let textField = UITextField()
-        textField.placeholder = "알파벳 소문자, 숫자 5~12자"
+        textField.placeholder = "소문자, 숫자 5~14자"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         return textField
@@ -45,7 +45,7 @@ class SignUpVC: UIViewController {
     
     let pwSignUpTextField : UITextField = {
         let textField = UITextField()
-        textField.placeholder = "알파벳 소문자, 특수문자 필수 8~16자"
+        textField.placeholder = "대소문자, 숫자, 특수문자 1개 이상 필수 8~16자"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         return textField
@@ -98,7 +98,7 @@ class SignUpVC: UIViewController {
     
     let eMailSignUpTextField : UITextField = {
         let textField = UITextField()
-        textField.placeholder = "abcdegf@KiKickBoard.com"
+        textField.placeholder = "KiKick@Board.com"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         return textField
@@ -289,25 +289,25 @@ extension SignUpVC {
         idDescription.isHidden = false
         
         let minCount = 5
-        let maxCount = 12
+        let maxCount = 14
         let count = idSignUpTextField.text!.count
         
         switch count {
         case 0 :
             idDescription.text = "아이디는 필수입력 정보입니다."
         case 1..<minCount :
-            idDescription.text = "아이디는 5글자 이상이어야 합니다."
+            idDescription.text = "아이디는 \(minCount)글자 이상이어야 합니다."
         case minCount..<maxCount :
-            let idPattern = "^[a-z0-9-_]{\(minCount),\(maxCount)}$"
+            let idPattern = "^[a-z0-9]{\(minCount),\(maxCount)}$"
             let isValidPattern = (idSignUpTextField.text!.range(of: idPattern, options: .regularExpression) != nil)
             if isValidPattern {
                 idDescription.text = "조건에 맞는 아이디"
                 idDescription.isHidden = true
             } else {
-                idDescription.text = "소문자, 숫자, 빼기(-), 밑줄(_)만 사용할 수 있습니다."
+                idDescription.text = "알파벳 소문자, 숫자만 사용할 수 있습니다."
             }
         default :
-            idDescription.text = "아이디는 12글자 이하여야 합니다."
+            idDescription.text = "아이디는 \(maxCount)글자 이하여야 합니다."
         }
         
     }
@@ -315,26 +315,27 @@ extension SignUpVC {
     @objc func pwValidCheck() {
         pwDescription.isHidden = false
         
-        let minCount = 5
-        let maxCount = 12
+        let minCount = 8
+        let maxCount = 16
         let count = pwSignUpTextField.text!.count
         
         switch count {
         case 0 :
-            pwDescription.text = "아이디는 필수입력 정보입니다."
+            pwDescription.text = "비밀번호는 필수입력 정보입니다."
         case 1..<minCount :
-            pwDescription.text = "아이디는 5글자 이상이어야 합니다."
+            pwDescription.text = "비밀번호는 \(minCount)글자 이상이어야 합니다."
         case minCount..<maxCount :
-            let pwPattern = "^[a-z0-9-_]{\(minCount),\(maxCount)}$"
+            //(?=.*[]) 조건문 []안에 조건 삽입. 소문자, 대문자, 숫자, 특수문자 각각 1개 이상
+            let pwPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[`~!@#$%^&*?])[a-zA-Z0-9`~!@#$%^&*?]{\(minCount),\(maxCount)}$"
             let isValidPattern = (pwSignUpTextField.text!.range(of: pwPattern, options: .regularExpression) != nil)
             if isValidPattern {
-                pwDescription.text = "조건에 맞는 아이디"
+                pwDescription.text = "조건에 맞는 비밀번호"
                 pwDescription.isHidden = true
             } else {
-                pwDescription.text = "소문자, 숫자, 빼기(-), 밑줄(_)만 사용할 수 있습니다."
+                pwDescription.text = "알파벳 대소문자, 숫자를 각각 1개 이상 사용해야 합니다."
             }
         default :
-            pwDescription.text = "아이디는 12글자 이하여야 합니다."
+            pwDescription.text = "비밀번호는 \(maxCount)글자 이하여야 합니다."
         }
         
     }
@@ -347,18 +348,28 @@ extension SignUpVC {
             pwCheckDescription.textColor = .blue
         default :
             pwCheckDescription.text = "비밀번호가 일치하지 않습니다."
+            pwSignUpCheckTextField.textColor = .red
         }
         
     }
     @objc func eMailValidCheck() {
         eMailCheckDescription.isHidden = false
-
-        let eMailPattern = "^[a-zA-Z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"
-        let isValidPattern = (eMailSignUpTextField.text!.range(of: eMailPattern, options: .regularExpression) != nil)
         
-        switch isValidPattern {
-        case true :
-            eMailCheckDescription.text = ""
+        let minCount = 1
+        let maxCount = 255
+        let count = eMailSignUpTextField.text!.count
+        
+        switch count {
+        case 0 :
+            eMailCheckDescription.text = "이메일 주소는 필수입력 정보입니다."
+        case minCount..<maxCount :
+            let eMailPattern = "^[a-zA-Z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"
+            let isValidPattern = (eMailSignUpTextField.text!.range(of: eMailPattern, options: .regularExpression) != nil)
+            if isValidPattern {
+                eMailCheckDescription.text = ""
+            } else {
+                eMailCheckDescription.text = "정상적인 이메일 주소가 아닙니다."
+            }
         default :
             eMailCheckDescription.text = "정상적인 이메일 주소가 아닙니다."
         }
