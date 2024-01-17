@@ -11,6 +11,7 @@
 		3F0182DB2B561B300006F4B4 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DA2B561B300006F4B4 /* SignUpController.swift */; };
 		3F0182DD2B5678F40006F4B4 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DC2B5678F40006F4B4 /* LoginModel.swift */; };
 		3F0182DF2B567B090006F4B4 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DE2B567B090006F4B4 /* LoginController.swift */; };
+		3F0182E12B57BC5E0006F4B4 /* SignUpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182E02B57BC5E0006F4B4 /* SignUpExtension.swift */; };
 		F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F972F2B5539FC00BD01DE /* AppDelegate.swift */; };
 		F87F97322B5539FC00BD01DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97312B5539FC00BD01DE /* SceneDelegate.swift */; };
 		F87F97392B5539FD00BD01DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F87F97382B5539FD00BD01DE /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		3F0182DA2B561B300006F4B4 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
 		3F0182DC2B5678F40006F4B4 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		3F0182DE2B567B090006F4B4 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		3F0182E02B57BC5E0006F4B4 /* SignUpExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpExtension.swift; sourceTree = "<group>"; };
 		F87F972C2B5539FC00BD01DE /* KiKickBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiKickBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87F972F2B5539FC00BD01DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F87F97312B5539FC00BD01DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				3F0182D82B56176D0006F4B4 /* SignUpModel.swift */,
 				F87F97452B553B0D00BD01DE /* SignUpVC.swift */,
 				3F0182DA2B561B300006F4B4 /* SignUpController.swift */,
+				3F0182E02B57BC5E0006F4B4 /* SignUpExtension.swift */,
 			);
 			name = SignUp;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,
 				F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */,
 				3F0182DD2B5678F40006F4B4 /* LoginModel.swift in Sources */,
+				3F0182E12B57BC5E0006F4B4 /* SignUpExtension.swift in Sources */,
 				3F0182D92B56176D0006F4B4 /* SignUpModel.swift in Sources */,
 				F87F97482B553B1900BD01DE /* HomeVC.swift in Sources */,
 				3F0182DB2B561B300006F4B4 /* SignUpController.swift in Sources */,

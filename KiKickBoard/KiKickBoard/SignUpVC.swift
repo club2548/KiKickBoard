@@ -160,7 +160,7 @@ class SignUpVC: UIViewController {
         autoLayout()
         setupInteraction()
         setEyeButton()
-//        idValidCheck()
+        mobileSignUpTextField.delegate = self
     }
 }
 
@@ -255,7 +255,7 @@ extension SignUpVC {
         pwSignUpTextField.addTarget(self, action: #selector(pwValidCheck), for: .editingChanged)
         pwSignUpCheckTextField.addTarget(self, action: #selector(pwEqualCheck), for: .editingChanged)
         eMailSignUpTextField.addTarget(self, action: #selector(eMailValidCheck), for: .editingChanged)
-        mobileSignUpTextField.addTarget(self, action: #selector(mobileNumberFormatting), for: .editingChanged)
+//        mobileSignUpTextField.addTarget(self, action: #selector(mobileNumberFormatting), for: .editingChanged)
     }
     
     // 사용자 입력 중 아이디, 이메일, 전화번호를 저장된 정보와 확인한 후, 없다면 UserDefaults에 저장.
@@ -340,7 +340,6 @@ extension SignUpVC {
     }
     @objc func pwEqualCheck() {
         pwCheckDescription.isHidden = false
-        let count = pwSignUpCheckTextField.text!.count
         
         switch pwSignUpCheckTextField.text {
         case pwSignUpTextField.text :
@@ -354,7 +353,6 @@ extension SignUpVC {
     @objc func eMailValidCheck() {
         eMailCheckDescription.isHidden = false
 
-        let count = eMailSignUpTextField.text!.count
         let eMailPattern = "^[a-zA-Z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"
         let isValidPattern = (eMailSignUpTextField.text!.range(of: eMailPattern, options: .regularExpression) != nil)
         
@@ -367,26 +365,6 @@ extension SignUpVC {
         
     }
     
-    @objc func mobileNumberFormatting() {
-        guard let phoneNumber = mobileSignUpTextField.text else { return }
-        
-        var formattedNumber = ""
-        
-        switch phoneNumber.count {
-        case 1..<4:
-            formattedNumber = phoneNumber
-        case 4..<7:
-            formattedNumber = "\(phoneNumber.prefix(3))-\(phoneNumber.suffix(3))"
-        case 7..<11:
-            formattedNumber = "\(phoneNumber.prefix(3))-\(phoneNumber.suffix(4))-\(phoneNumber.suffix(4))"
-        default:
-            formattedNumber = "\(phoneNumber.prefix(3))-\(phoneNumber.suffix(4))-\(phoneNumber.suffix(4))"
-            mobileSignUpTextField.text = formattedNumber
-            return
-        }
-        
-        mobileSignUpTextField.text = formattedNumber
-    }
     
     private func setEyeButton() {
         eyeButton = UIButton(type: .custom)
@@ -421,6 +399,29 @@ extension SignUpVC {
 
 }
 
+extension SignUpVC : UITextFieldDelegate {
+    func format(mask : String,phone : String) -> String{ // format함수
+        let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+        var result = ""
+        var index = numbers.startIndex
+        for ch in mask where index < numbers.endIndex {
+            if ch == "X" {
+                result.append(numbers[index])
+                index = numbers.index(after: index)
+            } else {
+                result.append(ch)
+            }
+        }
+        return result
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return false }
+        let newString = (text as NSString).replacingCharacters(in: range, with: string)
+        textField.text = format(mask:"XXX-XXXX-XXXX", phone: newString)
+        return false
+    }
+}
+
 extension UIView{
   func addSubViews(_ views : [UIView]){
     _ = views.map{self.addSubview($0)}
@@ -432,6 +433,40 @@ extension UIImage {
         return UIGraphicsImageRenderer(size: size).image { _ in
             draw(in: CGRect(origin: .zero, size: size))
         }
+    }
+}
+
+// MARK: - 문자열에 구분자 삽입
+extension String {
+    public func inserting(separator: String, every n: Int) -> String {
+        var result: [String] = []
+        var currentIndex = startIndex
+
+        while currentIndex < endIndex {
+            let endIndex = index(currentIndex, offsetBy: n, limitedBy: endIndex) ?? self.endIndex
+            result.append(String(self[currentIndex..<endIndex]))
+            currentIndex = endIndex
+        }
+
+        return result.joined(separator: separator)
+    }
+}
+
+// MARK: - 휴대폰 번호 검증
+extension String {
+    public func validatePhone(number: String) -> Bool {
+        let regex = "^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$"
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: number)
+    }
+}
+
+// MARK: - 휴대폰 번호 하이픈 추가
+extension String {
+    public var withHypen: String {
+        var stringWithHypen: String = self
+        stringWithHypen.insert("-", at: stringWithHypen.index(stringWithHypen.startIndex, offsetBy: 3))
+        stringWithHypen.insert("-", at: stringWithHypen.index(stringWithHypen.endIndex, offsetBy: -4))
+        return stringWithHypen
     }
 }
 
