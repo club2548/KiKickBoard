@@ -169,6 +169,11 @@ class SignUpVC: UIViewController {
         setEyeButton()
         mobileSignUpTextField.delegate = self
         setUpKeyboard()
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        changeStatusBarBgColor(bgColor: .white)
     }
 }
 
