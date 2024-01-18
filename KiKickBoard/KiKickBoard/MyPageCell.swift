@@ -12,8 +12,8 @@ import SnapKit
 class MyPageCell: UICollectionViewCell {
     static let MPCidenti = "MyPageCell"
     
-    var profileLabel: UILabel = {
-        let profileLabel = UILabel()        
+    var myPageLabel: UILabel = {
+        let profileLabel = UILabel()
         return profileLabel
     }()
     
@@ -21,7 +21,7 @@ class MyPageCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(profileLabel)
+        addSubview(myPageLabel)
         myPageAutoLayout()
         //셀 모서리 둥글게
         layer.cornerRadius = 5
@@ -33,7 +33,7 @@ class MyPageCell: UICollectionViewCell {
     }
     
     func myPageAutoLayout(){ //오토레이아웃
-        profileLabel.snp.makeConstraints { make in
+        myPageLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-10)

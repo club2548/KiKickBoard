@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6BB2C7AB2B58AB1200C48352 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB2C7AA2B58AB1200C48352 /* ProfileCell.swift */; };
 		6BDCFA1C2B569C5D00A76830 /* MyPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDCFA1B2B569C5D00A76830 /* MyPageCell.swift */; };
 		6BDCFA292B57FD8900A76830 /* RegistrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDCFA282B57FD8900A76830 /* RegistrationVC.swift */; };
 		6BDCFA2B2B57FF3600A76830 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDCFA2A2B57FF3600A76830 /* HistoryVC.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6BB2C7AA2B58AB1200C48352 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		6BDCFA1B2B569C5D00A76830 /* MyPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCell.swift; sourceTree = "<group>"; };
 		6BDCFA282B57FD8900A76830 /* RegistrationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVC.swift; sourceTree = "<group>"; };
 		6BDCFA2A2B57FF3600A76830 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				F87F974B2B553B3200BD01DE /* MyPageVC.swift */,
 				6BDCFA1B2B569C5D00A76830 /* MyPageCell.swift */,
 				6BDCFA2C2B57FF7300A76830 /* ProfileVC.swift */,
+				6BB2C7AA2B58AB1200C48352 /* ProfileCell.swift */,
 				6BDCFA2A2B57FF3600A76830 /* HistoryVC.swift */,
 				6BDCFA282B57FD8900A76830 /* RegistrationVC.swift */,
 			);
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6BB2C7AB2B58AB1200C48352 /* ProfileCell.swift in Sources */,
 				6BDCFA2D2B57FF7300A76830 /* ProfileVC.swift in Sources */,
 				F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */,
 				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,

@@ -83,7 +83,7 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCell.MPCidenti, for: indexPath) as! MyPageCell
         let model = models[indexPath.item]
-        cell.profileLabel.text = model
+        cell.myPageLabel.text = model
         
         cell.backgroundColor = .lightGray
 
@@ -101,11 +101,11 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         guard let cell = myPageCollectionView.dequeueReusableCell(withReuseIdentifier: MyPageCell.MPCidenti, for: indexPath) as? MyPageCell else { return .zero }
         
         let model = models[indexPath.item]
-        cell.profileLabel.text = model
+        cell.myPageLabel.text = model
         //sizeToFit() 글자 사이즈에 맞춤
-        cell.profileLabel.sizeToFit()
+        cell.myPageLabel.sizeToFit()
         
-        let cellheight = cell.profileLabel.frame.height + 20
+        let cellheight = cell.myPageLabel.frame.height + 20
         
         return CGSize(width: collectionView.safeAreaLayoutGuide.layoutFrame.width - 30, height: cellheight)
     }
@@ -119,6 +119,17 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         //case 3: navigationController?.popToRootViewController(animated: true)
         default: break
         }
+        
+        //로그아웃 alert
+        let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "Yes", style: .default, handler: nil) // 핸들러로 rootView로 이동
+        let cancel = UIAlertAction(title: "No", style: .cancel)
+        
+        alertController.addAction(cancel)
+        alertController.addAction(ok)
+        
+        present(alertController, animated: true, completion: nil)
 
         }
         
