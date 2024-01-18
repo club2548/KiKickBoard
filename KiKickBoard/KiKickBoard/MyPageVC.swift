@@ -116,20 +116,19 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         case 0: navigationController?.pushViewController(ProfileVC(), animated:true)
         case 1: navigationController?.pushViewController(HistoryVC(), animated:true)
         case 2: navigationController?.pushViewController(RegisterVC(), animated: true)
-        //case 3: navigationController?.popToRootViewController(animated: true)
+        case 3: let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+            
+            let ok = UIAlertAction(title: "Yes", style: .default, handler: nil) // 핸들러로 rootView로 이동
+            let cancel = UIAlertAction(title: "No", style: .cancel)
+            
+            alertController.addAction(cancel)
+            alertController.addAction(ok)
+            
+            present(alertController, animated: true, completion: nil)
         default: break
         }
         
         //로그아웃 alert
-        let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
-        
-        let ok = UIAlertAction(title: "Yes", style: .default, handler: nil) // 핸들러로 rootView로 이동
-        let cancel = UIAlertAction(title: "No", style: .cancel)
-        
-        alertController.addAction(cancel)
-        alertController.addAction(ok)
-        
-        present(alertController, animated: true, completion: nil)
 
         }
         
