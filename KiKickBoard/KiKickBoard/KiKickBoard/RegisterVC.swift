@@ -72,6 +72,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     
     var selectedPosition: NMGLatLng?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "PrimaryColoy")
@@ -97,45 +98,48 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         marker.iconImage = NMFOverlayImage(name: "KickBoardImg")
         marker.width = 30
         marker.height = 30
-        marker.mapView = mapView // 마커를 지도에 추가
-        selectedPosition = latlng
+//        marker.mapView = mapView // 마커를 지도에 추가
+
         print("\(latlng.lat), \(latlng.lng)")
+        if self.confirmPrice() {
+            showAlert(marker)
+        }
         
-        showAlert()
     }
     
-    func showAlert() {
+    func showAlert(_ marker: NMFMarker) {
         let serialNumber = serialNumber()
         let baseRate = baseRateTextField.text ?? ""
         let extraFee = extraFeeTextField.text ?? ""
-        guard let position = selectedPosition else {
-            let alert = UIAlertController(title: "킥보드 위치 선택", message: "등록할 킥보드의 위치를 선택해주세요.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-            present(alert, animated: true)
-            return
-        }
-        
         let alertMassage = """
             선택하신 킥보드 정보는 다음과 같습니다:
             - 시리얼 번호: \(serialNumber)
             - 기본 요금: \(baseRate)원
             - 추가 요금: \(extraFee)원
-            - 위치: \(position.lat), \(position.lng)
+            - 위치: \(marker.position.lat), \(marker.position.lng)
 
             위 정보가 맞으신가요?
             """
         let alert = UIAlertController(title: "킥보드 정보 확인", message: alertMassage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
-            let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, position: position, markerInfo: )
+            let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, position: marker.position, markerInfo: marker )
+            
             // 킥보드정보 객체 저장
             KickBoardData.shared.kickboards.append(kickboard)
+            marker.mapView = self.naverMapView.mapView
+            
             print("시리얼 넘버: \(serialNumber)")
             print("기본요금: \(baseRate)")
             print("추가요금: \(extraFee)")
-            print("위치: \(position.lat), \(position.lng)")
+            print("위치: \(marker.position.lat), \(marker.position.lng)")
         })
         present(alert, animated: true, completion: nil)
+    }
+    
+    // 금액 입력 여부확인
+    func confirmPrice() -> Bool {
+        return !(baseRateTextField.text?.isEmpty ?? true) && !(extraFeeTextField.text?.isEmpty ?? true)
     }
     
     // 시리얼 넘버

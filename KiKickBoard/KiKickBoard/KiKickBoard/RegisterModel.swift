@@ -10,12 +10,12 @@ class KickBoardInfo {
     var iconImage: NMFOverlayImage
     var markerInfo: NMFMarker
     
-    init(serialNumber: Int, baseRate: String, extraFee: String, position: NMGLatLng, iconImage: NMFOverlayImage, markerInfo: NMFMarker) {
+    init(serialNumber: Int, baseRate: String, extraFee: String, position: NMGLatLng, markerInfo: NMFMarker) {
         self.serialNumber = serialNumber
         self.baseRate = baseRate
         self.extraFee = extraFee
         self.position = position
-        self.iconImage = iconImage
+        self.iconImage = NMFOverlayImage(name: "KickBoardImg")
         self.markerInfo = markerInfo
     }
 }
