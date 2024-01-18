@@ -3,13 +3,15 @@ import NMapsMap
 
 
 struct KickBoardInfo {
-    var serialNumber: Int
-    var baseRate: String
-    var extraFee: String
-    var iconImage: NMFOverlayImage = NMFOverlayImage(name: "KickBoardImg")
-    var markerInfo: NMFMarker
-
+  var serialNumber: Int
+  var baseRate: String
+  var extraFee: String
+  var iconImage: NMFOverlayImage = NMFOverlayImage(name: "KickBoardImg")
+  var markerInfo: NMFMarker
 }
+    
+    
+
 
 class KickBoardData {
     static let shared = KickBoardData()

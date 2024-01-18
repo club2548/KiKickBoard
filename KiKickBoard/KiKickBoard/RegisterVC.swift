@@ -70,20 +70,31 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         return mapView
     }()
     
-    var selectedPosition: NMGLatLng?
+    private lazy var baseRateCheckLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .red
+        label.text = "*기본요금을 입력해주세요"
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+
+    private lazy var extraFeeCheckLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .red
+        label.text = "*추가요금을 입력해주세요"
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "PrimaryColoy")
-        
-        
         naverMapView.mapView.touchDelegate = self
+        baseRateTextField.delegate = self
+        extraFeeTextField.delegate = self
+        
         addSubViews()
         autoLayouts()
-        
-//        button.addTarget(self, action: #selector(registerButton(_:)), for: .touchUpInside)
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -99,9 +110,16 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         let marker = NMFMarker()
         marker.position = latlng
         marker.iconImage = NMFOverlayImage(name: "KickBoardImg")
-        print("마커 설정 위치 좌표 : \(latlng.lat), \(latlng.lng)")
+        marker.width = 30
+        marker.height = 30
+        
+        print("탭한 좌표값: \(latlng.lat), \(latlng.lng)")
         if self.confirmPrice() {
             showAlert(marker)
+        } else {
+            let alert = UIAlertController(title: "요금 입력을 확인해주세요.", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+            present(alert, animated: true, completion: nil)
         }
     }
     
@@ -116,19 +134,19 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
             - 추가 요금: \(extraFee)원
             - 위치: \(marker.position.lat), \(marker.position.lng)
 
-            위 정보가 맞으신가요?
+            위 정보를 확인해주세요.
             """
         let alert = UIAlertController(title: "킥보드 정보 확인", message: alertMassage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
-            let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee,markerInfo: marker )
+            let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, markerInfo: marker )
             // 킥보드정보 객체 저장
             KickBoardData.shared.kickboards.append(kickboard)
             marker.mapView = self.naverMapView.mapView
             print("시리얼 넘버: \(serialNumber)")
-            print("기본요금: \(baseRate)")
-            print("추가요금: \(extraFee)")
-            print("위치: \(marker.position.lat), \(marker.position.lng)")
+            print("기본요금: \(baseRate)원")
+            print("추가요금: \(extraFee)원")
+            print("추가된 킥보드의 좌표값: \(marker.position.lat), \(marker.position.lng)")
         })
         present(alert, animated: true, completion: nil)
         
@@ -142,6 +160,23 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     func serialNumber() -> Int {
         return Int.random(in: 10000000...99999999)
     }
+    
+    // 라벨 재사용 메서드
+    func createWonLabel(to textField: UITextField, with text: String) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = .lightGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label)
+
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 5),
+            label.trailingAnchor.constraint(equalTo: textField.trailingAnchor)
+        ])
+
+        return label
+    }
     // 네이버지도에 킥보드 마커 표시
     func setMapKcikBoardMark(){
         let kickBoardList = KickBoardData.shared.kickboards
@@ -149,7 +184,6 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
             kickBoard.markerInfo.mapView = self.naverMapView.mapView
         }
     }
-    
 }
 
 // 등록하기 화면 UI
@@ -169,19 +203,25 @@ extension RegisterVC {
         }
         
         baseRateTextField.snp.makeConstraints { make in
-            make.top.equalTo(baseRateLabel.snp.bottom).offset(20)
+            make.top.equalTo(baseRateLabel.snp.bottom).offset(10)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+        }
+        
+        baseRateCheckLabel.snp.makeConstraints { make in
+            make.top.equalTo(baseRateTextField.snp.bottom).offset(1)
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
         }
         
         extraFeeLabel.snp.makeConstraints { make in
-            make.top.equalTo(baseRateTextField.snp.bottom).offset(20)
+            make.top.equalTo(baseRateTextField.snp.bottom).offset(30)
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
         }
         
         extraFeeTextField.snp.makeConstraints { make in
-            make.top.equalTo(extraFeeLabel.snp.bottom).offset(20)
+            make.top.equalTo(extraFeeLabel.snp.bottom).offset(10)
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
         }
@@ -192,24 +232,55 @@ extension RegisterVC {
             make.right.equalTo(view).offset(-20)
         }
         
+        extraFeeCheckLabel.snp.makeConstraints { make in
+            make.top.equalTo(extraFeeTextField.snp.bottom).offset(1)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+        }
+        
         naverMapView.snp.makeConstraints { make in
-            
-            make.top.equalTo(eLLabel.snp.bottom).offset(20)
+            make.top.equalTo(eLLabel.snp.bottom).offset(10)
             make.left.right.equalTo(view).inset(20) // 좌우 여백 설정
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
+        
+        
     }
     
-    
     func addSubViews() {
-        self.view.addSubViews([  baseRateLabel, baseRateTextField, extraFeeLabel, extraFeeTextField, registerTitlelabel, eLLabel, naverMapView])
+        self.view.addSubViews([
+            baseRateLabel, baseRateTextField, extraFeeLabel, extraFeeTextField, registerTitlelabel, eLLabel, naverMapView, extraFeeCheckLabel, baseRateCheckLabel
+        ])
+        // 같은 라벨을 사용하기 때문에 따로 선언.
+        let baseRateWonLabel = createWonLabel(to: baseRateTextField, with: "(단위: 원)")
+        let extraFeeWonLabel = createWonLabel(to: extraFeeTextField, with: "(단위: 원)")
     }
 }
 
-
-
-extension RegisterVC {
-    
+extension RegisterVC: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            guard let text = textField.text else { return true }
+        let newString = (text as NSString).replacingCharacters(in: range, with: string)
+        // 입력 상태에 따라 라벨 text 값 변환
+        if textField === baseRateTextField {
+            if newString.isEmpty {
+                baseRateCheckLabel.text = "기본요금을 입력해주세요"
+                baseRateCheckLabel.textColor = .red
+            } else {
+                baseRateCheckLabel.text = " ✓"
+                baseRateCheckLabel.textColor = .systemGreen
+            }
+        } else if textField === extraFeeTextField {
+            if newString.isEmpty {
+                extraFeeCheckLabel.text = "추가요금을 입력해주세요"
+                extraFeeCheckLabel.textColor = .red
+            } else {
+                extraFeeCheckLabel.text = " ✓"
+                extraFeeCheckLabel.textColor = .systemGreen
+            }
+        }
+        return true
+    }
 }
 
 
