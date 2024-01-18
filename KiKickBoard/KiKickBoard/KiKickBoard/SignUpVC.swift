@@ -302,10 +302,12 @@ extension SignUpVC {
         case 0 :
             idDescription.text = "아이디는 필수입력 정보입니다."
             self.idCheck = false
+            self.oKCheck()
             print("id False")
         case 1..<minCount :
             idDescription.text = "아이디는 \(minCount)글자 이상이어야 합니다."
             self.idCheck = false
+            self.oKCheck()
             print("id False")
         case minCount..<maxCount :
             let idPattern = "^[a-z0-9]{\(minCount),\(maxCount)}$"
@@ -314,15 +316,18 @@ extension SignUpVC {
                 idDescription.text = "조건에 맞는 아이디"
                 idDescription.isHidden = true
                 self.idCheck = true
+                self.oKCheck()
                 print("id True")
             } else {
                 idDescription.text = "알파벳 소문자, 숫자만 사용할 수 있습니다."
                 self.idCheck = false
+                self.oKCheck()
                 print("id False")
             }
         default :
             idDescription.text = "아이디는 \(maxCount)글자 이하여야 합니다."
             self.idCheck = false
+            self.oKCheck()
             print("id False")
         }
         
@@ -337,20 +342,25 @@ extension SignUpVC {
         switch count {
         case 0 :
             pwDescription.text = "비밀번호는 필수입력 정보입니다."
+            self.oKCheck()
         case 1..<minCount :
             pwDescription.text = "비밀번호는 \(minCount)글자 이상이어야 합니다."
+            self.oKCheck()
         case minCount..<maxCount :
             //(?=.*[]) 조건문 []안에 조건 삽입. 소문자, 대문자, 숫자, 특수문자 각각 1개 이상
             let pwPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[`~!@#$%^&*?])[a-zA-Z0-9`~!@#$%^&*?]{\(minCount),\(maxCount)}$"
             let isValidPattern = (pwSignUpTextField.text!.range(of: pwPattern, options: .regularExpression) != nil)
             if isValidPattern {
                 pwDescription.text = "조건에 맞는 비밀번호"
+                self.oKCheck()
                 pwDescription.isHidden = true
             } else {
                 pwDescription.text = "알파벳 대소문자, 숫자를 각각 1개 이상 사용해야 합니다."
+                self.oKCheck()
             }
         default :
             pwDescription.text = "비밀번호는 \(maxCount)글자 이하여야 합니다."
+            self.oKCheck()
         }
         
     }
@@ -362,11 +372,13 @@ extension SignUpVC {
             pwCheckDescription.text = "비밀번호가 일치합니다."
             pwCheckDescription.textColor = .blue
             self.pwCheck = true
+            self.oKCheck()
             print("pw True")
         default :
             pwCheckDescription.text = "비밀번호가 일치하지 않습니다."
             pwCheckDescription.textColor = .red
             self.pwCheck = false
+            self.oKCheck()
             print("pw False")
         }
         
@@ -382,6 +394,7 @@ extension SignUpVC {
         case 0 :
             eMailCheckDescription.text = "이메일 주소는 필수입력 정보입니다."
             self.eMailCheck = false
+            self.oKCheck()
             print("eMail False")
         case minCount..<maxCount :
             let eMailPattern = "^[a-zA-Z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$"
@@ -389,15 +402,18 @@ extension SignUpVC {
             if isValidPattern {
                 eMailCheckDescription.text = ""
                 self.eMailCheck = true
+                self.oKCheck()
                 print("eMail True")
             } else {
                 eMailCheckDescription.text = "정상적인 이메일 주소가 아닙니다."
                 self.eMailCheck = false
+                self.oKCheck()
                 print("eMail False")
             }
         default :
             eMailCheckDescription.text = "정상적인 이메일 주소가 아닙니다."
             self.eMailCheck = false
+            self.oKCheck()
             print("eMail False")
         }
         
