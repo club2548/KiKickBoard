@@ -8,13 +8,11 @@
 import Foundation
 struct NMapAddModel : Decodable {
     let status: String
-//    let meta: Meta
     let addresses: [Address]
     let errorMessage: String
 }
 struct Address: Decodable {
     let roadAddress, jibunAddress, englishAddress: String
-//    let addressElements: [AddressElement]
     let x, y: String
     let distance: Double
 }
