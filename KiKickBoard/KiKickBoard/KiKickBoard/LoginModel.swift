@@ -10,4 +10,5 @@ import Foundation
 struct LoginModel: Codable {
     var uid : String
     var password : String
+    // wip
 }

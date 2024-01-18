@@ -43,7 +43,8 @@ extension SignUpVC : UITextFieldDelegate {
 
         // Update mobileCheck accordingly
         mobileCheck = isComplete
-        
+        self.oKCheck()
+
         return false
     }
 }
