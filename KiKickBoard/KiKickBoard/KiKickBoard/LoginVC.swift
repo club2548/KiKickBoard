@@ -12,29 +12,31 @@ class LoginVC: UIViewController {
     
     let mainImage = UIImageView(image: UIImage(named: "KiKickBoard_Logo"))
     
-    let logInStr : UILabel = {
-        let str = UILabel()
-        str.font = .boldSystemFont(ofSize: 40)
-        str.textColor = .black
-        str.text = "Log In"
-        str.textAlignment = .left
-        return str
-    }()
+//    let logInStr : UILabel = {
+//        let str = UILabel()
+//        str.font = .boldSystemFont(ofSize: 40)
+//        str.textColor = .black
+//        str.text = "Log In"
+//        str.textAlignment = .left
+//        return str
+//    }()
     
     let uIDTextField : UITextField = {
         let textField = UITextField()
-        textField.placeholder = "ID"
+        textField.placeholder = "아이디"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         textField.keyboardType = .alphabet
+        textField.font = UIFont.systemFont(ofSize: 20)
         return textField
     }()
     
     let uPWTextField : UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Password"
+        textField.placeholder = "비밀번호"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.font = UIFont.systemFont(ofSize: 20)
         return textField
     }()
     
@@ -43,7 +45,9 @@ class LoginVC: UIViewController {
     let logInBtn : UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .gray
-        btn.setTitle("Sign In", for: .normal)
+        btn.setTitle("로그인", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        
         return btn
     }()
     
@@ -62,10 +66,13 @@ class LoginVC: UIViewController {
         setupInteraction()
         setEyeButton()
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
     
     private func addSubView() {
         self.view.addSubview(mainImage)
-        self.view.addSubview(logInStr)
+//        self.view.addSubview(logInStr)
         self.view.addSubview(uIDTextField)
         self.view.addSubview(uPWTextField)
         self.view.addSubview(logInBtn)
@@ -83,27 +90,30 @@ class LoginVC: UIViewController {
             make.height.equalTo(mainImage.snp.width).multipliedBy(584.0 / 730.0)
         }
         
-        logInStr.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
+//        logInStr.snp.makeConstraints() { make in
+//            make.left.equalToSuperview().offset(50)
+//            make.top.equalTo(mainImage.snp.bottom).offset(50)
+//        }
+        
+        uIDTextField.snp.makeConstraints() { make in
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
+            make.height.equalTo(60)
             make.top.equalTo(mainImage.snp.bottom).offset(50)
         }
         
-        uIDTextField.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(logInStr.snp.bottom).offset(50)
-        }
-        
         uPWTextField.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(uIDTextField.snp.bottom).offset(50)
+            make.left.equalTo(uIDTextField)
+            make.width.equalTo(uIDTextField)
+            make.height.equalTo(uIDTextField)
+            make.top.equalTo(uIDTextField.snp.bottom).offset(5)
         }
         
         logInBtn.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(uPWTextField.snp.bottom).offset(50)
+            make.left.equalTo(uIDTextField)
+            make.width.equalTo(uIDTextField)
+            make.height.equalTo(65)
+            make.top.equalTo(uPWTextField.snp.bottom).offset(10)
         }
         
         signUPBtn.snp.makeConstraints() { make in
@@ -134,7 +144,7 @@ class LoginVC: UIViewController {
                 self.navigationController?.pushViewController(HomeVC(), animated: true)})
         } else {
             
-            showAlert(message: "KiKickBoard 가입을 환영합니다!", handler: nil)
+            showAlert(message: "잘못된 정보입니다.", handler: nil)
         }
 
         print("Saved UserInfo : \(LoginController.shared.currentUserInfo)")
