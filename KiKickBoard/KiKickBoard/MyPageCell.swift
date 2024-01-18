@@ -24,6 +24,7 @@ class MyPageCell: UICollectionViewCell {
         addSubview(myPageLabel)
         myPageAutoLayout()
         //셀 모서리 둥글게
+        
         layer.cornerRadius = 5
         layer.masksToBounds = true
     }

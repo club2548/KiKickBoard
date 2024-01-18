@@ -36,7 +36,7 @@ extension UIViewController {
 class MyPageVC: UIViewController {
     
     //cell label
-    var models: [String] = ["회원정보", "이용내역", "등록한 킥보드", "로그아웃"]
+    var models: [String] = ["킥보드 미사용", "회원정보", "이용내역", "등록한 킥보드", "로그아웃"]
 
     private let myPageCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -85,7 +85,20 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         let model = models[indexPath.item]
         cell.myPageLabel.text = model
         
-        cell.backgroundColor = .lightGray
+        cell.layer.masksToBounds = true
+        
+        if indexPath.item == 0 {
+            cell.backgroundColor = .systemOrange
+            cell.myPageLabel.textColor = .lightText
+            cell.myPageLabel.textAlignment = .center
+            cell.myPageLabel.font = UIFont.systemFont(ofSize: 25)
+            cell.layer.cornerRadius = 0
+            
+        } else {
+            cell.backgroundColor = .lightGray
+            cell.layer.cornerRadius = 5
+        }
+        
 
         return cell
     }
@@ -103,6 +116,12 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         let model = models[indexPath.item]
         cell.myPageLabel.text = model
         //sizeToFit() 글자 사이즈에 맞춤
+        
+        if indexPath.item == 0 {
+            cell.myPageLabel.font = UIFont.systemFont(ofSize: 25)
+        } else {
+            cell.myPageLabel.font = UIFont.systemFont(ofSize: 16)
+        }
         cell.myPageLabel.sizeToFit()
         
         let cellheight = cell.myPageLabel.frame.height + 20
@@ -113,10 +132,10 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         switch indexPath.item {
-        case 0: navigationController?.pushViewController(ProfileVC(), animated:true)
-        case 1: navigationController?.pushViewController(HistoryVC(), animated:true)
-        case 2: navigationController?.pushViewController(RegistrationVC(), animated: true)
-        case 3: let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        case 1: navigationController?.pushViewController(ProfileVC(), animated:true)
+        case 2: navigationController?.pushViewController(HistoryVC(), animated:true)
+        case 3: navigationController?.pushViewController(RegistrationVC(), animated: true)
+        case 4: let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
             
             let ok = UIAlertAction(title: "Yes", style: .default, handler: nil) // 핸들러로 rootView로 이동
             let cancel = UIAlertAction(title: "No", style: .cancel)
