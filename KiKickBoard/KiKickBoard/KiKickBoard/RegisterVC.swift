@@ -12,7 +12,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         label.font = UIFont.boldSystemFont(ofSize: 25)
         return label
     }()
-    
+
     // 기본 요금 라벨/텍스트필드
     private lazy var baseRateLabel: UILabel = {
         let label = UILabel()
@@ -85,7 +85,10 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
 //        button.addTarget(self, action: #selector(registerButton(_:)), for: .touchUpInside)
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setMapKcikBoardMark()
+    }
     // 텍스트필드에 키보드 동작 후 화면 터치 이벤트로 다시 숨기기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -96,15 +99,10 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         let marker = NMFMarker()
         marker.position = latlng
         marker.iconImage = NMFOverlayImage(name: "KickBoardImg")
-        marker.width = 30
-        marker.height = 30
-//        marker.mapView = mapView // 마커를 지도에 추가
-
-        print("\(latlng.lat), \(latlng.lng)")
+        print("마커 설정 위치 좌표 : \(latlng.lat), \(latlng.lng)")
         if self.confirmPrice() {
             showAlert(marker)
         }
-        
     }
     
     func showAlert(_ marker: NMFMarker) {
@@ -123,20 +121,18 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         let alert = UIAlertController(title: "킥보드 정보 확인", message: alertMassage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
-            let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, position: marker.position, markerInfo: marker )
-            
+            let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee,markerInfo: marker )
             // 킥보드정보 객체 저장
             KickBoardData.shared.kickboards.append(kickboard)
             marker.mapView = self.naverMapView.mapView
-            
             print("시리얼 넘버: \(serialNumber)")
             print("기본요금: \(baseRate)")
             print("추가요금: \(extraFee)")
             print("위치: \(marker.position.lat), \(marker.position.lng)")
         })
         present(alert, animated: true, completion: nil)
+        
     }
-    
     // 금액 입력 여부확인
     func confirmPrice() -> Bool {
         return !(baseRateTextField.text?.isEmpty ?? true) && !(extraFeeTextField.text?.isEmpty ?? true)
@@ -146,7 +142,13 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     func serialNumber() -> Int {
         return Int.random(in: 10000000...99999999)
     }
-    
+    // 네이버지도에 킥보드 마커 표시
+    func setMapKcikBoardMark(){
+        let kickBoardList = KickBoardData.shared.kickboards
+        for kickBoard in kickBoardList{
+            kickBoard.markerInfo.mapView = self.naverMapView.mapView
+        }
+    }
     
 }
 
@@ -200,10 +202,7 @@ extension RegisterVC {
     
     
     func addSubViews() {
-        let views = [
-            baseRateLabel, baseRateTextField, extraFeeLabel, extraFeeTextField, registerTitlelabel, eLLabel, naverMapView
-        ]
-        _ = views.map { view.addSubview($0)}
+        self.view.addSubViews([  baseRateLabel, baseRateTextField, extraFeeLabel, extraFeeTextField, registerTitlelabel, eLLabel, naverMapView])
     }
 }
 

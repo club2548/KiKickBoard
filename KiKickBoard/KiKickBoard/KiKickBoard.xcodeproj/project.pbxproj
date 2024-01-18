@@ -14,7 +14,6 @@
 		3F0182DF2B567B090006F4B4 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DE2B567B090006F4B4 /* LoginController.swift */; };
 		3F0182E12B57BC5E0006F4B4 /* SignUpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182E02B57BC5E0006F4B4 /* SignUpExtension.swift */; };
 		46FA049A2B581C2000B963CB /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FA04992B581C2000B963CB /* RegisterVC.swift */; };
-		F85D46F62B575B07002E4160 /* BaseKickBoardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */; };
 		F85D46FA2B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D46F92B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift */; };
 		F85D46FD2B57A395002E4160 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D46FC2B57A395002E4160 /* UILabel+Extension.swift */; };
 		F8728F252B56BE3000700EB1 /* NaverGeocodingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8728F242B56BE3000700EB1 /* NaverGeocodingManager.swift */; };
@@ -43,7 +42,6 @@
 		46FA04992B581C2000B963CB /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		A0B0B8F6C31DCBA39CEF2156 /* Pods-KiKickBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.debug.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.debug.xcconfig"; sourceTree = "<group>"; };
 		F3461657C19D0140250FFF5C /* Pods-KiKickBoard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.release.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.release.xcconfig"; sourceTree = "<group>"; };
-		F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseKickBoardData.swift; sourceTree = "<group>"; };
 		F85D46F92B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocationCoordinate2D+Extension.swift"; sourceTree = "<group>"; };
 		F85D46FC2B57A395002E4160 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		F8728F242B56BE3000700EB1 /* NaverGeocodingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverGeocodingManager.swift; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				F8728F242B56BE3000700EB1 /* NaverGeocodingManager.swift */,
-				F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -337,7 +334,6 @@
 				F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */,
 				3F0182DF2B567B090006F4B4 /* LoginController.swift in Sources */,
 				F85D46FA2B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift in Sources */,
-				F85D46F62B575B07002E4160 /* BaseKickBoardData.swift in Sources */,
 				F8D5EAF72B56275A0057168A /* View+Extension.swift in Sources */,
 				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,
 				F8728F272B56CAA200700EB1 /* NMapAddModel.swift in Sources */,
