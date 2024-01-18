@@ -20,6 +20,7 @@ extension SignUpVC {
         
         // keyboardYTop : 키보드 상단의 y값(=높이)
         let keyboardYTop = keyboardFrame.cgRectValue.origin.y
+        let properYHight = keyboardYTop*1.3
         // convertedTextFieldFrame : 현재 선택한 textField의 frame값(=CGRect). superview에서 frame으로 convert를 했다는데.. 무슨 말인지..
         let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
         // textFieldYBottom : 텍스트필드 하단의 y값 = 텍스트필드의 y값(=y축 위치) + 텍스트필드의 높이

@@ -28,6 +28,7 @@ class SignUpVC: UIViewController {
         textField.placeholder = "소문자, 숫자 5~14자"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.keyboardType = .alphabet
         return textField
     }()
     
@@ -106,6 +107,7 @@ class SignUpVC: UIViewController {
         textField.placeholder = "KiKick@Board.com"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.keyboardType = .emailAddress
         return textField
     }()
     
