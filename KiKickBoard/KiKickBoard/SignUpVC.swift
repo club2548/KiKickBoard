@@ -16,7 +16,7 @@ class SignUpVC: UIViewController {
     
     let idStr : UILabel = {
         let str = UILabel()
-        str.font = .boldSystemFont(ofSize: 15)
+        str.font = .boldSystemFont(ofSize: 17)
         str.textColor = .black
         str.text = "아이디"
         str.textAlignment = .left
@@ -28,6 +28,8 @@ class SignUpVC: UIViewController {
         textField.placeholder = "소문자, 숫자 5~14자"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.keyboardType = .alphabet
+        textField.font = UIFont.systemFont(ofSize: 15)
         return textField
     }()
     
@@ -41,7 +43,7 @@ class SignUpVC: UIViewController {
     
     let pwStr : UILabel = {
         let str = UILabel()
-        str.font = .boldSystemFont(ofSize: 15)
+        str.font = .boldSystemFont(ofSize: 17)
         str.textColor = .black
         str.text = "비밀번호"
         str.textAlignment = .left
@@ -53,6 +55,7 @@ class SignUpVC: UIViewController {
         textField.placeholder = "대소문자, 숫자, 특수문자 1개 이상 필수 8~16자"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.font = UIFont.systemFont(ofSize: 15)
         return textField
     }()
     
@@ -68,7 +71,7 @@ class SignUpVC: UIViewController {
     
     let pwCheckStr : UILabel = {
         let str = UILabel()
-        str.font = .boldSystemFont(ofSize: 15)
+        str.font = .boldSystemFont(ofSize: 17)
         str.textColor = .black
         str.text = "비밀번호 확인"
         str.textAlignment = .left
@@ -81,6 +84,7 @@ class SignUpVC: UIViewController {
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         textField.isSecureTextEntry = true
+        textField.font = UIFont.systemFont(ofSize: 15)
         return textField
     }()
     
@@ -94,18 +98,20 @@ class SignUpVC: UIViewController {
     
     let eMailStr : UILabel = {
         let str = UILabel()
-        str.font = .boldSystemFont(ofSize: 15)
+        str.font = .boldSystemFont(ofSize: 17)
         str.textColor = .black
         str.text = "이메일"
         str.textAlignment = .left
         return str
     }()
     
-    let eMailSignUpTextField : UITextField = {
-        let textField = UITextField()
+    let eMailSignUpTextField : CustomTextFieldEMail = {
+        let textField = CustomTextFieldEMail()
         textField.placeholder = "KiKick@Board.com"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.keyboardType = .emailAddress
+        textField.font = UIFont.systemFont(ofSize: 15)
         return textField
     }()
     
@@ -119,24 +125,25 @@ class SignUpVC: UIViewController {
     
     let nameStr : UILabel = {
         let str = UILabel()
-        str.font = .boldSystemFont(ofSize: 15)
+        str.font = .boldSystemFont(ofSize: 17)
         str.textColor = .black
         str.text = "이름"
         str.textAlignment = .left
         return str
     }()
     
-    let nameSignUpTextField : UITextField = {
-        let textField = UITextField()
+    let nameSignUpTextField : CustomTextFieldName = {
+        let textField = CustomTextFieldName()
         textField.placeholder = "박보검"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.font = UIFont.systemFont(ofSize: 15)
         return textField
     }()
     
     let mobileStr : UILabel = {
         let str = UILabel()
-        str.font = .boldSystemFont(ofSize: 15)
+        str.font = .boldSystemFont(ofSize: 17)
         str.textColor = .black
         str.text = "전화번호"
         str.textAlignment = .left
@@ -148,14 +155,18 @@ class SignUpVC: UIViewController {
         textField.placeholder = "-없이 입력"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.keyboardType = .numberPad
+        textField.font = UIFont.systemFont(ofSize: 15)
         return textField
     }()
     
     let joinBtn : UIButton = {
         let btn = UIButton()
-        btn.isHidden = true
-        btn.backgroundColor = .gray
+        btn.isEnabled = false
+        btn.backgroundColor = .lightGray
         btn.setTitle("JOIN", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        btn.layer.cornerRadius = 5
         return btn
     }()
     
@@ -186,79 +197,86 @@ extension SignUpVC {
     
     private func autoLayout() {
         idStr.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.top.equalToSuperview().offset(150)
+            make.left.equalToSuperview().offset(30)
+            make.top.equalToSuperview().offset(120)
         }
         idSignUpTextField.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
+            make.left.equalTo(idStr)
+            make.right.equalToSuperview().offset(-30)
             make.top.equalTo(idStr.snp.bottom).offset(5)
+            make.height.equalTo(45)
         }
         idDescription.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
+            make.left.equalTo(idStr).offset(5)
             make.top.equalTo(idSignUpTextField.snp.bottom).offset(5)
         }
         pwStr.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.top.equalTo(idSignUpTextField.snp.bottom).offset(35)
+            make.left.equalTo(idStr)
+            make.top.equalTo(idSignUpTextField.snp.bottom).offset(25)
         }
         pwSignUpTextField.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
+            make.left.equalTo(idSignUpTextField)
+            make.right.equalTo(idSignUpTextField)
             make.top.equalTo(pwStr.snp.bottom).offset(5)
+            make.height.equalTo(idSignUpTextField)
         }
         pwDescription.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
+            make.left.equalTo(idDescription)
             make.top.equalTo(pwSignUpTextField.snp.bottom).offset(5)
         }
         pwCheckStr.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.top.equalTo(pwSignUpTextField.snp.bottom).offset(35)
+            make.left.equalTo(idStr)
+            make.top.equalTo(pwSignUpTextField.snp.bottom).offset(25)
         }
         pwSignUpCheckTextField.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
+            make.left.equalTo(idSignUpTextField)
+            make.right.equalTo(idSignUpTextField)
             make.top.equalTo(pwCheckStr.snp.bottom).offset(5)
+            make.height.equalTo(idSignUpTextField)
         }
         pwCheckDescription.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
+            make.left.equalTo(idDescription)
             make.top.equalTo(pwSignUpCheckTextField.snp.bottom).offset(5)
         }
         eMailStr.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.top.equalTo(pwSignUpCheckTextField.snp.bottom).offset(35)
+            make.left.equalTo(idStr)
+            make.top.equalTo(pwSignUpCheckTextField.snp.bottom).offset(25)
         }
         eMailSignUpTextField.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
+            make.left.equalTo(idSignUpTextField)
+            make.right.equalTo(idSignUpTextField)
             make.top.equalTo(eMailStr.snp.bottom).offset(5)
+            make.height.equalTo(idSignUpTextField)
         }
         eMailCheckDescription.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
+            make.left.equalTo(idDescription)
             make.top.equalTo(eMailSignUpTextField.snp.bottom).offset(5)
         }
         nameStr.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.top.equalTo(eMailSignUpTextField.snp.bottom).offset(35)
+            make.left.equalTo(idStr)
+            make.top.equalTo(eMailSignUpTextField.snp.bottom).offset(25)
         }
         nameSignUpTextField.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
+            make.left.equalTo(idSignUpTextField)
+            make.right.equalTo(idSignUpTextField)
             make.top.equalTo(nameStr.snp.bottom).offset(5)
+            make.height.equalTo(idSignUpTextField)
         }
         mobileStr.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.top.equalTo(nameSignUpTextField.snp.bottom).offset(35)
+            make.left.equalTo(idStr)
+            make.top.equalTo(nameSignUpTextField.snp.bottom).offset(25)
         }
         mobileSignUpTextField.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
+            make.left.equalTo(idSignUpTextField)
+            make.right.equalTo(idSignUpTextField)
             make.top.equalTo(mobileStr.snp.bottom).offset(5)
+            make.height.equalTo(idSignUpTextField)
         }
         joinBtn.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(mobileSignUpTextField.snp.bottom).offset(50)
+            make.left.equalTo(idSignUpTextField)
+            make.right.equalTo(idSignUpTextField)
+            make.top.equalTo(mobileSignUpTextField.snp.bottom).offset(5)
+            make.height.equalTo(65)
         }
     }
     
@@ -438,10 +456,12 @@ extension SignUpVC {
     }
     
     func oKCheck() {
-        if idCheck && pwCheck && eMailCheck && mobileCheck {
-            joinBtn.isHidden = false
+        if idCheck && pwCheck && eMailCheck && mobileCheck && !nameSignUpTextField.text!.isEmpty {
+            joinBtn.isEnabled = true
+            joinBtn.backgroundColor = UIColor(named: "PrimaryColor")
         } else {
-            joinBtn.isHidden = true
+            joinBtn.isEnabled = false
+            joinBtn.backgroundColor = .lightGray
             }
     }
     
@@ -471,25 +491,4 @@ extension SignUpVC {
     }
 }
 
-// MARK: -Pre View
-import SwiftUI
-struct PreView: PreviewProvider {
-  static var previews: some View {
-    UINavigationController(rootViewController: LoginVC()).toPreview()
-  }
-}
-#if DEBUG
-extension UIViewController {
-  private struct Preview: UIViewControllerRepresentable {
-      let viewController: UIViewController
-      func makeUIViewController(context: Context) -> UIViewController {
-        return viewController
-      }
-      func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-      }
-    }
-    func toPreview() -> some View {
-      Preview(viewController: self)
-    }
-}
-#endif
+

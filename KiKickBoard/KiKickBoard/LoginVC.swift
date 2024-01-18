@@ -12,28 +12,31 @@ class LoginVC: UIViewController {
     
     let mainImage = UIImageView(image: UIImage(named: "KiKickBoard_Logo"))
     
-    let logInStr : UILabel = {
-        let str = UILabel()
-        str.font = .boldSystemFont(ofSize: 40)
-        str.textColor = .black
-        str.text = "Log In"
-        str.textAlignment = .left
-        return str
-    }()
+//    let logInStr : UILabel = {
+//        let str = UILabel()
+//        str.font = .boldSystemFont(ofSize: 40)
+//        str.textColor = .black
+//        str.text = "Log In"
+//        str.textAlignment = .left
+//        return str
+//    }()
     
     let uIDTextField : UITextField = {
         let textField = UITextField()
-        textField.placeholder = "ID"
+        textField.placeholder = "아이디"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.keyboardType = .alphabet
+        textField.font = UIFont.systemFont(ofSize: 20)
         return textField
     }()
     
     let uPWTextField : UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Password"
+        textField.placeholder = "비밀번호"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.font = UIFont.systemFont(ofSize: 20)
         return textField
     }()
     
@@ -41,15 +44,18 @@ class LoginVC: UIViewController {
     
     let logInBtn : UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = .gray
-        btn.setTitle("Sign In", for: .normal)
+        btn.setTitle("로그인", for: .normal)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        btn.layer.cornerRadius = 5
+        btn.backgroundColor = UIColor(named: "PrimaryColor")
         return btn
     }()
     
     let signUPBtn : UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = .gray
-        btn.setTitle("Sign Up", for: .normal)
+        btn.backgroundColor = .clear
+        btn.setTitle("회원가입", for: .normal)
+        btn.setTitleColor(UIColor(named: "PrimaryColor"), for: .normal)
         return btn
     }()
     
@@ -63,10 +69,13 @@ class LoginVC: UIViewController {
         setupInteraction()
         setEyeButton()
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
     
     private func addSubView() {
         self.view.addSubview(mainImage)
-        self.view.addSubview(logInStr)
+//        self.view.addSubview(logInStr)
         self.view.addSubview(uIDTextField)
         self.view.addSubview(uPWTextField)
         self.view.addSubview(logInBtn)
@@ -84,33 +93,36 @@ class LoginVC: UIViewController {
             make.height.equalTo(mainImage.snp.width).multipliedBy(584.0 / 730.0)
         }
         
-        logInStr.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
+//        logInStr.snp.makeConstraints() { make in
+//            make.left.equalToSuperview().offset(50)
+//            make.top.equalTo(mainImage.snp.bottom).offset(50)
+//        }
+        
+        uIDTextField.snp.makeConstraints() { make in
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
+            make.height.equalTo(60)
             make.top.equalTo(mainImage.snp.bottom).offset(50)
         }
         
-        uIDTextField.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(logInStr.snp.bottom).offset(50)
-        }
-        
         uPWTextField.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(uIDTextField.snp.bottom).offset(50)
+            make.left.equalTo(uIDTextField)
+            make.width.equalTo(uIDTextField)
+            make.height.equalTo(uIDTextField)
+            make.top.equalTo(uIDTextField.snp.bottom).offset(5)
         }
         
         logInBtn.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(uPWTextField.snp.bottom).offset(50)
+            make.left.equalTo(uIDTextField)
+            make.width.equalTo(uIDTextField)
+            make.height.equalTo(65)
+            make.top.equalTo(uPWTextField.snp.bottom).offset(10)
         }
         
         signUPBtn.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(logInBtn.snp.bottom).offset(50)
+            make.right.equalTo(logInBtn)
+            make.width.equalTo(100)
+            make.top.equalTo(logInBtn.snp.bottom).offset(20)
         }
     }
     
@@ -137,7 +149,7 @@ class LoginVC: UIViewController {
             })
         } else {
             
-            showAlert(message: "KiKickBoard 가입을 환영합니다!", handler: nil)
+            showAlert(message: "잘못된 정보입니다.", handler: nil)
         }
 
         print("Saved UserInfo : \(LoginController.shared.currentUserInfo)")
@@ -177,17 +189,27 @@ class LoginVC: UIViewController {
             self.eyeButton.isSelected.toggle()
         }), for: .touchUpInside)
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
+// MARK: -Pre View
+import SwiftUI
+struct PreView: PreviewProvider {
+  static var previews: some View {
+    UINavigationController(rootViewController: LoginVC()).toPreview()
+  }
+}
+#if DEBUG
+extension UIViewController {
+  private struct Preview: UIViewControllerRepresentable {
+      let viewController: UIViewController
+      func makeUIViewController(context: Context) -> UIViewController {
+        return viewController
+      }
+      func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+      }
+    }
+    func toPreview() -> some View {
+      Preview(viewController: self)
+    }
+}
+#endif

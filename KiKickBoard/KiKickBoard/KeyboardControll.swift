@@ -6,10 +6,30 @@
 //
 
 import UIKit
+// setUpKeyboard 키보드가 특정 textField를 가릴 때, view를 높여주는 함수
 extension SignUpVC {
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.setUpKeyboard()
+//        print("viewWillAppear")
+//    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        self.removeKeyboardNotifications()
+//        print("viewWillDisappear")
+//    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        print("touchesBegan")
+    }
+    
     func setUpKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func removeKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func keyboardWillShow(_ sender: Notification) {
@@ -19,6 +39,7 @@ extension SignUpVC {
         
         // keyboardYTop : 키보드 상단의 y값(=높이)
         let keyboardYTop = keyboardFrame.cgRectValue.origin.y
+        let properYHight = keyboardYTop*1.3
         // convertedTextFieldFrame : 현재 선택한 textField의 frame값(=CGRect). superview에서 frame으로 convert를 했다는데.. 무슨 말인지..
         let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
         // textFieldYBottom : 텍스트필드 하단의 y값 = 텍스트필드의 y값(=y축 위치) + 텍스트필드의 높이
@@ -55,5 +76,39 @@ extension UIResponder {
     
     @objc private func _trap() {
         Static.responder = self
+    }
+}
+
+class CustomTextFieldName : UITextField {
+    private func getKeyboardLanguages() -> String? {
+        return "ko-KR"
+    }
+    
+    override var textInputMode : UITextInputMode? {
+        if let language = getKeyboardLanguages() {
+            for inputMode in UITextInputMode.activeInputModes {
+                if inputMode.primaryLanguage! == language {
+                    return inputMode
+                }
+            }
+        }
+        return super.textInputMode
+    }
+}
+
+class CustomTextFieldEMail : UITextField {
+    private func getKeyboardLanguages() -> String? {
+        return "en-EU"
+    }
+    
+    override var textInputMode : UITextInputMode? {
+        if let language = getKeyboardLanguages() {
+            for inputMode in UITextInputMode.activeInputModes {
+                if inputMode.primaryLanguage! == language {
+                    return inputMode
+                }
+            }
+        }
+        return super.textInputMode
     }
 }
