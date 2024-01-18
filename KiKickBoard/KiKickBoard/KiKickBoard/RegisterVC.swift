@@ -70,20 +70,32 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         return mapView
     }()
     
-    var selectedPosition: NMGLatLng?
-    
+    private lazy var baseRateCheckLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .red
+        label.text = "*기본요금을 입력해주세요"
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
+
+    private lazy var extraFeeCheckLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .red
+        label.text = "*추가요금을 입력해주세요"
+        label.font = UIFont.systemFont(ofSize: 12)
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "PrimaryColoy")
         
         
         naverMapView.mapView.touchDelegate = self
+        baseRateTextField.delegate = self
+        extraFeeTextField.delegate = self
+        
         addSubViews()
         autoLayouts()
-        
-//        button.addTarget(self, action: #selector(registerButton(_:)), for: .touchUpInside)
-        
     }
     
     // 텍스트필드에 키보드 동작 후 화면 터치 이벤트로 다시 숨기기
@@ -167,19 +179,25 @@ extension RegisterVC {
         }
         
         baseRateTextField.snp.makeConstraints { make in
-            make.top.equalTo(baseRateLabel.snp.bottom).offset(20)
+            make.top.equalTo(baseRateLabel.snp.bottom).offset(10)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+        }
+        
+        baseRateCheckLabel.snp.makeConstraints { make in
+            make.top.equalTo(baseRateTextField.snp.bottom).offset(1)
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
         }
         
         extraFeeLabel.snp.makeConstraints { make in
-            make.top.equalTo(baseRateTextField.snp.bottom).offset(20)
+            make.top.equalTo(baseRateTextField.snp.bottom).offset(30)
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
         }
         
         extraFeeTextField.snp.makeConstraints { make in
-            make.top.equalTo(extraFeeLabel.snp.bottom).offset(20)
+            make.top.equalTo(extraFeeLabel.snp.bottom).offset(10)
             make.left.equalTo(view).offset(20)
             make.right.equalTo(view).offset(-20)
         }
@@ -190,9 +208,14 @@ extension RegisterVC {
             make.right.equalTo(view).offset(-20)
         }
         
+        extraFeeCheckLabel.snp.makeConstraints { make in
+            make.top.equalTo(extraFeeTextField.snp.bottom).offset(1)
+            make.left.equalTo(view).offset(20)
+            make.right.equalTo(view).offset(-20)
+        }
+        
         naverMapView.snp.makeConstraints { make in
-            
-            make.top.equalTo(eLLabel.snp.bottom).offset(20)
+            make.top.equalTo(eLLabel.snp.bottom).offset(10)
             make.left.right.equalTo(view).inset(20) // 좌우 여백 설정
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
@@ -201,7 +224,7 @@ extension RegisterVC {
     
     func addSubViews() {
         let views = [
-            baseRateLabel, baseRateTextField, extraFeeLabel, extraFeeTextField, registerTitlelabel, eLLabel, naverMapView
+            baseRateLabel, baseRateTextField, extraFeeLabel, extraFeeTextField, registerTitlelabel, eLLabel, naverMapView, extraFeeCheckLabel, baseRateCheckLabel
         ]
         _ = views.map { view.addSubview($0)}
     }
@@ -209,8 +232,30 @@ extension RegisterVC {
 
 
 
-extension RegisterVC {
-    
+extension RegisterVC: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            guard let text = textField.text else { return true }
+        let newString = (text as NSString).replacingCharacters(in: range, with: string)
+        
+        if textField === baseRateTextField {
+            if newString.isEmpty {
+                baseRateCheckLabel.text = "기본요금을 입력해주세요"
+                baseRateCheckLabel.textColor = .red
+            } else {
+                baseRateCheckLabel.text = "✓"
+                baseRateCheckLabel.textColor = .green
+            }
+        } else if textField === extraFeeTextField {
+            if newString.isEmpty {
+                extraFeeCheckLabel.text = "추가요금을 입력해주세요"
+                extraFeeCheckLabel.textColor = .red
+            } else {
+                extraFeeCheckLabel.text = "✓"
+                extraFeeCheckLabel.textColor = .green
+            }
+        }
+        return true
+    }
 }
 
 
