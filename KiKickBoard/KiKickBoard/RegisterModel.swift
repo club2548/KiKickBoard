@@ -2,21 +2,16 @@ import Foundation
 import NMapsMap
 
 
-class KickBoardInfo {
-    var serialNumber: Int
-    var baseRate: String
-    var extraFee: String
-    var position: NMGLatLng
-    var iconImage: NMFOverlayImage
-    
-    init(serialNumber: Int, baseRate: String, extraFee: String, position: NMGLatLng) {
-        self.serialNumber = serialNumber
-        self.baseRate = baseRate
-        self.extraFee = extraFee
-        self.position = position
-        self.iconImage = NMFOverlayImage(name: "KickBoradImg")
-    }
+struct KickBoardInfo {
+  var serialNumber: Int
+  var baseRate: String
+  var extraFee: String
+  var iconImage: NMFOverlayImage = NMFOverlayImage(name: "KickBoardImg")
+  var markerInfo: NMFMarker
 }
+    
+    
+
 
 class KickBoardData {
     static let shared = KickBoardData()

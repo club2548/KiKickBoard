@@ -15,8 +15,7 @@ class HomeVC: UIViewController{
     var currentLatitude: Double = 0 // 현재 위치 lat 저장
     var currentLongtitude: Double = 0 // 현재위지 lng 저장
     var searchAddress = "" // 검색한 주소 저장
-    var markers : [NMFMarker] = BaseKickBoardData().baseKickBoard // 지도의 Mark qoduf
-    
+    var usingKickBoard : KickBoardInfo? // 사용하고 있는 킥보드 정보
     private lazy var explainLabel : UILabel = { // 상위 설명 Label
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17)
@@ -73,7 +72,7 @@ class HomeVC: UIViewController{
         label.font = UIFont.systemFont(ofSize: 20)
         return label
     }()
-    private lazy var navermapView : NMFNaverMapView = { // 네이버 지도 View
+    private lazy var naverMapView : NMFNaverMapView = { // 네이버 지도 View
         let mapView = NMFNaverMapView() // 지도 객체 생성
         mapView.showLocationButton = true
         return mapView
@@ -91,16 +90,19 @@ class HomeVC: UIViewController{
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        ketBoardHide()
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = "Home"
         addSubViews()
         setAutoLayout()
         setExplainLabel()
         getCurrentLoaction()
-        navermapView.mapView.touchDelegate = self
-        setMapKickBoardMark()
+        naverMapView.mapView.touchDelegate = self
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setMapKickBoardMark(kickBoardList: KickBoardData.shared.kickboards) // KickBoardData.shared.kickboards : 킥보드 정보 리스트
+    }
 }
 extension HomeVC : CLLocationManagerDelegate{
     //MARK: - 좌표 및 지도 관련
@@ -109,7 +111,7 @@ extension HomeVC : CLLocationManagerDelegate{
         self.currentLatitude = location.coordinate.latitude // 현재 사용자 좌표 lat
         self.currentLongtitude = location.coordinate.longitude // 현재 사용자 좌표 lng
         let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)) // 카메라 이동될 좌표
-        navermapView.mapView.moveCamera(cameraUpdate) // 현재 사용자 위치 기준으로  카메라 이동
+        naverMapView.mapView.moveCamera(cameraUpdate) // 현재 사용자 위치 기준으로  카메라 이동
     }
     func getCurrentLoaction(){
         locationManager = CLLocationManager()// CLLocationManager클래스의 인스턴스 locationManager를 생성
@@ -129,7 +131,7 @@ extension HomeVC : CLLocationManagerDelegate{
             }
             let postion = NMFCameraUpdate(scrollTo: NMGLatLng(lat: latitude , lng: longitude ))
             DispatchQueue.main.async { // UI업데이트는 Main 스레드에서 이루어져야함 (설정안해줘서 오류발생)
-                self.navermapView.mapView.moveCamera(postion)
+                self.naverMapView.mapView.moveCamera(postion)
             }
         }
         addressTextField.text = ""
@@ -137,37 +139,56 @@ extension HomeVC : CLLocationManagerDelegate{
     @objc func changeTextField(_ sender : UITextField){
         searchAddress = sender.text ?? "" // 주소 입력창에 입력되는 Text
     }
-    @objc func tapReturnButton(){// 키보드 반납하기 버튼 Action
-        self.changeUsingStatus(use: false) // 키보드 반납
-        let returnKickBoard = NMFMarker(position: NMGLatLng(lat: self.currentLatitude, lng: self.currentLongtitude), iconImage: NMFOverlayImage(name: "KickBoardImg"))
-        self.markers.append(returnKickBoard) // 킥보드 마커 배열 추가
-        setMapKickBoardMark() // 킥보드 마커 업데이트
+    //MARK: - 반납하기
+    @objc func tapReturnButton(){// 킥보드 반납하기 버튼 Action
+        self.changeUsingStatus(use: false) // 키보드 반납 상태로 변경
+        guard let usingKickBoard = self.usingKickBoard else { return } // 사용하고 있는 킥보드 정보
+        // MARK: 거리 구하기
+        let currentCoordinate = CLLocation(latitude: self.currentLatitude, longitude: self.currentLongtitude) // 현재 위치 좌표
+        let kickBoardCoordinate = CLLocation(latitude: usingKickBoard.markerInfo.position.lat, longitude: usingKickBoard.markerInfo.position.lng) // 킥보드 위치 좌표
+        var price = Int(usingKickBoard.baseRate)! // 이용 가격
+        let useDist = Int(floor(currentCoordinate.distance(from: kickBoardCoordinate))) // 이용 거리
+        let currentDate = getCurrentDate()
+        if useDist > 600 {
+            price += (Int(useDist)-500) / 100 * Int(usingKickBoard.extraFee)!
+        }
+        showAlert(useDist, price) // 알림창
+        UseHistoryData.shared.historyList.append(UseHistoryModel(serialNumber: usingKickBoard.serialNumber, price: price, date: currentDate, distance: useDist))// 이욕기록 추가
         
+        let returnMarkInfo = NMFMarker(position: NMGLatLng(lat: self.currentLatitude, lng: self.currentLongtitude), iconImage: usingKickBoard.iconImage) // 킥보드 반납 마커 상태
+        returnMarkInfo.height = 30
+        returnMarkInfo.width = 30
+        let returnKickBoard = KickBoardInfo(serialNumber: usingKickBoard.serialNumber, baseRate: usingKickBoard.baseRate, extraFee: usingKickBoard.extraFee, markerInfo: returnMarkInfo) // KickBoardInfo 에서 킥보드 반납 마커 상태 추가
         
+        KickBoardData.shared.kickboards.append(returnKickBoard)
+        setMapKickBoardMark(kickBoardList: KickBoardData.shared.kickboards) // 킥보드 마커 업데이트
+        UseStatusData.shared.status = false
     }
-// MARK: - 킥보드 마커 설정
-    func setMapKickBoardMark(){
-        for (idx,mark) in markers.enumerated(){
-            mark.anchor = CGPoint(x: 0.5, y: 0.5) // 마커의 중심읠 현재위치로 설정
-            mark.mapView = self.navermapView.mapView
-            
-            mark.touchHandler = { (overlay : NMFOverlay) -> Bool in // marker의 touch Event
+    // MARK: - 킥보드 마커 설정
+    func setMapKickBoardMark(kickBoardList : [KickBoardInfo]){
+        for (idx,kickBoard) in kickBoardList.enumerated(){
+            // 킥보드 마커 설정
+            kickBoard.markerInfo.mapView = self.naverMapView.mapView //마커 설정
+            //MARK: - 킥보드 대여하기
+            kickBoard.markerInfo.touchHandler = { (overlay : NMFOverlay) -> Bool in // marker의 touch Event
                 let currentCoordinate = CLLocation(latitude: self.currentLatitude, longitude: self.currentLongtitude) // 현재 위치 좌표
-                let from = CLLocation(latitude: mark.position.lat, longitude: mark.position.lng) // mark 위치 좌표
+                let from = CLLocation(latitude: kickBoard.markerInfo.position.lat, longitude: kickBoard.markerInfo.position.lng) // 킥보드 위치 좌표
                 let dist = currentCoordinate.distance(from: from) // 현재 위치에서 킥보드사이의 거리 (미터 기준)
                 if dist <= 100 { // 100m 이하일 경우
                     let alert = UIAlertController(title: "대여하기", message: "해당 킥보드를 대여하시겠습니까?", preferredStyle: .alert)
                     let confirmAction = UIAlertAction(title: "대여", style: .default){ _ in
+                        self.usingKickBoard = kickBoard
                         self.changeUsingStatus(use: true)
-                        self.markers.remove(at: idx)
-                        mark.mapView = nil // 대여 함으로써 해당 킥보드 마커 지우기
+                        KickBoardData.shared.kickboards.remove(at: idx)// 킥보드 데이터 삭제
+                        kickBoard.markerInfo.mapView = nil // 대여 함으로써 해당 킥보드 마커 지우기
+                        UseStatusData.shared.status = true
                     }
                     let cancelAction = UIAlertAction(title: "취소", style: .cancel)
                     alert.addAction(confirmAction)
                     alert.addAction(cancelAction)
                     self.present(alert, animated: true)
                 }else{
-                    let alert = UIAlertController(title: "킥보드와의 거리가 100m이상입니다.", message: "킥보드에 가까이 와주세요. ", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "킥보드와의 거리가 100m를 넘습니다.", message: "킥보드에 가까이 와주세요. ", preferredStyle: .alert)
                     let confirmAction = UIAlertAction(title: "확인", style: .cancel)
                     alert.addAction(confirmAction)
                     self.present(alert, animated: true)
@@ -177,14 +198,25 @@ extension HomeVC : CLLocationManagerDelegate{
             
         }
     }
+    func showAlert(_ useDist: Int ,_ price : Int){
+        let alert = UIAlertController(title: "이용 정보", message: "이용 거리:\(useDist)m 이용 가격 : \(price)원입니다.", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .cancel)
+        alert.addAction(confirmAction)
+        self.present(alert, animated: true)
+    }
+    func getCurrentDate() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
+    }
     
 }
 extension HomeVC : NMFMapViewTouchDelegate{ // 맵 클릭해서 좌표 알아내기 위함
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
-        print("\(latlng.lat), \(latlng.lng)")
+        print("클릭한 지도 좌표 lat : \(latlng.lat),lng : \(latlng.lng)")
     }
 }
-
 extension HomeVC {
     private func setExplainLabel(){ // explainLabel 설정
         let text = "가까운 곳의 킥보드를 찾아보세요.\n대여를 원하는 킥보드를 클릭하세요."
@@ -199,9 +231,9 @@ extension HomeVC {
         self.view.addSubview(addressStackView)
         addressStackView.addArrangedSubview(addressTextField)
         addressStackView.addArrangedSubview(addressButton)
-        self.view.addSubview(navermapView)
+        self.view.addSubview(naverMapView)
         self.view.addSubview(returnButton)
-        navermapView.addSubview(usingLabel)
+        naverMapView.addSubview(usingLabel)
     }
     private func setAutoLayout(){
         explainLabel.snp.makeConstraints { make in
@@ -219,13 +251,13 @@ extension HomeVC {
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
         }
-        navermapView.snp.makeConstraints { make in
+        naverMapView.snp.makeConstraints { make in
             make.top.equalTo(addressStackView.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
         }
         returnButton.snp.makeConstraints { make in
-            make.top.equalTo(navermapView.snp.bottom).offset(15)
+            make.top.equalTo(naverMapView.snp.bottom).offset(15)
             make.left.equalToSuperview().offset(15)
             make.right.equalToSuperview().offset(-15)
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-15)

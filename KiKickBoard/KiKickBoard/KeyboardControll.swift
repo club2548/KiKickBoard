@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 // setUpKeyboard 키보드가 특정 textField를 가릴 때, view를 높여주는 함수
 extension SignUpVC {
     
