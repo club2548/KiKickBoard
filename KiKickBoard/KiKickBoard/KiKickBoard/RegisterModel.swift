@@ -6,7 +6,6 @@ struct KickBoardInfo {
   var serialNumber: Int
   var baseRate: String
   var extraFee: String
-  var position: NMGLatLng
   var iconImage: NMFOverlayImage = NMFOverlayImage(name: "KickBoardImg")
   var markerInfo: NMFMarker
 }
