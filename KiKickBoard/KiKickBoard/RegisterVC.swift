@@ -12,7 +12,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         label.font = UIFont.boldSystemFont(ofSize: 25)
         return label
     }()
-    
+
     // 기본 요금 라벨/텍스트필드
     private lazy var baseRateLabel: UILabel = {
         let label = UILabel()
@@ -96,7 +96,10 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         addSubViews()
         autoLayouts()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setMapKcikBoardMark()
+    }
     // 텍스트필드에 키보드 동작 후 화면 터치 이벤트로 다시 숨기기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -118,7 +121,6 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
             alert.addAction(UIAlertAction(title: "확인", style: .cancel))
             present(alert, animated: true, completion: nil)
         }
-        
     }
     
     func showAlert(_ marker: NMFMarker) {
@@ -138,19 +140,17 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
             let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, markerInfo: marker )
-            
             // 킥보드정보 객체 저장
             KickBoardData.shared.kickboards.append(kickboard)
             marker.mapView = self.naverMapView.mapView
-            
             print("시리얼 넘버: \(serialNumber)")
             print("기본요금: \(baseRate)원")
             print("추가요금: \(extraFee)원")
             print("추가된 킥보드의 좌표값: \(marker.position.lat), \(marker.position.lng)")
         })
         present(alert, animated: true, completion: nil)
+        
     }
-    
     // 금액 입력 여부확인
     func confirmPrice() -> Bool {
         return !(baseRateTextField.text?.isEmpty ?? true) && !(extraFeeTextField.text?.isEmpty ?? true)
@@ -176,6 +176,13 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         ])
 
         return label
+    }
+    // 네이버지도에 킥보드 마커 표시
+    func setMapKcikBoardMark(){
+        let kickBoardList = KickBoardData.shared.kickboards
+        for kickBoard in kickBoardList{
+            kickBoard.markerInfo.mapView = self.naverMapView.mapView
+        }
     }
 }
 
