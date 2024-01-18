@@ -171,6 +171,7 @@ extension HomeVC : CLLocationManagerDelegate{
             kickBoard.markerInfo.mapView = self.naverMapView.mapView //마커 설정
             //MARK: - 킥보드 대여하기
             kickBoard.markerInfo.touchHandler = { (overlay : NMFOverlay) -> Bool in // marker의 touch Event
+                print("Home")
                 let currentCoordinate = CLLocation(latitude: self.currentLatitude, longitude: self.currentLongtitude) // 현재 위치 좌표
                 let from = CLLocation(latitude: kickBoard.markerInfo.position.lat, longitude: kickBoard.markerInfo.position.lng) // 킥보드 위치 좌표
                 let dist = currentCoordinate.distance(from: from) // 현재 위치에서 킥보드사이의 거리 (미터 기준)

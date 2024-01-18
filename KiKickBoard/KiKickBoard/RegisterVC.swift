@@ -179,6 +179,10 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     func setMapKcikBoardMark(){
         let kickBoardList = KickBoardData.shared.kickboards
         for kickBoard in kickBoardList{
+            kickBoard.markerInfo.touchHandler = { (overlay : NMFOverlay) -> Bool in
+                print("Register")
+                return false
+            }
             kickBoard.markerInfo.mapView = self.naverMapView.mapView
         }
     }
