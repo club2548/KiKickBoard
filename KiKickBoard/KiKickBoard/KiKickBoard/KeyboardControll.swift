@@ -10,14 +10,17 @@ import UIKit
 // setUpKeyboard 키보드가 특정 textField를 가릴 때, view를 높여주는 함수
 extension SignUpVC {
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.setUpKeyboard()
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        self.removeKeyboardNotifications()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        self.setUpKeyboard()
+//        print("viewWillAppear")
+//    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        self.removeKeyboardNotifications()
+//        print("viewWillDisappear")
+//    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+        print("touchesBegan")
     }
     
     func setUpKeyboard() {

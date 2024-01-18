@@ -44,17 +44,18 @@ class LoginVC: UIViewController {
     
     let logInBtn : UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = .gray
         btn.setTitle("로그인", for: .normal)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 20)
-        
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        btn.layer.cornerRadius = 5
+        btn.backgroundColor = UIColor(named: "PrimaryColor")
         return btn
     }()
     
     let signUPBtn : UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = .gray
-        btn.setTitle("Sign Up", for: .normal)
+        btn.backgroundColor = .clear
+        btn.setTitle("회원가입", for: .normal)
+        btn.setTitleColor(UIColor(named: "PrimaryColor"), for: .normal)
         return btn
     }()
     
@@ -117,9 +118,9 @@ class LoginVC: UIViewController {
         }
         
         signUPBtn.snp.makeConstraints() { make in
-            make.left.equalToSuperview().offset(50)
-            make.right.equalToSuperview().offset(-50)
-            make.top.equalTo(logInBtn.snp.bottom).offset(50)
+            make.right.equalTo(logInBtn)
+            make.width.equalTo(100)
+            make.top.equalTo(logInBtn.snp.bottom).offset(20)
         }
     }
     
@@ -184,17 +185,27 @@ class LoginVC: UIViewController {
             self.eyeButton.isSelected.toggle()
         }), for: .touchUpInside)
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
+// MARK: -Pre View
+import SwiftUI
+struct PreView: PreviewProvider {
+  static var previews: some View {
+    UINavigationController(rootViewController: LoginVC()).toPreview()
+  }
+}
+#if DEBUG
+extension UIViewController {
+  private struct Preview: UIViewControllerRepresentable {
+      let viewController: UIViewController
+      func makeUIViewController(context: Context) -> UIViewController {
+        return viewController
+      }
+      func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+      }
+    }
+    func toPreview() -> some View {
+      Preview(viewController: self)
+    }
+}
+#endif
