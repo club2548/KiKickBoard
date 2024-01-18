@@ -7,6 +7,7 @@
 
 import UIKit
 
+// setUpKeyboard 키보드가 특정 textField를 가릴 때, view를 높여주는 함수
 extension SignUpVC {
     func setUpKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -57,5 +58,39 @@ extension UIResponder {
     
     @objc private func _trap() {
         Static.responder = self
+    }
+}
+
+class CustomTextFieldName : UITextField {
+    private func getKeyboardLanguages() -> String? {
+        return "ko-KR"
+    }
+    
+    override var textInputMode : UITextInputMode? {
+        if let language = getKeyboardLanguages() {
+            for inputMode in UITextInputMode.activeInputModes {
+                if inputMode.primaryLanguage! == language {
+                    return inputMode
+                }
+            }
+        }
+        return super.textInputMode
+    }
+}
+
+class CustomTextFieldEMail : UITextField {
+    private func getKeyboardLanguages() -> String? {
+        return "en-EU"
+    }
+    
+    override var textInputMode : UITextInputMode? {
+        if let language = getKeyboardLanguages() {
+            for inputMode in UITextInputMode.activeInputModes {
+                if inputMode.primaryLanguage! == language {
+                    return inputMode
+                }
+            }
+        }
+        return super.textInputMode
     }
 }

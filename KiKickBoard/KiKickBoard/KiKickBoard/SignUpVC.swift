@@ -102,8 +102,8 @@ class SignUpVC: UIViewController {
         return str
     }()
     
-    let eMailSignUpTextField : UITextField = {
-        let textField = UITextField()
+    let eMailSignUpTextField : CustomTextFieldEMail = {
+        let textField = CustomTextFieldEMail()
         textField.placeholder = "KiKick@Board.com"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
@@ -128,8 +128,8 @@ class SignUpVC: UIViewController {
         return str
     }()
     
-    let nameSignUpTextField : UITextField = {
-        let textField = UITextField()
+    let nameSignUpTextField : CustomTextFieldName = {
+        let textField = CustomTextFieldName()
         textField.placeholder = "박보검"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
@@ -150,6 +150,7 @@ class SignUpVC: UIViewController {
         textField.placeholder = "-없이 입력"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.keyboardType = .numberPad
         return textField
     }()
     

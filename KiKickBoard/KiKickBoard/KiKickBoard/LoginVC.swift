@@ -26,6 +26,7 @@ class LoginVC: UIViewController {
         textField.placeholder = "ID"
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
+        textField.keyboardType = .alphabet
         return textField
     }()
     
