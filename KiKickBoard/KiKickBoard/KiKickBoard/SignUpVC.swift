@@ -167,6 +167,7 @@ class SignUpVC: UIViewController {
         setupInteraction()
         setEyeButton()
         mobileSignUpTextField.delegate = self
+        setUpKeyboard()
     }
 }
 

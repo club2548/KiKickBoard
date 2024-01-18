@@ -13,6 +13,7 @@
 		3F0182DD2B5678F40006F4B4 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DC2B5678F40006F4B4 /* LoginModel.swift */; };
 		3F0182DF2B567B090006F4B4 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182DE2B567B090006F4B4 /* LoginController.swift */; };
 		3F0182E12B57BC5E0006F4B4 /* SignUpExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0182E02B57BC5E0006F4B4 /* SignUpExtension.swift */; };
+		3F1BD16F2B58F6EF00A6037B /* KeyboardControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1BD16E2B58F6EE00A6037B /* KeyboardControll.swift */; };
 		46FA049A2B581C2000B963CB /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46FA04992B581C2000B963CB /* RegisterVC.swift */; };
 		F85D46F62B575B07002E4160 /* BaseKickBoardData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D46F52B575B07002E4160 /* BaseKickBoardData.swift */; };
 		F85D46FA2B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85D46F92B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift */; };
@@ -40,6 +41,7 @@
 		3F0182DC2B5678F40006F4B4 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		3F0182DE2B567B090006F4B4 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		3F0182E02B57BC5E0006F4B4 /* SignUpExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpExtension.swift; sourceTree = "<group>"; };
+		3F1BD16E2B58F6EE00A6037B /* KeyboardControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardControll.swift; sourceTree = "<group>"; };
 		46FA04992B581C2000B963CB /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		A0B0B8F6C31DCBA39CEF2156 /* Pods-KiKickBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.debug.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.debug.xcconfig"; sourceTree = "<group>"; };
 		F3461657C19D0140250FFF5C /* Pods-KiKickBoard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiKickBoard.release.xcconfig"; path = "Target Support Files/Pods-KiKickBoard/Pods-KiKickBoard.release.xcconfig"; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				F87F97452B553B0D00BD01DE /* SignUpVC.swift */,
 				3F0182DA2B561B300006F4B4 /* SignUpController.swift */,
 				3F0182E02B57BC5E0006F4B4 /* SignUpExtension.swift */,
+				3F1BD16E2B58F6EE00A6037B /* KeyboardControll.swift */,
 			);
 			name = SignUp;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				F85D46FA2B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				F85D46F62B575B07002E4160 /* BaseKickBoardData.swift in Sources */,
 				F8D5EAF72B56275A0057168A /* View+Extension.swift in Sources */,
+				3F1BD16F2B58F6EF00A6037B /* KeyboardControll.swift in Sources */,
 				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,
 				F8728F272B56CAA200700EB1 /* NMapAddModel.swift in Sources */,
 				F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */,
