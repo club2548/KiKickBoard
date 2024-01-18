@@ -10,16 +10,38 @@ import SnapKit
 
 class HistoryCell: UITableViewCell {
     static let HTidenti = "HTCell"
-    
-    var historyCellLabel: UILabel = {
-        let historyCellLabel = UILabel()
-        return historyCellLabel
+    var upperStackView : UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        return stackView
     }()
-    
+    var serialLabel: UILabel = {
+        let serialLabel = UILabel()
+        serialLabel.font = UIFont.systemFont(ofSize: 15)
+        serialLabel.textAlignment = .left
+        return serialLabel
+    }()
+    var useInfoLabel : UILabel = {
+        let useInfoLabel = UILabel()
+        useInfoLabel.font = UIFont.systemFont(ofSize: 15)
+        useInfoLabel.textAlignment = .left
+        return useInfoLabel
+    }()
+    var dateInfoLabel : UILabel = {
+        let dateInfoLabel = UILabel()
+        dateInfoLabel.font = UIFont.systemFont(ofSize: 15)
+        dateInfoLabel.textAlignment = .right
+        return dateInfoLabel
+    }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: HistoryCell.HTidenti)
-        
-        addSubview(historyCellLabel)
+        addSubview(upperStackView)
+        upperStackView.addArrangedSubview(serialLabel)
+        upperStackView.addArrangedSubview(useInfoLabel)
+        upperStackView.addArrangedSubview(dateInfoLabel)
         HistoryAutoLayout()
     }
     
@@ -40,11 +62,17 @@ class HistoryCell: UITableViewCell {
     }
     
     func HistoryAutoLayout() {
-        historyCellLabel.snp.makeConstraints { make in
+        upperStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-10)
         }
-        
     }
+    func setHistory(model : UseHistoryModel){
+        serialLabel.text = "\(model.serialNumber)"
+        useInfoLabel.text = "이용 거리 : \(model.distance)  | 이용 금액 : \(model.price)"
+        dateInfoLabel.text = "\(model.date)"
+    }
+    
 }

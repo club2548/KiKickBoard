@@ -14,8 +14,7 @@ class HistoryVC: UIViewController {
     private let historyVC = UITableView()
     
     //데이터 받아오기. 날짜는 어떻게 받아오지?
-    var historyData: [String] = [ "yyyy-MM-dd HH:mm", "Serial Number", "이용 거리" , "거리에 따른 금액"]
-
+    var historyData: [UseHistoryModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +31,10 @@ class HistoryVC: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.historyData = UseHistoryData.shared.historyList
+    }
 
 }
 
@@ -44,10 +47,7 @@ extension HistoryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryCell.HTidenti , for: indexPath) as? HistoryCell else { return UITableViewCell() }
         
-        let models = historyData[indexPath.row]
-        cell.historyCellLabel.text = models
-        
-        cell.historyCellLabel.textColor = .darkGray
+        cell.setHistory(model: historyData[indexPath.row])
         cell.backgroundColor = .clear
         cell.selectionStyle = .none
         

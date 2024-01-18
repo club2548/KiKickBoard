@@ -12,7 +12,7 @@ class RegistrationVC: UIViewController {
     
     private let registrationVC = UITableView()
     
-    var registrationData: [String] = ["Serial Number", "더미", "더미"]
+    var registrationData: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +31,10 @@ class RegistrationVC: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registrationData = RegisterData.shared.registList
+    }
 }
 
 
@@ -42,9 +46,7 @@ extension RegistrationVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RegistrationCell.RRidenti, for: indexPath) as? RegistrationCell else { return UITableViewCell()}
-        
-        let models = registrationData[indexPath.row]
-        cell.registrationLabel.text = models
+        cell.registrationLabel.text = "Serial Number\(registrationData[indexPath.row])"
         
         //삭제 버튼
         let deleteButton = UIButton(type: .system)
@@ -70,9 +72,8 @@ extension RegistrationVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func deleteButtonTapped(_ sender: UIButton) {
-        guard let cell = sender.superview?.superview as? RegistrationCell,
-              let indexPath = registrationVC.indexPath(for: cell) else { return }
-            
+//        guard let cell = sender.superview?.superview as? RegistrationCell
+//      let indexPath = registrationVC.indexPath(for: cell) else { return }
         //데이터 삭제
         //registrationData.remove(at: indexPath.row)
         //registrationVC.deleteRows(at: [indexpath], with: .automatic)

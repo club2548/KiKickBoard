@@ -12,11 +12,11 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         label.font = UIFont.boldSystemFont(ofSize: 25)
         return label
     }()
-
+    
     // 기본 요금 라벨/텍스트필드
     private lazy var baseRateLabel: UILabel = {
         let label = UILabel()
-        label.text = "기본 요금 (1km)"
+        label.text = "기본 요금 (500m)"
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
@@ -25,7 +25,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     private lazy var baseRateTextField: UITextField = {
         let field = UITextField()
         field.borderStyle = .roundedRect
-        field.placeholder = "1km 이내를 이동하는 기본요금을 설정합니다."
+        field.placeholder = "500m 이내를 이동하는 기본요금을 설정합니다."
         field.keyboardType = .numberPad // 숫자패드
         return field
     }()
@@ -41,7 +41,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     private lazy var extraFeeTextField: UITextField = {
         let field = UITextField()
         field.borderStyle = .roundedRect
-        field.placeholder = "1km를 초과한 후 100m당 요금을 설정합니다. "
+        field.placeholder = "500m를 초과한 후 100m당 요금을 설정합니다. "
         field.keyboardType = .numberPad //숫자패드
         return field
     }()
@@ -77,7 +77,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         label.font = UIFont.systemFont(ofSize: 12)
         return label
     }()
-
+    
     private lazy var extraFeeCheckLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
@@ -89,6 +89,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ketBoardHide()
         naverMapView.mapView.touchDelegate = self
         baseRateTextField.delegate = self
         extraFeeTextField.delegate = self
@@ -132,7 +133,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
             - 기본 요금: \(baseRate)원
             - 추가 요금: \(extraFee)원
             - 위치: \(marker.position.lat), \(marker.position.lng)
-
+            
             위 정보를 확인해주세요.
             """
         let alert = UIAlertController(title: "킥보드 정보 확인", message: alertMassage, preferredStyle: .alert)
@@ -141,6 +142,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
             let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, markerInfo: marker )
             // 킥보드정보 객체 저장
             KickBoardData.shared.kickboards.append(kickboard)
+            RegisterData.shared.registList.append(serialNumber)
             marker.mapView = self.naverMapView.mapView
             print("시리얼 넘버: \(serialNumber)")
             print("기본요금: \(baseRate)원")
@@ -255,7 +257,7 @@ extension RegisterVC {
 
 extension RegisterVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            guard let text = textField.text else { return true }
+        guard let text = textField.text else { return true }
         let newString = (text as NSString).replacingCharacters(in: range, with: string)
         // 입력 상태에 따라 라벨 text 값 변환
         if textField === baseRateTextField {

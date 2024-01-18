@@ -29,6 +29,7 @@ class SignUpController {
     func readUserInfoArray() {
         if let savedData = UserDefaults.standard.object(forKey: "userInfoArray") as? Data, let decodedData = try? decoder.decode([UserInfo].self, from: savedData) {
             userInfoArray = decodedData
+            print("\(userInfoArray)")
         }
     }
     

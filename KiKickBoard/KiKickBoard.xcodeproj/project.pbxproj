@@ -36,6 +36,8 @@
 		F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87F97522B553BAB00BD01DE /* TabBarController.swift */; };
 		F87F97562B55400E00BD01DE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F87F97552B55400E00BD01DE /* SnapKit */; };
 		F8977B972B591DAB0082B116 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8977B962B591DAB0082B116 /* SignUpVC.swift */; };
+		F8977B9A2B5920830082B116 /* PublicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8977B992B5920830082B116 /* PublicData.swift */; };
+		F8977BD12B594C0D0082B116 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8977BD02B594C0D0082B116 /* ViewController+Extension.swift */; };
 		F8C5DC872B5814F900702F8E /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C5DC852B5814F900702F8E /* RegisterModel.swift */; };
 		F8D5EAF72B56275A0057168A /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5EAF62B56275A0057168A /* View+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +75,8 @@
 		F87F974B2B553B3200BD01DE /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
 		F87F97522B553BAB00BD01DE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F8977B962B591DAB0082B116 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		F8977B992B5920830082B116 /* PublicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicData.swift; sourceTree = "<group>"; };
+		F8977BD02B594C0D0082B116 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
 		F8C5DC852B5814F900702F8E /* RegisterModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		F8D5EAF62B56275A0057168A /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +117,7 @@
 				F8D5EAF62B56275A0057168A /* View+Extension.swift */,
 				F85D46F92B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift */,
 				F85D46FC2B57A395002E4160 /* UILabel+Extension.swift */,
+				F8977BD02B594C0D0082B116 /* ViewController+Extension.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -138,13 +143,14 @@
 		F87F972E2B5539FC00BD01DE /* KiKickBoard */ = {
 			isa = PBXGroup;
 			children = (
-				F85D46FB2B57A35D002E4160 /* Extension */,
 				F87F972F2B5539FC00BD01DE /* AppDelegate.swift */,
 				F87F97312B5539FC00BD01DE /* SceneDelegate.swift */,
 				F87F97382B5539FD00BD01DE /* Assets.xcassets */,
 				F87F973A2B5539FD00BD01DE /* LaunchScreen.storyboard */,
 				F87F973D2B5539FD00BD01DE /* Info.plist */,
 				F87F97522B553BAB00BD01DE /* TabBarController.swift */,
+				F8977B982B5920510082B116 /* MyPageGetData */,
+				F85D46FB2B57A35D002E4160 /* Extension */,
 				F87F974D2B553B3600BD01DE /* Login */,
 				F87F974E2B553B5600BD01DE /* SignUp */,
 				F87F974F2B553B6300BD01DE /* Home */,
@@ -232,6 +238,14 @@
 				F8728F242B56BE3000700EB1 /* NaverGeocodingManager.swift */,
 			);
 			name = Service;
+			sourceTree = "<group>";
+		};
+		F8977B982B5920510082B116 /* MyPageGetData */ = {
+			isa = PBXGroup;
+			children = (
+				F8977B992B5920830082B116 /* PublicData.swift */,
+			);
+			name = MyPageGetData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,11 +372,13 @@
 				6BDCFA2D2B57FF7300A76830 /* ProfileVC.swift in Sources */,
 				F8728F252B56BE3000700EB1 /* NaverGeocodingManager.swift in Sources */,
 				F87F97302B5539FC00BD01DE /* AppDelegate.swift in Sources */,
+				F8977B9A2B5920830082B116 /* PublicData.swift in Sources */,
 				3F0182DF2B567B090006F4B4 /* LoginController.swift in Sources */,
 				F85D46FA2B5797C1002E4160 /* CLLocationCoordinate2D+Extension.swift in Sources */,
 				F8D5EAF72B56275A0057168A /* View+Extension.swift in Sources */,
 				3F1BD16F2B58F6EF00A6037B /* KeyboardControll.swift in Sources */,
 				F87F97442B553B0000BD01DE /* LoginVC.swift in Sources */,
+				F8977BD12B594C0D0082B116 /* ViewController+Extension.swift in Sources */,
 				F8728F272B56CAA200700EB1 /* NMapAddModel.swift in Sources */,
 				F8977B972B591DAB0082B116 /* SignUpVC.swift in Sources */,
 				F87F97532B553BAB00BD01DE /* TabBarController.swift in Sources */,
