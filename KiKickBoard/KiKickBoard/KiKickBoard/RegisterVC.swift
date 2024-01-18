@@ -63,15 +63,6 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         return eLocationLabel
     }()
     
-    private lazy var button: UIButton =  {
-        let button = UIButton()
-        button.setTitle("등록하기", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.layer.cornerRadius = 25 // 둥근 모서리
-        button.layer.borderWidth = 1 // 테두리 선
-        button.layer.borderColor = UIColor.systemBlue.cgColor // 데두리 색상
-        return button
-    }()
     
     private lazy var naverMapView: NMFNaverMapView = {
         let mapView = NMFNaverMapView()
@@ -90,7 +81,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         addSubViews()
         autoLayouts()
         
-        button.addTarget(self, action: #selector(registerButton(_:)), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(registerButton(_:)), for: .touchUpInside)
         
     }
     
@@ -109,28 +100,45 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         marker.mapView = mapView // 마커를 지도에 추가
         selectedPosition = latlng
         print("\(latlng.lat), \(latlng.lng)")
+        
+        showAlert()
     }
     
-    // 등록하기 버튼 클릭시 동작.
-    @objc func registerButton(_ sender: UIButton) { // 등록하기 버튼 x -> 지도 클릭 할 떄마다 등록. alert
+    func showAlert() {
         let serialNumber = serialNumber()
         let baseRate = baseRateTextField.text ?? ""
         let extraFee = extraFeeTextField.text ?? ""
         guard let position = selectedPosition else {
-            let alert = UIAlertController(title: "킥보드 위치 미등록", message: "등록할 킥보드의 위치를 선택해주세요.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "킥보드 위치 선택", message: "등록할 킥보드의 위치를 선택해주세요.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
             present(alert, animated: true)
             return
         }
-        let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, position: selectedPosition!)
-        // 킥보드정보 객체를 저장
-        KickBoardData.shared.kickboards.append(kickboard)
-        print("시리얼 넘버: \(serialNumber)")
-        print("기본요금: \(baseRate)")
-        print("추가요금: \(extraFee)")
-        print("위치: \(position.lat), \(position.lng)")
+        
+        let alertMassage = """
+            선택하신 킥보드 정보는 다음과 같습니다:
+            - 시리얼 번호: \(serialNumber)
+            - 기본 요금: \(baseRate)원
+            - 추가 요금: \(extraFee)원
+            - 위치: \(position.lat), \(position.lng)
+
+            위 정보가 맞으신가요?
+            """
+        let alert = UIAlertController(title: "킥보드 정보 확인", message: alertMassage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
+            let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, position: position)
+            // 킥보드정보 객체 저장
+            KickBoardData.shared.kickboards.append(kickboard)
+            print("시리얼 넘버: \(serialNumber)")
+            print("기본요금: \(baseRate)")
+            print("추가요금: \(extraFee)")
+            print("위치: \(position.lat), \(position.lng)")
+        })
+        present(alert, animated: true, completion: nil)
     }
     
+    // 시리얼 넘버
     func serialNumber() -> Int {
         return Int.random(in: 10000000...99999999)
     }
@@ -178,25 +186,18 @@ extension RegisterVC {
             make.right.equalTo(view).offset(-20)
         }
         
-        button.snp.makeConstraints { make in
-            make.centerX.equalTo(view) // 가로축에서 중앙 정렬
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
-            make.width.equalTo(200)
-            make.height.equalTo(50)
-        }
-        
         naverMapView.snp.makeConstraints { make in
             
             make.top.equalTo(eLLabel.snp.bottom).offset(20)
             make.left.right.equalTo(view).inset(20) // 좌우 여백 설정
-            make.bottom.equalTo(button.snp.top).offset(-20) // 버튼 위에 위치
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
     }
     
     
     func addSubViews() {
         let views = [
-            baseRateLabel, baseRateTextField, extraFeeLabel, extraFeeTextField, registerTitlelabel, eLLabel, button, naverMapView
+            baseRateLabel, baseRateTextField, extraFeeLabel, extraFeeTextField, registerTitlelabel, eLLabel, naverMapView
         ]
         _ = views.map { view.addSubview($0)}
     }
@@ -208,33 +209,4 @@ extension RegisterVC {
     
 }
 
-//// MARK: -Pre View
-//import SwiftUI
-//
-//
-//struct PreView: PreviewProvider {
-//    static var previews: some View {
-//        UINavigationController(rootViewController: RegisterVC()).toPreview()
-//    }
-//}
-//
-//
-//#if DEBUG
-//extension UIViewController {
-//    private struct Preview: UIViewControllerRepresentable {
-//            let viewController: UIViewController
-//
-//            func makeUIViewController(context: Context) -> UIViewController {
-//                return viewController
-//            }
-//
-//            func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//            }
-//        }
-//
-//        func toPreview() -> some View {
-//            Preview(viewController: self)
-//        }
-//}
-//#endif
 
