@@ -18,6 +18,7 @@ class HistoryVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.addSubview(historyVC)
         historyAutoLayout()
         
