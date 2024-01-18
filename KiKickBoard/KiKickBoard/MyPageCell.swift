@@ -38,6 +38,7 @@ class MyPageCell: UICollectionViewCell {
             make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-10)
+            make.bottom.equalToSuperview().offset(-10)
         }
     }
 }

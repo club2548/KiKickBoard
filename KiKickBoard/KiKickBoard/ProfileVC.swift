@@ -31,7 +31,7 @@ class ProfileVC: UIViewController {
         }
     }
     func setUserData(){
-        let userDataList = SignUpController.shared.userInfoArray
+//        let userDataList = SignUpController.shared.userInfoArray
 //        if userDataList.filter({ userInfo in
 //            userInfo.uid == LoginController.shared.currentUserInfo.uid
 //        })

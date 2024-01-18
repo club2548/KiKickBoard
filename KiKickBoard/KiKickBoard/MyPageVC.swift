@@ -87,6 +87,8 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         let model = models[indexPath.item]
         cell.myPageLabel.text = model
         
+        
+        
         cell.layer.masksToBounds = true
         
         if indexPath.item == 0 {
@@ -95,11 +97,13 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
             cell.myPageLabel.textColor = .white
             cell.myPageLabel.textAlignment = .center
             cell.myPageLabel.font = UIFont.systemFont(ofSize: 25)
+            cell.myPageLabel.sizeToFit()
             cell.layer.cornerRadius = 0
             
         } else {
             cell.backgroundColor = .gray
             cell.myPageLabel.textColor = .white
+            cell.myPageLabel.sizeToFit()
             cell.layer.cornerRadius = 5
         }
         
@@ -114,23 +118,8 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     
     //셀 크기
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        guard let cell = myPageCollectionView.dequeueReusableCell(withReuseIdentifier: MyPageCell.MPCidenti, for: indexPath) as? MyPageCell else { return .zero }
-        
-        let model = models[indexPath.item]
-        cell.myPageLabel.text = model
-        //sizeToFit() 글자 사이즈에 맞춤
-        
-        if indexPath.item == 0 {
-            cell.myPageLabel.font = UIFont.systemFont(ofSize: 25)
-        } else {
-            cell.myPageLabel.font = UIFont.systemFont(ofSize: 16)
-        }
-        cell.myPageLabel.sizeToFit()
-        
-        let cellheight = cell.myPageLabel.frame.height + 20
-        
-        return CGSize(width: collectionView.safeAreaLayoutGuide.layoutFrame.width - 30, height: cellheight)
+        // 여기서 cell 생성 X
+        return CGSize(width: collectionView.safeAreaLayoutGuide.layoutFrame.width - 30, height: 45)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
