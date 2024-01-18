@@ -127,7 +127,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         let alert = UIAlertController(title: "킥보드 정보 확인", message: alertMassage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "확인", style: .default) { _ in
-            let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, position: position)
+            let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, position: position, markerInfo: )
             // 킥보드정보 객체 저장
             KickBoardData.shared.kickboards.append(kickboard)
             print("시리얼 넘버: \(serialNumber)")
