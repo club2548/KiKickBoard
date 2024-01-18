@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 extension SignUpVC {
     func setUpKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
