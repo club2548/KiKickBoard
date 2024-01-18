@@ -24,8 +24,7 @@ class ProfileVC: UIViewController {
         profileVC.dataSource = self
         profileVC.delegate = self
         profileVC.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.PFCidenti)
-        
-        profileVC.backgroundColor = .purple
+    
     }
     
     func profileAutoLayout() {
@@ -48,6 +47,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     let models = profileData[indexPath.row]
     cell.profileCellLabel.text = models
     
+    cell.profileCellLabel.textColor = .darkGray
     cell.backgroundColor = .clear
     cell.selectionStyle = .none
     

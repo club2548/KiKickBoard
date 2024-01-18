@@ -38,13 +38,5 @@ class MyPageCell: UICollectionViewCell {
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-10)
         }
-        
-        func createLabel() -> UILabel {
-            let label = UILabel()
-            label.textAlignment = .left
-            label.textColor = .black
-            return label
-            
-        }
     }
 }

@@ -4,11 +4,13 @@
 //
 //  Created by t2023-m0099 on 1/17/24.
 //
-
+import Foundation
 import UIKit
 import SnapKit
 
 class RegistrationVC: UIViewController {
+    
+    var registrationData: [String] = ["Serial Number", "삭제"]
     
 
     

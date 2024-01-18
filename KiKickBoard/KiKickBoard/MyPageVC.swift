@@ -125,10 +125,9 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
             alertController.addAction(ok)
             
             present(alertController, animated: true, completion: nil)
+    
         default: break
         }
-        
-        //로그아웃 alert
 
         }
         
