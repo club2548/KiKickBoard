@@ -90,6 +90,7 @@ class HomeVC: UIViewController{
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        ketBoardHide()
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = "Home"
         addSubViews()
@@ -138,22 +139,40 @@ extension HomeVC : CLLocationManagerDelegate{
     @objc func changeTextField(_ sender : UITextField){
         searchAddress = sender.text ?? "" // 주소 입력창에 입력되는 Text
     }
-    @objc func tapReturnButton(){// 키보드 반납하기 버튼 Action
+    //MARK: - 반납하기
+    @objc func tapReturnButton(){// 킥보드 반납하기 버튼 Action
         self.changeUsingStatus(use: false) // 키보드 반납 상태로 변경
         guard let usingKickBoard = self.usingKickBoard else { return } // 사용하고 있는 킥보드 정보
+        // MARK: 거리 구하기
+        let currentCoordinate = CLLocation(latitude: self.currentLatitude, longitude: self.currentLongtitude) // 현재 위치 좌표
+        let kickBoardCoordinate = CLLocation(latitude: usingKickBoard.markerInfo.position.lat, longitude: usingKickBoard.markerInfo.position.lng) // 킥보드 위치 좌표
+        var price = Int(usingKickBoard.baseRate)! // 이용 가격
+        let useDist = Int(floor(currentCoordinate.distance(from: kickBoardCoordinate))) // 이용 거리
+        let currentDate = getCurrentDate()
+        if useDist > 600 {
+            price += (Int(useDist)-500) / 100 * Int(usingKickBoard.extraFee)!
+        }
+        showAlert(useDist, price) // 알림창
+        UseHistoryData.shared.historyList.append(UseHistoryModel(serialNumber: usingKickBoard.serialNumber, price: price, date: currentDate, distance: useDist))// 이욕기록 추가
+        
         let returnMarkInfo = NMFMarker(position: NMGLatLng(lat: self.currentLatitude, lng: self.currentLongtitude), iconImage: usingKickBoard.iconImage) // 킥보드 반납 마커 상태
-        let returnKickBoard = KickBoardInfo(serialNumber: usingKickBoard.serialNumber, baseRate: usingKickBoard.baseRate, extraFee: usingKickBoard.extraFee, markerInfo: returnMarkInfo)
+        returnMarkInfo.height = 30
+        returnMarkInfo.width = 30
+        let returnKickBoard = KickBoardInfo(serialNumber: usingKickBoard.serialNumber, baseRate: usingKickBoard.baseRate, extraFee: usingKickBoard.extraFee, markerInfo: returnMarkInfo) // KickBoardInfo 에서 킥보드 반납 마커 상태 추가
+        
         KickBoardData.shared.kickboards.append(returnKickBoard)
         setMapKickBoardMark(kickBoardList: KickBoardData.shared.kickboards) // 킥보드 마커 업데이트
+        UseStatusData.shared.status = false
     }
     // MARK: - 킥보드 마커 설정
     func setMapKickBoardMark(kickBoardList : [KickBoardInfo]){
         for (idx,kickBoard) in kickBoardList.enumerated(){
             // 킥보드 마커 설정
             kickBoard.markerInfo.mapView = self.naverMapView.mapView //마커 설정
+            //MARK: - 킥보드 대여하기
             kickBoard.markerInfo.touchHandler = { (overlay : NMFOverlay) -> Bool in // marker의 touch Event
                 let currentCoordinate = CLLocation(latitude: self.currentLatitude, longitude: self.currentLongtitude) // 현재 위치 좌표
-                let from = CLLocation(latitude: kickBoard.markerInfo.position.lat, longitude: kickBoard.markerInfo.position.lng) // mark 위치 좌표
+                let from = CLLocation(latitude: kickBoard.markerInfo.position.lat, longitude: kickBoard.markerInfo.position.lng) // 킥보드 위치 좌표
                 let dist = currentCoordinate.distance(from: from) // 현재 위치에서 킥보드사이의 거리 (미터 기준)
                 if dist <= 100 { // 100m 이하일 경우
                     let alert = UIAlertController(title: "대여하기", message: "해당 킥보드를 대여하시겠습니까?", preferredStyle: .alert)
@@ -162,6 +181,7 @@ extension HomeVC : CLLocationManagerDelegate{
                         self.changeUsingStatus(use: true)
                         KickBoardData.shared.kickboards.remove(at: idx)// 킥보드 데이터 삭제
                         kickBoard.markerInfo.mapView = nil // 대여 함으로써 해당 킥보드 마커 지우기
+                        UseStatusData.shared.status = true
                     }
                     let cancelAction = UIAlertAction(title: "취소", style: .cancel)
                     alert.addAction(confirmAction)
@@ -178,11 +198,23 @@ extension HomeVC : CLLocationManagerDelegate{
             
         }
     }
+    func showAlert(_ useDist: Int ,_ price : Int){
+        let alert = UIAlertController(title: "이용 정보", message: "이용 거리:\(useDist)m 이용 가격 : \(price)원입니다.", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .cancel)
+        alert.addAction(confirmAction)
+        self.present(alert, animated: true)
+    }
+    func getCurrentDate() -> String {
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
+    }
     
 }
 extension HomeVC : NMFMapViewTouchDelegate{ // 맵 클릭해서 좌표 알아내기 위함
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
-        print("\(latlng.lat), \(latlng.lng)")
+        print("클릭한 지도 좌표 lat : \(latlng.lat),lng : \(latlng.lng)")
     }
 }
 extension HomeVC {

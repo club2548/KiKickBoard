@@ -37,16 +37,13 @@ class MyPageVC: UIViewController {
     
     //cell label
     var models: [String] = ["킥보드 미사용", "회원정보", "이용내역", "등록한 킥보드", "로그아웃"]
-
+    var kickBoardUseStatus = false
     private let myPageCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero , collectionViewLayout: layout)
-        
         //셀끼리 간격
         layout.minimumLineSpacing = 1
-        
         collectionView.backgroundColor = .white
-        
         return collectionView
     }()
     
@@ -61,6 +58,11 @@ class MyPageVC: UIViewController {
         myPageCollectionViewAutoLayout()
         configureMyPageCollectionView()
 
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.kickBoardUseStatus = UseStatusData.shared.status
+        myPageCollectionView.reloadData()
     }
     
     func myPageAddSubView() {
@@ -88,14 +90,16 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         cell.layer.masksToBounds = true
         
         if indexPath.item == 0 {
-            cell.backgroundColor = .systemOrange
-            cell.myPageLabel.textColor = .lightText
+            cell.myPageLabel.text = kickBoardUseStatus ? "킥보드 이용중" : "킥보드 미사용"
+            cell.backgroundColor = UIColor(named: "PrimaryColor")
+            cell.myPageLabel.textColor = .white
             cell.myPageLabel.textAlignment = .center
             cell.myPageLabel.font = UIFont.systemFont(ofSize: 25)
             cell.layer.cornerRadius = 0
             
         } else {
-            cell.backgroundColor = .lightGray
+            cell.backgroundColor = .gray
+            cell.myPageLabel.textColor = .white
             cell.layer.cornerRadius = 5
         }
         
@@ -137,7 +141,10 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         case 3: navigationController?.pushViewController(RegistrationVC(), animated: true)
         case 4: let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
             
-            let ok = UIAlertAction(title: "Yes", style: .default, handler: nil) // 핸들러로 rootView로 이동
+            let ok = UIAlertAction(title: "Yes", style: .default, handler: { _ in // 핸들러로 rootView로 이동
+                let mainRootVIewController = LoginVC()
+                self.view.window?.rootViewController = mainRootVIewController
+            })
             let cancel = UIAlertAction(title: "No", style: .cancel)
             
             alertController.addAction(cancel)

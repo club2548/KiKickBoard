@@ -55,6 +55,8 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        ketBoardHide()
+        self.view.backgroundColor = .white
         LoginController.shared.readCurrentUserInfo()
         addSubView()
         autoLayout()
@@ -130,7 +132,9 @@ class LoginVC: UIViewController {
             LoginController.shared.currentUserInfo = incomeUserInfo
             LoginController.shared.saveCurrentUserInfo()
             showAlert(message: "로그인 성공", handler: {_ in
-                self.navigationController?.pushViewController(HomeVC(), animated: true)})
+                let mainRootVIewController = TabBarController()
+                self.view.window?.rootViewController = mainRootVIewController
+            })
         } else {
             
             showAlert(message: "KiKickBoard 가입을 환영합니다!", handler: nil)

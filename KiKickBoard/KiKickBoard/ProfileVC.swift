@@ -12,15 +12,13 @@ import SnapKit
 class ProfileVC: UIViewController {
     //private 선언을 잘하자
     private let profileVC = UITableView()
-    var profileData: [String] = ["아이디", "비밀번호", "이름", "전화번호", "이메일"]
+    var profileData: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.addSubview(profileVC)
-        
+        setUserData()
         profileAutoLayout()
-        
         profileVC.dataSource = self
         profileVC.delegate = self
         profileVC.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.PFCidenti)
@@ -30,6 +28,21 @@ class ProfileVC: UIViewController {
     func profileAutoLayout() {
         profileVC.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    func setUserData(){
+        let userDataList = SignUpController.shared.userInfoArray
+//        if userDataList.filter({ userInfo in
+//            userInfo.uid == LoginController.shared.currentUserInfo.uid
+//        })
+        for userList in SignUpController.shared.userInfoArray{
+            if userList.uid == LoginController.shared.currentUserInfo.uid{
+                profileData.append(userList.uid)
+                profileData.append(userList.name)
+                profileData.append(userList.password)
+                profileData.append(userList.phoneNumber)
+                profileData.append(userList.email)   
+            }
         }
     }
     
