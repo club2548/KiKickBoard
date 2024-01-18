@@ -92,7 +92,6 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         naverMapView.mapView.touchDelegate = self
         baseRateTextField.delegate = self
         extraFeeTextField.delegate = self
-        
         addSubViews()
         autoLayouts()
     }
@@ -162,20 +161,17 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     }
     
     // 라벨 재사용 메서드
-    func createWonLabel(to textField: UITextField, with text: String) -> UILabel {
+    func createWonLabel(to textField: UITextField, with text: String){
         let label = UILabel()
         label.text = text
         label.font = .systemFont(ofSize: 14)
         label.textColor = .lightGray
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
-
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 5),
             label.trailingAnchor.constraint(equalTo: textField.trailingAnchor)
         ])
-
-        return label
     }
     // 네이버지도에 킥보드 마커 표시
     func setMapKcikBoardMark(){
@@ -252,8 +248,8 @@ extension RegisterVC {
             baseRateLabel, baseRateTextField, extraFeeLabel, extraFeeTextField, registerTitlelabel, eLLabel, naverMapView, extraFeeCheckLabel, baseRateCheckLabel
         ])
         // 같은 라벨을 사용하기 때문에 따로 선언.
-        let baseRateWonLabel = createWonLabel(to: baseRateTextField, with: "(단위: 원)")
-        let extraFeeWonLabel = createWonLabel(to: extraFeeTextField, with: "(단위: 원)")
+        createWonLabel(to: baseRateTextField, with: "(단위: 원)")
+        createWonLabel(to: extraFeeTextField, with: "(단위: 원)")
     }
 }
 
