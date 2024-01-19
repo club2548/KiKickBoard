@@ -186,11 +186,11 @@ class SignUpVC: UIViewController {
         setEyeButton()
         mobileSignUpTextField.delegate = self
         setUpKeyboard()
-        navigationBarAppearance()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         changeStatusBarBgColor(bgColor: .white)
+        navigationBarAppearance()
     }
 }
 
@@ -517,16 +517,13 @@ extension SignUpVC {
     
     private func navigationBarAppearance() {
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithDefaultBackground()
         
         navigationController?.navigationBar.tintColor = UIColor(hexCode: "176963")
+        navigationController?.navigationBar.backgroundColor = UIColor.systemBackground
         
         self.navigationController?.navigationBar.topItem?.title = ""
         
         UINavigationBar.appearance().standardAppearance = appearance
-//        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-//        UINavigationBar.appearance().compactAppearance = appearance
     }
 }
-
 
