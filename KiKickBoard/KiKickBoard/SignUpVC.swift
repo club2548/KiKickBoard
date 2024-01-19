@@ -186,6 +186,7 @@ class SignUpVC: UIViewController {
         setEyeButton()
         mobileSignUpTextField.delegate = self
         setUpKeyboard()
+        navigationBarAppearance()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -512,6 +513,19 @@ extension SignUpVC {
             pwSignUpTextField.isSecureTextEntry.toggle()
             self.eyeButton.isSelected.toggle()
         }), for: .touchUpInside)
+    }
+    
+    private func navigationBarAppearance() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        
+        navigationController?.navigationBar.tintColor = UIColor(hexCode: "176963")
+        
+        self.navigationController?.navigationBar.topItem?.title = ""
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+//        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//        UINavigationBar.appearance().compactAppearance = appearance
     }
 }
 
