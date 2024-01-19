@@ -8,31 +8,6 @@
 import UIKit
 import SnapKit
 import SwiftUI
-//struct PreView: PreviewProvider {
-//  static var previews: some View {
-//    UINavigationController(rootViewController: MyPageVC()).toPreview()
-//  }
-//}
-//#if DEBUG
-//
-//extension UIViewController {
-//    
-//    
-//  private struct Preview: UIViewControllerRepresentable {
-//      let viewController: UIViewController
-//      func makeUIViewController(context: Context) -> UIViewController {
-//        return viewController
-//      }
-//      func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//      }
-//    }
-//    func toPreview() -> some View {
-//      Preview(viewController: self)
-//    }
-//}
-//#endif
-
-
 class MyPageVC: UIViewController {
     
     //cell label
@@ -83,24 +58,18 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     
     //셀 설정 및 반환
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCell.MPCidenti, for: indexPath) as! MyPageCell
-        let model = models[indexPath.item]
-        cell.myPageLabel.text = model
-        
-        cell.layer.masksToBounds = true
-        
+        cell.setMypageLabel(model: models[indexPath.item])
         if indexPath.item == 0 {
             cell.myPageLabel.text = kickBoardUseStatus ? "킥보드 이용중" : "킥보드 미사용"
             cell.backgroundColor = UIColor(named: "PrimaryColor")
-            cell.myPageLabel.textColor = .white
             cell.myPageLabel.textAlignment = .center
             cell.myPageLabel.font = UIFont.systemFont(ofSize: 25)
             cell.layer.cornerRadius = 0
-            
-        } else {
-            cell.backgroundColor = .gray
-            cell.myPageLabel.textColor = .white
-            cell.layer.cornerRadius = 5
+            cell.myPageLabel.sizeToFit()
+        }else{
+            cell.backgroundColor = UIColor.gray
         }
         
 
@@ -114,23 +83,8 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     
     //셀 크기
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        guard let cell = myPageCollectionView.dequeueReusableCell(withReuseIdentifier: MyPageCell.MPCidenti, for: indexPath) as? MyPageCell else { return .zero }
-        
-        let model = models[indexPath.item]
-        cell.myPageLabel.text = model
-        //sizeToFit() 글자 사이즈에 맞춤
-        
-        if indexPath.item == 0 {
-            cell.myPageLabel.font = UIFont.systemFont(ofSize: 25)
-        } else {
-            cell.myPageLabel.font = UIFont.systemFont(ofSize: 16)
-        }
-        cell.myPageLabel.sizeToFit()
-        
-        let cellheight = cell.myPageLabel.frame.height + 20
-        
-        return CGSize(width: collectionView.safeAreaLayoutGuide.layoutFrame.width - 30, height: cellheight)
+        // 여기서 cell 생성 X
+        return CGSize(width: collectionView.safeAreaLayoutGuide.layoutFrame.width - 30, height: 45)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -145,6 +99,7 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
                 let LoginVC = UINavigationController.init(rootViewController: LoginVC())
                 let mainRootVIewController = LoginVC
                 self.view.window?.rootViewController = mainRootVIewController
+                self.view.window?.rootViewController = LoginVC
             })
             let cancel = UIAlertAction(title: "No", style: .cancel)
             
