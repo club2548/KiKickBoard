@@ -17,11 +17,7 @@ class UseHistoryData {
     var historyList: [UseHistoryModel] = []
     private init() {}
 }
-class RegisterData{
-    static let shared = RegisterData()
-    var registList : [Int] = []
-    private init() {}
-}
+
 class UseStatusData{
     static let shared = UseStatusData()
     var status : Bool = false

@@ -98,8 +98,13 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setMapKcikBoardMark()
+        for mark in DeleteMarkInfo.shared.marks{
+            mark.mapView = nil
+        }
+        setMapKcikBoardMark(kickBoardList: KickBoardData.shared.kickboards)
+        
     }
+   
     // 텍스트필드에 키보드 동작 후 화면 터치 이벤트로 다시 숨기기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -142,7 +147,6 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
             let kickboard = KickBoardInfo(serialNumber: serialNumber, baseRate: baseRate, extraFee: extraFee, markerInfo: marker )
             // 킥보드정보 객체 저장
             KickBoardData.shared.kickboards.append(kickboard)
-            RegisterData.shared.registList.append(serialNumber)
             marker.mapView = self.naverMapView.mapView
             print("시리얼 넘버: \(serialNumber)")
             print("기본요금: \(baseRate)원")
@@ -176,14 +180,15 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         ])
     }
     // 네이버지도에 킥보드 마커 표시
-    func setMapKcikBoardMark(){
-        let kickBoardList = KickBoardData.shared.kickboards
+    func setMapKcikBoardMark(kickBoardList : [KickBoardInfo]){
         for kickBoard in kickBoardList{
+            print(kickBoard)
+            print("-------")
+            kickBoard.markerInfo.mapView = self.naverMapView.mapView
             kickBoard.markerInfo.touchHandler = { (overlay : NMFOverlay) -> Bool in
                 print("Register")
                 return false
             }
-            kickBoard.markerInfo.mapView = self.naverMapView.mapView
         }
     }
 }
