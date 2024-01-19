@@ -12,15 +12,6 @@ class LoginVC: UIViewController {
     
     let mainImage = UIImageView(image: UIImage(named: "KiKickBoard_Logo"))
     
-//    let logInStr : UILabel = {
-//        let str = UILabel()
-//        str.font = .boldSystemFont(ofSize: 40)
-//        str.textColor = .black
-//        str.text = "Log In"
-//        str.textAlignment = .left
-//        return str
-//    }()
-    
     let uIDTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "아이디"
@@ -28,6 +19,7 @@ class LoginVC: UIViewController {
         textField.autocapitalizationType = .none
         textField.keyboardType = .alphabet
         textField.font = UIFont.systemFont(ofSize: 20)
+        textField.returnKeyType = .next
         return textField
     }()
     
@@ -37,6 +29,7 @@ class LoginVC: UIViewController {
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         textField.font = UIFont.systemFont(ofSize: 20)
+        textField.returnKeyType = .done
         return textField
     }()
     
@@ -75,7 +68,6 @@ class LoginVC: UIViewController {
     
     private func addSubView() {
         self.view.addSubview(mainImage)
-//        self.view.addSubview(logInStr)
         self.view.addSubview(uIDTextField)
         self.view.addSubview(uPWTextField)
         self.view.addSubview(logInBtn)
@@ -92,11 +84,6 @@ class LoginVC: UIViewController {
             make.top.equalToSuperview().offset(100)
             make.height.equalTo(mainImage.snp.width).multipliedBy(584.0 / 730.0)
         }
-        
-//        logInStr.snp.makeConstraints() { make in
-//            make.left.equalToSuperview().offset(50)
-//            make.top.equalTo(mainImage.snp.bottom).offset(50)
-//        }
         
         uIDTextField.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(16)
@@ -129,6 +116,9 @@ class LoginVC: UIViewController {
     private func setupInteraction() {
         logInBtn.addTarget(self, action: #selector(touchSignIn), for: .touchUpInside)
         signUPBtn.addTarget(self, action: #selector(touchSignUP), for: .touchUpInside)
+        
+        uIDTextField.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
+        uPWTextField.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
     }
 
     @objc func touchSignIn() {
@@ -154,7 +144,6 @@ class LoginVC: UIViewController {
 
         print("Saved UserInfo : \(LoginController.shared.currentUserInfo)")
     }
-    
     private func showAlert(message: String, handler: ((UIAlertAction) -> Void)?) {
         let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인", style: .default, handler: handler))
@@ -165,6 +154,15 @@ class LoginVC: UIViewController {
         self.navigationController?.pushViewController(SignUpVC(), animated: true)
     }
     
+    @objc func didEndOnExit(_ sender: UITextField) {
+            if uIDTextField.isFirstResponder {
+                uPWTextField.becomeFirstResponder()
+            }
+            else if uPWTextField.isFirstResponder {
+                touchSignIn()
+            }
+        }
+                                    
     private func setEyeButton() {
         eyeButton = UIButton(type: .custom)
         
