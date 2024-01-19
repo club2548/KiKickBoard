@@ -1,10 +1,11 @@
 import UIKit
 import SnapKit
 import NMapsMap
-
+import CoreLocation
 // dev
 class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     // 타이틀 라벨
+    var locationManager: CLLocationManager! // 현재위치 정보를 받아오기 위함
     private lazy var registerTitlelabel: UILabel = {
         let label = UILabel()
         label.text = "KiKickBoard 등록하기"
@@ -95,6 +96,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         extraFeeTextField.delegate = self
         addSubViews()
         autoLayouts()
+        getCurrentLoaction()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -263,7 +265,20 @@ extension RegisterVC {
         createWonLabel(to: extraFeeTextField, with: "(단위: 원)")
     }
 }
-
+extension RegisterVC : CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) { // 현재 사용자 위치 받아오기
+        let location = locations[locations.count - 1]
+        let cameraUpdate = NMFCameraUpdate(scrollTo: NMGLatLng(lat: location.coordinate.latitude, lng: location.coordinate.longitude)) // 카메라 이동될 좌표
+        naverMapView.mapView.moveCamera(cameraUpdate) // 현재 사용자 위치 기준으로  카메라 이동
+    }
+    func getCurrentLoaction(){
+        locationManager = CLLocationManager()// CLLocationManager클래스의 인스턴스 locationManager를 생성
+        locationManager.delegate = self// 포그라운드일 때 위치 추적 권한 요청
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest// 배터리에 맞게 권장되는 최적의 정확도
+        locationManager.startUpdatingLocation()// 위치 업데이트
+    }
+}
 extension RegisterVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }

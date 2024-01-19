@@ -97,8 +97,6 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
             
             let ok = UIAlertAction(title: "Yes", style: .default, handler: { _ in // 핸들러로 rootView로 이동
                 let LoginVC = UINavigationController.init(rootViewController: LoginVC())
-                let mainRootVIewController = LoginVC
-                self.view.window?.rootViewController = mainRootVIewController
                 self.view.window?.rootViewController = LoginVC
             })
             let cancel = UIAlertAction(title: "No", style: .cancel)
