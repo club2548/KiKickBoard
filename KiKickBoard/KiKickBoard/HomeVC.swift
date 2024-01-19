@@ -90,7 +90,7 @@ class HomeVC: UIViewController{
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        ketBoardHide()
+        keyBoardHide()
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.topItem?.title = "Home"
         addSubViews()
@@ -105,7 +105,7 @@ class HomeVC: UIViewController{
     }
 }
 extension HomeVC : CLLocationManagerDelegate{
-    //MARK: - 좌표 및 지도 관련
+//MARK: - 좌표 및 지도 관련
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) { // 현재 사용자 위치 받아오기
         let location = locations[locations.count - 1]
         self.currentLatitude = location.coordinate.latitude // 현재 사용자 좌표 lat
@@ -139,16 +139,17 @@ extension HomeVC : CLLocationManagerDelegate{
     @objc func changeTextField(_ sender : UITextField){
         searchAddress = sender.text ?? "" // 주소 입력창에 입력되는 Text
     }
-    //MARK: - 반납하기
+//MARK: - 반납하기
     @objc func tapReturnButton(){// 킥보드 반납하기 버튼 Action
         self.changeUsingStatus(use: false) // 키보드 반납 상태로 변경
         guard let usingKickBoard = self.usingKickBoard else { return } // 사용하고 있는 킥보드 정보
-        // MARK: 거리 구하기
+//MARK: - 거리 구하기
         let currentCoordinate = CLLocation(latitude: self.currentLatitude, longitude: self.currentLongtitude) // 현재 위치 좌표
         let kickBoardCoordinate = CLLocation(latitude: usingKickBoard.markerInfo.position.lat, longitude: usingKickBoard.markerInfo.position.lng) // 킥보드 위치 좌표
         var price = Int(usingKickBoard.baseRate)! // 이용 가격
         let useDist = Int(floor(currentCoordinate.distance(from: kickBoardCoordinate))) // 이용 거리
         let currentDate = getCurrentDate()
+        
         if useDist > 600 {
             price += (Int(useDist)-500) / 100 * Int(usingKickBoard.extraFee)!
         }
@@ -164,16 +165,13 @@ extension HomeVC : CLLocationManagerDelegate{
         setMapKickBoardMark(kickBoardList: KickBoardData.shared.kickboards) // 킥보드 마커 업데이트
         UseStatusData.shared.status = false
     }
-    // MARK: - 킥보드 마커 설정
+// MARK: - 킥보드 마커 설정
     func setMapKickBoardMark(kickBoardList : [KickBoardInfo]){
         for (idx,kickBoard) in kickBoardList.enumerated(){
             // 킥보드 마커 설정
-            print(kickBoard)
-            print("------------")
             kickBoard.markerInfo.mapView = self.naverMapView.mapView //마커 설정
-            //MARK: - 킥보드 대여하기
+//MARK: - 킥보드 대여하기
             kickBoard.markerInfo.touchHandler = { (overlay : NMFOverlay) -> Bool in // marker의 touch Event
-                print("Home")
                 let currentCoordinate = CLLocation(latitude: self.currentLatitude, longitude: self.currentLongtitude) // 현재 위치 좌표
                 let from = CLLocation(latitude: kickBoard.markerInfo.position.lat, longitude: kickBoard.markerInfo.position.lng) // 킥보드 위치 좌표
                 let dist = currentCoordinate.distance(from: from) // 현재 위치에서 킥보드사이의 거리 (미터 기준)

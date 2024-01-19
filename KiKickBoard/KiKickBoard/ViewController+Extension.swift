@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 extension UIViewController {
-    func ketBoardHide(){
+    func keyBoardHide(){
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)

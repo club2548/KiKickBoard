@@ -90,7 +90,7 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ketBoardHide()
+        keyBoardHide()
         naverMapView.mapView.touchDelegate = self
         baseRateTextField.delegate = self
         extraFeeTextField.delegate = self
@@ -106,12 +106,6 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
         setMapKcikBoardMark(kickBoardList: KickBoardData.shared.kickboards)
         
     }
-   
-    // 텍스트필드에 키보드 동작 후 화면 터치 이벤트로 다시 숨기기
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-    
     // 마커 설정.
     func mapView(_ mapView: NMFMapView, didTapMap latlng: NMGLatLng, point: CGPoint) {
         let marker = NMFMarker()
@@ -184,11 +178,8 @@ class RegisterVC: UIViewController, NMFMapViewTouchDelegate {
     // 네이버지도에 킥보드 마커 표시
     func setMapKcikBoardMark(kickBoardList : [KickBoardInfo]){
         for kickBoard in kickBoardList{
-            print(kickBoard)
-            print("-------")
             kickBoard.markerInfo.mapView = self.naverMapView.mapView
             kickBoard.markerInfo.touchHandler = { (overlay : NMFOverlay) -> Bool in
-                print("Register")
                 return false
             }
         }

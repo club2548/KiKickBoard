@@ -18,8 +18,10 @@ class NaverGeocodingManager { // 주소 Stirng to 좌표 구하는 API
         components?.queryItems = [URLQueryItem(name: "query", value: address)]
         var request = URLRequest(url: (components?.url)!)
         request.httpMethod = "GET"
-        request.setValue("2xkmerjbz5", forHTTPHeaderField: "X-NCP-APIGW-API-KEY-ID")
-        request.setValue("VgFQzLLwe57aS2SdVUzLG2imCIp2azEsfHZEu1hF", forHTTPHeaderField: "X-NCP-APIGW-API-KEY")
+        let keyID = Bundle.main.infoDictionary?["X-NCP-APIGW-API-KEY-ID"] as! String
+        let key = Bundle.main.infoDictionary?["X-NCP-APIGW-API-KEY"] as! String
+        request.setValue("\(keyID)", forHTTPHeaderField: "X-NCP-APIGW-API-KEY-ID")
+        request.setValue("\(key)", forHTTPHeaderField: "X-NCP-APIGW-API-KEY")
         URLSession(configuration: .default).dataTask(with: request) { data, response, error in
             guard error == nil else{
                 print("Error : \(String(describing: error?.localizedDescription))")

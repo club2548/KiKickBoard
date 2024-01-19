@@ -179,7 +179,7 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        ketBoardHide()
+        keyBoardHide()
         addSubView()
         autoLayout()
         setupInteraction()

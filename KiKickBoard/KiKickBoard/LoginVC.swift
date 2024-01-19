@@ -11,7 +11,7 @@ import SnapKit
 class LoginVC: UIViewController {
     
     let mainImage = UIImageView(image: UIImage(named: "KiKickBoard_Logo"))
-    
+
     let uIDTextField : UITextField = {
         let textField = UITextField()
         textField.placeholder = "아이디"
@@ -54,16 +54,13 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ketBoardHide()
+        keyBoardHide()
         self.view.backgroundColor = .white
         LoginController.shared.readCurrentUserInfo()
         addSubView()
         autoLayout()
         setupInteraction()
         setEyeButton()
-    }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
     }
     
     private func addSubView() {
@@ -76,7 +73,7 @@ class LoginVC: UIViewController {
         uPWTextField.text = LoginController.shared.currentUserInfo.password
 
     }
-    
+//MARK: - 오토레이 아웃 Code
     private func autoLayout() {
         mainImage.snp.makeConstraints() { make in
             make.left.equalToSuperview().offset(80)
@@ -112,7 +109,7 @@ class LoginVC: UIViewController {
             make.top.equalTo(logInBtn.snp.bottom).offset(20)
         }
     }
-    
+//MARK: - Button Action
     private func setupInteraction() {
         logInBtn.addTarget(self, action: #selector(touchSignIn), for: .touchUpInside)
         signUPBtn.addTarget(self, action: #selector(touchSignUP), for: .touchUpInside)
