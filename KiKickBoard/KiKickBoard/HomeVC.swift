@@ -168,6 +168,8 @@ extension HomeVC : CLLocationManagerDelegate{
     func setMapKickBoardMark(kickBoardList : [KickBoardInfo]){
         for (idx,kickBoard) in kickBoardList.enumerated(){
             // 킥보드 마커 설정
+            print(kickBoard)
+            print("------------")
             kickBoard.markerInfo.mapView = self.naverMapView.mapView //마커 설정
             //MARK: - 킥보드 대여하기
             kickBoard.markerInfo.touchHandler = { (overlay : NMFOverlay) -> Bool in // marker의 touch Event

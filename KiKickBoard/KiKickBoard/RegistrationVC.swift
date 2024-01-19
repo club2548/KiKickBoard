@@ -7,33 +7,33 @@
 import Foundation
 import UIKit
 import SnapKit
+import NMapsMap
 
 class RegistrationVC: UIViewController {
-    
-    private let registrationVC = UITableView()
-    
+    private let registrationVC : UITableView = {
+        let tableView = UITableView()
+        tableView.register(RegistrationCell.self, forCellReuseIdentifier: RegistrationCell.RRidenti)
+        return tableView
+    }()
     var registrationData: [Int] = []
-    
+    var markList : [NMFMarker] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.view.addSubview(registrationVC)
         registrationAutoLayout()
-        
         registrationVC.dataSource = self
         registrationVC.delegate = self
-        registrationVC.register(RegistrationCell.self, forCellReuseIdentifier: RegistrationCell.RRidenti)
-        
-    }
-    
-    func registrationAutoLayout() {
-        registrationVC.snp.makeConstraints{ make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
-        }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        registrationData = RegisterData.shared.registList
+        var serialList : [Int] = []
+        var markList : [NMFMarker] = []
+        for kickBoard in KickBoardData.shared.kickboards{
+            serialList.append(kickBoard.serialNumber)
+            markList.append(kickBoard.markerInfo)
+        }
+        registrationData = serialList
+        self.markList = markList
     }
 }
 
@@ -47,39 +47,23 @@ extension RegistrationVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RegistrationCell.RRidenti, for: indexPath) as? RegistrationCell else { return UITableViewCell()}
         cell.registrationLabel.text = "Serial Number\(registrationData[indexPath.row])"
-        
-        //삭제 버튼
-        let deleteButton = UIButton(type: .system)
-        deleteButton.setTitle("삭제", for: .normal)
-        deleteButton.addTarget(self, action: #selector(deleteButtonTapped(_:)), for: .touchUpInside)
-        
-        //버튼을 view에 추가
-        cell.contentView.addSubview(deleteButton)
-        
-        //버튼 설정
-        deleteButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().offset(-10)
-            make.centerY.equalToSuperview()
-            make.width.equalTo(30)
+        cell.tapDelteClosure = {
+            KickBoardData.shared.kickboards.remove(at: indexPath.row)
+            DeleteMarkInfo.shared.marks.append(self.markList[indexPath.row])
+            self.registrationData.remove(at: indexPath.row)
+            self.registrationVC.reloadData()
+            
+            
         }
-        
-        //label 설정
-        cell.registrationLabel.textColor = .darkGray
-        cell.backgroundColor = .clear
-        cell.selectionStyle = .none
-        
         return cell
     }
     
-    @objc func deleteButtonTapped(_ sender: UIButton) {
-//        guard let cell = sender.superview?.superview as? RegistrationCell
-//      let indexPath = registrationVC.indexPath(for: cell) else { return }
-        //데이터 삭제
-        //registrationData.remove(at: indexPath.row)
-        //registrationVC.deleteRows(at: [indexpath], with: .automatic)
-        
-//        tasks[indexPath.section].list.remove(at: indexPath.row)
-//        let userDefaults = UserDefaults.standard
-//        userDefaults.removeObject(forKey: "tasks")
+    
+}
+extension RegistrationVC {
+    func registrationAutoLayout() {
+        registrationVC.snp.makeConstraints{ make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }

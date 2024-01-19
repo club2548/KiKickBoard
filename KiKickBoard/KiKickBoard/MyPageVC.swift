@@ -8,31 +8,6 @@
 import UIKit
 import SnapKit
 import SwiftUI
-//struct PreView: PreviewProvider {
-//  static var previews: some View {
-//    UINavigationController(rootViewController: MyPageVC()).toPreview()
-//  }
-//}
-//#if DEBUG
-//
-//extension UIViewController {
-//    
-//    
-//  private struct Preview: UIViewControllerRepresentable {
-//      let viewController: UIViewController
-//      func makeUIViewController(context: Context) -> UIViewController {
-//        return viewController
-//      }
-//      func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-//      }
-//    }
-//    func toPreview() -> some View {
-//      Preview(viewController: self)
-//    }
-//}
-//#endif
-
-
 class MyPageVC: UIViewController {
     
     //cell label
@@ -83,28 +58,18 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     
     //셀 설정 및 반환
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCell.MPCidenti, for: indexPath) as! MyPageCell
-        let model = models[indexPath.item]
-        cell.myPageLabel.text = model
-        
-        
-        
-        cell.layer.masksToBounds = true
-        
+        cell.setMypageLabel(model: models[indexPath.item])
         if indexPath.item == 0 {
             cell.myPageLabel.text = kickBoardUseStatus ? "킥보드 이용중" : "킥보드 미사용"
             cell.backgroundColor = UIColor(named: "PrimaryColor")
-            cell.myPageLabel.textColor = .white
             cell.myPageLabel.textAlignment = .center
             cell.myPageLabel.font = UIFont.systemFont(ofSize: 25)
-            cell.myPageLabel.sizeToFit()
             cell.layer.cornerRadius = 0
-            
-        } else {
-            cell.backgroundColor = .gray
-            cell.myPageLabel.textColor = .white
             cell.myPageLabel.sizeToFit()
-            cell.layer.cornerRadius = 5
+        }else{
+            cell.backgroundColor = UIColor.gray
         }
         
 

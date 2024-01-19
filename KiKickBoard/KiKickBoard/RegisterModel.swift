@@ -20,7 +20,13 @@ class KickBoardData {
     
     private init() {}
 }
-
+class DeleteMarkInfo {
+    static let shared = DeleteMarkInfo()
+    
+    var marks: [NMFMarker] = []
+    
+    private init() {}
+}
 //struct BaseKickBoardData {
 //    var baseKickBoard: [NMFMarker] {
 //        return KickBoardData.shared.kickboards.map { kickboardInfo in
