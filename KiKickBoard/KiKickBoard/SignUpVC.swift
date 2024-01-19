@@ -30,6 +30,7 @@ class SignUpVC: UIViewController {
         textField.autocapitalizationType = .none
         textField.keyboardType = .alphabet
         textField.font = UIFont.systemFont(ofSize: 15)
+        textField.returnKeyType = .next
         return textField
     }()
     
@@ -56,6 +57,7 @@ class SignUpVC: UIViewController {
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         textField.font = UIFont.systemFont(ofSize: 15)
+        textField.returnKeyType = .next
         return textField
     }()
     
@@ -85,6 +87,7 @@ class SignUpVC: UIViewController {
         textField.autocapitalizationType = .none
         textField.isSecureTextEntry = true
         textField.font = UIFont.systemFont(ofSize: 15)
+        textField.returnKeyType = .next
         return textField
     }()
     
@@ -112,6 +115,7 @@ class SignUpVC: UIViewController {
         textField.autocapitalizationType = .none
         textField.keyboardType = .emailAddress
         textField.font = UIFont.systemFont(ofSize: 15)
+        textField.returnKeyType = .next
         return textField
     }()
     
@@ -138,6 +142,7 @@ class SignUpVC: UIViewController {
         textField.borderStyle = .roundedRect
         textField.autocapitalizationType = .none
         textField.font = UIFont.systemFont(ofSize: 15)
+        textField.returnKeyType = .next
         return textField
     }()
     
@@ -157,6 +162,7 @@ class SignUpVC: UIViewController {
         textField.autocapitalizationType = .none
         textField.keyboardType = .numberPad
         textField.font = UIFont.systemFont(ofSize: 15)
+        textField.returnKeyType = .done
         return textField
     }()
     
@@ -180,7 +186,6 @@ class SignUpVC: UIViewController {
         setEyeButton()
         mobileSignUpTextField.delegate = self
         setUpKeyboard()
-        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -282,11 +287,18 @@ extension SignUpVC {
     
     private func setupInteraction() {
         joinBtn.addTarget(self, action: #selector(touchJoin), for: .touchUpInside)
+        
         idSignUpTextField.addTarget(self, action: #selector(idValidCheck), for: .editingChanged)
         pwSignUpTextField.addTarget(self, action: #selector(pwValidCheck), for: .editingChanged)
         pwSignUpCheckTextField.addTarget(self, action: #selector(pwEqualCheck), for: .editingChanged)
         eMailSignUpTextField.addTarget(self, action: #selector(eMailValidCheck), for: .editingChanged)
         nameSignUpTextField.addTarget(self, action: #selector(checkAllConditions), for: .editingChanged)
+        
+        idSignUpTextField.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
+        pwSignUpTextField.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
+        pwSignUpCheckTextField.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
+        eMailSignUpTextField.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
+        nameSignUpTextField.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
     }
     
     // 사용자 입력 중 아이디, 이메일, 전화번호를 저장된 정보와 확인한 후, 없다면 UserDefaults에 저장.
@@ -444,15 +456,27 @@ extension SignUpVC {
         
     }
     
+    // 다음 누르면 입력창 넘어가기, 완료 누르면 키보드 내려가기
+    @objc func didEndOnExit(_ sender: UITextField) {
+        if idSignUpTextField.isFirstResponder {
+            pwSignUpTextField.becomeFirstResponder()
+        }
+        else if pwSignUpTextField.isFirstResponder {
+            pwSignUpCheckTextField.becomeFirstResponder()
+        }
+        else if pwSignUpCheckTextField.isFirstResponder {
+            eMailSignUpTextField.becomeFirstResponder()
+        }
+        else if eMailSignUpTextField.isFirstResponder {
+            nameSignUpTextField.becomeFirstResponder()
+        }
+        else if nameSignUpTextField.isFirstResponder {
+            mobileSignUpTextField.becomeFirstResponder()
+        }
+    }
+    
     @objc func checkAllConditions() {
-//        let nameValidCheck = nameSignUpTextField.text!.isEmpty
-        
         self.oKCheck()
-//        if idCheck && pwCheck && eMailCheck && mobileCheck && !nameValidCheck {
-//            joinBtn.isHidden = false
-//        } else {
-//            joinBtn.isHidden = true
-//            }
     }
     
     func oKCheck() {

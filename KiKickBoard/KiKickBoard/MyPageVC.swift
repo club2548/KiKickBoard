@@ -142,7 +142,8 @@ extension MyPageVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         case 4: let alertController = UIAlertController(title: "로그아웃", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
             
             let ok = UIAlertAction(title: "Yes", style: .default, handler: { _ in // 핸들러로 rootView로 이동
-                let mainRootVIewController = LoginVC()
+                let LoginVC = UINavigationController.init(rootViewController: LoginVC())
+                let mainRootVIewController = LoginVC
                 self.view.window?.rootViewController = mainRootVIewController
             })
             let cancel = UIAlertAction(title: "No", style: .cancel)
